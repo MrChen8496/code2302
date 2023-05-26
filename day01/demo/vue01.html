@@ -6,16 +6,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>vue01.html</title>
   <script src="./js/vue.js"></script>
+  <style>
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid black;
+    }
+    .tabs .tab {
+      padding: 10px 15px;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: -1px;
+    }
+    .tabs .tab.active {
+      color: red;
+      border-bottom: 1px solid red;
+    }
+  </style>
 </head>
 <body>
   <div id="app">
-    <img height="200" src="https://p0.pipi.cn/mmdb/fb7386877e151bb86050152b2c2508b05f0e0.jpg?imageView2/1/w/464/h/644" alt="">
+    <img height="200" :src="movie.url" alt="">
     <h3>电影名称：{{ movie.name }}</h3>
     <h3>电影时长：
       {{ Math.floor(movie.duration/60) }}小时
       {{ movie.duration%60 }}分钟
     </h3>
     <h3>上映时间：{{ movie.showingon }}</h3>
+
+    <!-- 模拟选项卡 -->
+    <div class="tabs">
+      <div class="tab active">电影介绍</div>
+      <div class="tab">演职人员</div>
+      <div class="tab">荣誉奖项</div>
+      <div class="tab">剧照图集</div>
+    </div>
+
     <hr>
     <button id="btn">点我换一部电影</button>
     <button v-on:click="doClick(100)"> v-on:click() 绑定事件</button>
@@ -23,6 +48,10 @@
     <button v-on:click="doClick($event, 100, 200)"> v-on:click 绑定事件</button>
     <button @click="doClick"> @click 绑定事件</button>
     <input @blur="doClick" type="text" placeholder="点我再离开我">
+
+    <hr>
+    <input :type="type" placeholder="请输入密码">    
+    <button @click="type = (type=='password'?'type':'password')">小眼睛</button>
 
   </div>
 
@@ -34,7 +63,10 @@
     let vm = new Vue({
       // data选项用于定义页面中需要显示的一些变量
       data: {
+        type: 'password',
+
         movie: {
+          url: 'https://p0.pipi.cn/mmdb/fb7386877e151bb86050152b2c2508b05f0e0.jpg?imageView2/1/w/464/h/644',
           name: '速度与激情10',
           type: '动作',
           duration: 112,
@@ -48,6 +80,7 @@
           console.log('doClick按钮被点击:', {e, arg1, arg2})
           // 修改data中定义的movie数据
           this.movie = {
+            url: 'https://p0.pipi.cn/mmdb/fb738687e7addd7df5030c82a13f15b023a9c.jpg?imageView2/1/w/464/h/644',
             name: '刀剑神域进击篇：暮色黄昏',
             type: '动作 动画',
             duration: 101,

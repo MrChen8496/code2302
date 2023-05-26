@@ -251,6 +251,71 @@ new Vue()时，data中声明的属性，methods中声明的方法最终都会被
 <input placeholder="" readonly disabled type="password">
 ```
 
+vue框架动态修改属性的语法：
+
+```html
+<img v-bind:src="url">   <!-- vue1 -->
+
+<img :src="url">  <!-- vue2 -->
+<img :src="`http://xxx.com/${n}.jpg`">
+<button :disabled="v">按钮</button>
+```
+
+```javascript
+data: {
+    url: 'http://xxx.com/1.jpg',
+    n: 1,
+    v: true
+}
+```
+
+一旦为属性添加了`:`  (`v-bind:`)，那么， vue在解析该标签时，将会把该属性当做动态属性，此时双引号中的代码将被解析为js代码块，vue会将js代码块的返回值设置给该属性。
+
+
+
+### Vue中样式的动态绑定
+
+在页面中为元素绑定css样式的方式，通常有两种：
+
+```html
+<div class="c1">阿斯蒂芬啊</div>
+<div style="color: red;">直接用style</div>
+```
+
+```css
+.c1 {...}
+.c2 {...}
+```
+
+要研究的就是如何使用vue修改标签的class， 与style属性。
+
+#### 动态修改class类名
+
+```css
+.c1 {...}
+.c2 {...}
+```
+
+```html
+<div :class="className">阿斯蒂芬啊</div>
+<div :class="isC1?'c1':'c2'">阿斯蒂芬啊</div>
+```
+
+```javascript
+data: {
+    className: 'c1',
+    isC1: true
+}
+```
+
+
+
+
+
+
+
+
+
 
 
 
