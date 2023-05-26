@@ -164,3 +164,98 @@ vue在背后做了大量的工作，通过声明式的语法在data中声明变�
 
 
 
+#### 点击一个按钮，换一部电影
+
+```javascript
+// 创建Vue对象来管理页面元素   #app
+let vm = new Vue({
+    // data选项用于定义页面中需要显示的一些变量
+    data: {
+        movie: {
+            name: '速度与激情10',
+            type: '动作',
+            duration: 112,
+            showingon: '2023-05-17'
+        }
+    },
+    el: '#app',  // 该属性用于告诉Vue，管理页面中的哪个DOM
+})
+
+let btn = document.getElementById('btn')
+btn.onclick = function(){
+    // 修改掉vue对象内部data声明的变量的值 
+    vm.movie = {
+        name: '刀剑神域进击篇：暮色黄昏',
+        type: '动作 动画',
+        duration: 101,
+        showingon: '2023-05-26'
+    } 
+}
+```
+
+上述代码依然使用了DOM的方式，为按钮绑定事件，实际上按钮已经被vue所接管，可以使用vue的方式为按钮绑定事件。
+
+### vue中的事件处理
+
+```html
+<div>
+    <!-- vue1 的绑定事件的写法 -->
+    <button v-on:click="doClick()">按钮</button>
+    <!-- vue2 的绑定事件的写法 -->
+    <button @click="doClick()">按钮</button>
+    
+    <!-- 事件处理函数不用小括号 依然可以执行 -->
+    <button v-on:click="doClick">按钮</button>
+    <button @click="doClick">按钮</button>
+    
+    
+</div>
+```
+
+```javascript
+new Vue({
+    data: {....},
+    methods: {
+        doClick(){
+            alert('按钮被点击...')
+        }
+    }
+})
+```
+
+如果绑定事件处理函数时没有写小括号，也会执行相应事件处理函数；并且在此调用过程中将会自动传递一个event事件对象。对象内部包含了触发该事件相关的参数信息。
+
+如果想要同时传递事件对象与自定义参数，则：
+
+```html
+<button v-on:click="doClick($event, 100, 200)"> 
+    v-on:click 绑定事件
+</button>    
+```
+
+```javascript
+doClick(e, arg1, arg2){
+    ...
+}
+```
+
+new Vue()时，data中声明的属性，methods中声明的方法最终都会被混入到vue对象中，成为vue对象的成员属性、方法。所以在方法中可以直接使用`this`来访问vue对象本身。如果需要操作data里的数据，则： this.movie.xxxxx； 如果需要调用methods里的方法：this.sum(10, 20), this.nextMovie() 即可。
+
+
+
+### vue中属性的动态绑定
+
+```html
+<img src="http://xxx.com/1.jpg">
+<a href="http://www.baidu.com">链接</a>
+<input placeholder="" readonly disabled type="password">
+```
+
+
+
+
+
+
+
+
+

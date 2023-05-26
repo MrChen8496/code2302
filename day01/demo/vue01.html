@@ -18,7 +18,17 @@
     <h3>上映时间：{{ movie.showingon }}</h3>
     <hr>
     <button id="btn">点我换一部电影</button>
+    <button v-on:click="doClick(100)"> v-on:click() 绑定事件</button>
+    <button @click="doClick(200)"> @click() 绑定事件</button>
+    <button v-on:click="doClick($event, 100, 200)"> v-on:click 绑定事件</button>
+    <button @click="doClick"> @click 绑定事件</button>
+    <input @blur="doClick" type="text" placeholder="点我再离开我">
+
   </div>
+
+  <div id="app2"></div>
+  <div id="app3"></div>
+
   <script>
     // 创建Vue对象来管理页面元素   #app
     let vm = new Vue({
@@ -31,13 +41,33 @@
           showingon: '2023-05-17'
         }
       },
+      
+      // methods选项用于定义所需要的方法
+      methods:{
+        doClick(e, arg1, arg2){
+          console.log('doClick按钮被点击:', {e, arg1, arg2})
+          // 修改data中定义的movie数据
+          this.movie = {
+            name: '刀剑神域进击篇：暮色黄昏',
+            type: '动作 动画',
+            duration: 101,
+            showingon: '2023-05-26'
+          }
+        }
+      },
+      
       el: '#app',  // 该属性用于告诉Vue，管理页面中的哪个DOM
     })
 
     let btn = document.getElementById('btn')
     btn.onclick = function(){
-      // 修改掉vue对象内部data声明的变量的值   
-      vm.movie.name = '刀剑神域进击篇：暮色黄昏'   
+      // 修改掉vue对象内部data声明的变量的值 
+      vm.movie = {
+        name: '刀剑神域进击篇：暮色黄昏',
+        type: '动作 动画',
+        duration: 101,
+        showingon: '2023-05-26'
+      } 
     }
 
   </script>
