@@ -19,7 +19,7 @@
     }
     .tabs .tab.active {
       color: red;
-      border-bottom: 1px solid red;
+      border-bottom: 2px solid red;
     }
   </style>
 </head>
@@ -35,23 +35,41 @@
 
     <!-- 模拟选项卡 -->
     <div class="tabs">
-      <div class="tab active">电影介绍</div>
-      <div class="tab">演职人员</div>
-      <div class="tab">荣誉奖项</div>
-      <div class="tab">剧照图集</div>
+      <div @click="i=0" :class="`tab  ${i==0?'active':''}`">电影介绍</div>
+      <div @click="i=1" :class="`tab  ${i==1?'active':''}`">演职人员</div>
+      <div @click="i=2" :class="`tab  ${i==2?'active':''}`">荣誉奖项</div>
+      <div @click="i=3" :class="`tab  ${i==3?'active':''}`">剧照图集</div>
+    </div>
+    <div class="tabs">
+      <div @click="i=0" :class="{tab:true, active:i==0}">电影介绍</div>
+      <div @click="i=1" :class="{tab:true, active:i==1}">演职人员</div>
+      <div @click="i=2" :class="{tab:true, active:i==2}">荣誉奖项</div>
+      <div @click="i=3" :class="{tab:true, active:i==3}">剧照图集</div>
+    </div>
+    <div :style="`display:${i==0?'block':'none'};`">
+      <h3>电影介绍内容</h3>
+      <button id="btn">点我换一部电影</button>
+      <button v-on:click="doClick(100)"> v-on:click() 绑定事件</button>
+      <button @click="doClick(200)"> @click() 绑定事件</button>
+      <button v-on:click="doClick($event, 100, 200)"> v-on:click 绑定事件</button>
+      <button @click="doClick"> @click 绑定事件</button>
+      <input @blur="doClick" type="text" placeholder="点我再离开我">
+
+      <hr>
+      <input :type="type" placeholder="请输入密码">    
+      <button @click="type = (type=='password'?'type':'password')">小眼睛</button>
+
+    </div>
+    <div :style="`display:${i==1?'block':'none'};`">
+      <h3>演职人员内容</h3>
+    </div>
+    <div :style="{display:i==2?'block':'none'}">
+      <h3>荣誉奖项内容</h3>
+    </div>
+    <div :style="{display:i==3?'block':'none'}">
+      <h3>剧照图集内容</h3>
     </div>
 
-    <hr>
-    <button id="btn">点我换一部电影</button>
-    <button v-on:click="doClick(100)"> v-on:click() 绑定事件</button>
-    <button @click="doClick(200)"> @click() 绑定事件</button>
-    <button v-on:click="doClick($event, 100, 200)"> v-on:click 绑定事件</button>
-    <button @click="doClick"> @click 绑定事件</button>
-    <input @blur="doClick" type="text" placeholder="点我再离开我">
-
-    <hr>
-    <input :type="type" placeholder="请输入密码">    
-    <button @click="type = (type=='password'?'type':'password')">小眼睛</button>
 
   </div>
 
@@ -63,6 +81,7 @@
     let vm = new Vue({
       // data选项用于定义页面中需要显示的一些变量
       data: {
+        i: 0,  // 表示当前选中项tab的下标  0,1,2,3
         type: 'password',
 
         movie: {

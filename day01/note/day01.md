@@ -299,12 +299,42 @@ data: {
 ```html
 <div :class="className">阿斯蒂芬啊</div>
 <div :class="isC1?'c1':'c2'">阿斯蒂芬啊</div>
+<div :class="`tab  ${i==0?'active':''}`">电影介绍</div>
+
+<!-- vue设计的语法 -->
+<div :class="{tab:true, active:true}">电影介绍</div>
+将会生成：
+<div class="tab active">电影介绍</div>
+
+
+<div :class="{tab:true, active:false}">电影介绍</div>
+将会生成：
+<div class="tab">电影介绍</div>
 ```
 
 ```javascript
 data: {
     className: 'c1',
-    isC1: true
+    isC1: true,
+    i: 0
+}
+```
+
+#### 动态修改style属性
+
+```html
+将style当做普通属性，动态拼接属性值字符串即可
+<div :style="`display:${i==0?'block':'none'};`"></div>
+
+<!-- vue设计的语法 -->
+<div :style="{display:'block', color:'red', border:bstr}"></div>
+<div :style="{display:'none'}"></div>
+```
+
+```javascript
+data: {
+    bstr:'1px solid black',
+    i: 0
 }
 ```
 
