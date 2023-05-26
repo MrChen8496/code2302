@@ -340,9 +340,27 @@ data: {
 
 
 
+### Vue的常用指令
+
+在vue解析所管理的dom节点时，如果发现dom元素身上有v-xxx开头的属性，将会把这些属性当做是**vue指令**来进行处理。每一个指令背后就是一段程序，用于处理当前DOM元素。指令属性的值将会被vue当做javascript代码来解释执行。不同的指令有不同的功能：
+
+> 1. v-on   动态绑事件
+> 2. v-bind    动态绑定标签属性
+> 3. v-show   动态显示或隐藏元素
+> 4. v-if   动态控制是否输出当前元素
 
 
 
+### v-if指令
+
+```html
+<div v-if="boolean表达式1">分支1</div>
+<div v-else-if="boolean表达式2">分支2</div>
+<div v-else-if="boolean表达式3">分支3</div>
+<div v-else>分支4</div>
+```
+
+案例：
 
 
 

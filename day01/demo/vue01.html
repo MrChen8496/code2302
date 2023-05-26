@@ -25,6 +25,19 @@
 </head>
 <body>
   <div id="app">
+
+    <!-- 显示亮哥的年龄、年龄段 -->
+    <h3>
+      亮哥的年龄：{{age}}， 
+      属于年龄段：
+      <b v-if="age<18">未成年</b>
+      <b v-else-if="age<=35">青年</b>
+      <b v-else-if="age<=60">中年</b>
+      <b v-else>老年</b>
+      
+    </h3>
+    
+
     <img height="200" :src="movie.url" alt="">
     <h3>电影名称：{{ movie.name }}</h3>
     <h3>电影时长：
@@ -57,7 +70,7 @@
 
       <hr>
       <input :type="type" placeholder="请输入密码">    
-      <button @click="type = (type=='password'?'type':'password')">小眼睛</button>
+      <button @click="type = (type=='password'?'text':'password')">小眼睛</button>
 
     </div>
     <div :style="`display:${i==1?'block':'none'};`">
@@ -70,6 +83,31 @@
       <h3>剧照图集内容</h3>
     </div>
 
+    <div v-if="i==0">
+      <h3>电影介绍内容</h3>
+      <button id="btn">点我换一部电影</button>
+      <button v-on:click="doClick(100)"> v-on:click() 绑定事件</button>
+      <button @click="doClick(200)"> @click() 绑定事件</button>
+      <button v-on:click="doClick($event, 100, 200)"> v-on:click 绑定事件</button>
+      <button @click="doClick"> @click 绑定事件</button>
+      <input @blur="doClick" type="text" placeholder="点我再离开我">
+
+      <hr>
+      <input :type="type" placeholder="请输入密码">    
+      <button @click="type = (type=='password'?'text':'password')">小眼睛</button>
+
+    </div>
+    <div v-if="i==1">
+      <h3>演职人员内容</h3>
+    </div>
+    <div v-if="i==2">
+      <h3>荣誉奖项内容</h3>
+    </div>
+    <div v-if="i==3">
+      <h3>剧照图集内容</h3>
+    </div>
+
+
 
   </div>
 
@@ -81,6 +119,9 @@
     let vm = new Vue({
       // data选项用于定义页面中需要显示的一些变量
       data: {
+        age: 85, // 表示亮哥的年龄
+
+
         i: 0,  // 表示当前选中项tab的下标  0,1,2,3
         type: 'password',
 
