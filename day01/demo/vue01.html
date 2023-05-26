@@ -11,12 +11,17 @@
   <div id="app">
     <img height="200" src="https://p0.pipi.cn/mmdb/fb7386877e151bb86050152b2c2508b05f0e0.jpg?imageView2/1/w/464/h/644" alt="">
     <h3>电影名称：{{ movie.name }}</h3>
-    <h3>电影时长：{{ movie.duration }}分钟</h3>
+    <h3>电影时长：
+      {{ Math.floor(movie.duration/60) }}小时
+      {{ movie.duration%60 }}分钟
+    </h3>
     <h3>上映时间：{{ movie.showingon }}</h3>
+    <hr>
+    <button id="btn">点我换一部电影</button>
   </div>
   <script>
     // 创建Vue对象来管理页面元素   #app
-    new Vue({
+    let vm = new Vue({
       // data选项用于定义页面中需要显示的一些变量
       data: {
         movie: {
@@ -28,6 +33,13 @@
       },
       el: '#app',  // 该属性用于告诉Vue，管理页面中的哪个DOM
     })
+
+    let btn = document.getElementById('btn')
+    btn.onclick = function(){
+      // 修改掉vue对象内部data声明的变量的值   
+      vm.movie.name = '刀剑神域进击篇：暮色黄昏'   
+    }
+
   </script>
 </body>
 </html>
