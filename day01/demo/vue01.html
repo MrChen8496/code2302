@@ -11,18 +11,17 @@
   <div id="app">
     <img height="200" src="https://p0.pipi.cn/mmdb/fb7386877e151bb86050152b2c2508b05f0e0.jpg?imageView2/1/w/464/h/644" alt="">
     <h3>电影名称：{{ movie.name }}</h3>
-    <h3>电影类型：{{ movie.type }}</h3>
     <h3>电影时长：{{ movie.duration }}分钟</h3>
     <h3>上映时间：{{ movie.showingon }}</h3>
   </div>
   <script>
-    // 创建Vue对象来管理页面元素
+    // 创建Vue对象来管理页面元素   #app
     new Vue({
       // data选项用于定义页面中需要显示的一些变量
       data: {
         movie: {
           name: '速度与激情10',
-          type: '动作 / 剧情',
+          type: '动作',
           duration: 112,
           showingon: '2023-05-17'
         }
