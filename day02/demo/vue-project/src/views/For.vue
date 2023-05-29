@@ -8,8 +8,7 @@
     
     <h3>遍历输出京东导航条</h3>
     <div class="tabs">
-      <div>京东超市</div>
-      <div>秒杀</div>
+      <div v-for="item in tabs" :key="item">{{item}}</div>
     </div>
   </div>
 </template>
@@ -26,5 +25,12 @@
 </script>
 
 <style lang="scss" scoped>
-
+.tabs {
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  div {
+    padding: 10px 20px;  
+  }
+}
 </style>
