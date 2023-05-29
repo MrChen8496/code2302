@@ -14,7 +14,17 @@ const routes = [
     path: '/about',
     name: 'about',
     component: () => import('../views/AboutView.vue')
-  }
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/Login.vue'),
+  },
+  {
+    path: '/movie-detail',
+    name: 'movie-detail',
+    component: () => import('../views/MovieDetail.vue'),
+  },
 ]
 
 const router = new VueRouter({

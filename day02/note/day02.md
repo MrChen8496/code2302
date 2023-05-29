@@ -131,17 +131,29 @@ const routes = [
 
 思考题：尝试实现刚才的登录页面的需求。
 
+访问：http://localhost:8080/login，可以看到一个登录页面：包含账号、密码、登录按钮。
+
+1. 先创建一个组件：views/Login.vue，在template中定义页面内容。
+2. 配置router/index.js配置文件，使得访问：/login时可以看到Login.vue。
+3. 访问地址，测试效果。
 
 
 
+推荐大家安装vscode插件（Vetur），用于在vue文件中代码提示等功能。
+
+![1685340942420](../../day01/note/assets/1685340942420.png)
 
 
 
+案例：
 
+访问：http://localhost:8080/movie-detail，可以看到一个电影详情页面（MovieDetail.vue）
 
+用于显示电影基本信息。
 
+访问：http://localhost:8080/movie-list，可以看到一个电影列表页面（MovieList.vue）
 
-
+用于显示电影列表数据。
 
 
 
