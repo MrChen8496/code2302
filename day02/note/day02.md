@@ -157,6 +157,54 @@ const routes = [
 
 
 
+#### `xxx.vue`文件的语法
+
+每一个.vue文件都是一个vue组件，一个组件封装了页面中的局部内容（包括页面结构、元素的样式、事件功能）。一个完整的网页是由很多组件共同完成。所以就需要了解一下.vue文件的语法，来搞定项目页面的功能实现细节。
+
+```html
+<template>
+  <div></div>
+</template>
+
+<script>
+  export default {   }
+</script>
+
+<style lang="scss" scoped>
+
+</style>
+```
+
+`template`部分用于定义当前组件的页面结构。定义的这些页面结构都会被显示在#app上。注意：**template中的内容有且仅有一个根元素**。   
+
+`script`部分用于定义当前组件的`js`脚本。 
+
+在script中可以通过`data(){}`来提供当前组件所需要使用的数据。也可以通过`methods:{}`来提供当前组件所需要使用方法。
+
+`style`部分用于定义当前组件中标签的css样式。
+
+在style标签上可以添加scoped属性，一旦style标签上有scoped属性，则在此style段中定义的样式只针对当前组件生效（原理就是当前组件的每一个元素都会生成一个随机属性，使用属性选择器来代替普通选择器）。如果没有scoped属性，则样式一旦被加载后将全局生效。
+
+
+
+### Vue的常用指令
+
+> 1. v-on 绑定事件。
+> 2. v-bind  动态绑定属性。
+> 3. v-show  
+> 4. v-if
+> 5. v-text  
+> 6. v-html
+> 7. v-pre
+> 8. v-for
+> 9. v-* 等
+
+
+
+
+
+
+
 
 
 
