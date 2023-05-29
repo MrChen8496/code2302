@@ -230,23 +230,30 @@ data(){
 
 
 
+**基于v-for遍历对象数组**
 
+```html
+<h3>遍历电影对象数组</h3>
+<p v-for="item in movies" :key="item">
+    ID：{{item.id}} &nbsp;&nbsp;|&nbsp;&nbsp;
+    名称：《{{item.name}}》 &nbsp;&nbsp;|&nbsp;&nbsp;
+    {{item.duration}}分钟  &nbsp;&nbsp;|&nbsp;&nbsp;
+    {{item.showingon}}上映 
+</p>
+```
 
+```javascript
+movies: [
+    {id:1, name:'杀手', duration:114, showingon: '05-02'},
+    {id:2, name:'功夫', duration:124, showingon: '06-06'},
+    {id:3, name:'功夫熊猫', duration:125, showingon: '08-22'},
+    {id:4, name:'灌篮高手', duration:143, showingon: '01-12'}
+]
+```
 
+#### `:key`的作用
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+`v-for`指令一般都需要配一个 `v-bind:key` `(:key)` 来为当前每一个列表项设置一个唯一标识符（简单理解为一个名字），目的是为了提高列表更新时的DOM渲染性能。
 
 
 
