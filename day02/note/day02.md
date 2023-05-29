@@ -193,11 +193,50 @@ const routes = [
 > 2. v-bind  动态绑定属性。
 > 3. v-show  
 > 4. v-if
-> 5. v-text  
-> 6. v-html
-> 7. v-pre
-> 8. v-for
+> 5. v-text     类似{{}}，显示文本
+> 6. v-html    可以将文本当做html解析显示
+> 7. v-pre     原样显示，不解析双花括号
+> 8. v-for     
 > 9. v-* 等
+
+
+
+#### v-for指令的用法
+
+v-for指令用于循环输出重复的元素。例如：
+
+```html
+<p v-for="item in names">{{item}}</p>
+```
+
+```javascript
+data(){
+    return {
+        names: ['杀手', '功夫', '功夫熊猫', '灌篮高手']
+    }
+}
+```
+
+上述代码将会输出4个p标签，并且每个p标签中将显示相应的数组元素。最终输出：
+
+```html
+<p>杀手</p>
+<p>功夫</p>
+<p>功夫熊猫</p>
+<p>灌篮高手</p>
+```
+
+案例：写一个组件：views/For.vue， 当访问：/for时，可以看到它。测试v-for指令。
+
+
+
+
+
+
+
+
+
+
 
 
 

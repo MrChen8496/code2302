@@ -4,7 +4,7 @@
     <h3>电影名称：{{movie.name}}</h3>
     <h3>电影主演：{{movie.actors}}</h3>
     <h3>上映时间：{{movie.showingon}}</h3>
-    <p>简介（用双花括号方式）：{{movie.desc}}</p>
+    <p>简介（<i v-pre>用{{}}方式</i>）：{{movie.desc}}</p>
     <p>
       简介（用v-text指令）：
       <span v-text="movie.desc"></span>

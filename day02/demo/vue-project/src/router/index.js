@@ -25,6 +25,11 @@ const routes = [
     name: 'movie-detail',
     component: () => import('../views/MovieDetail.vue'),
   },
+  {
+    path: '/for',
+    name: 'for',
+    component: () => import('../views/For.vue'),
+  }
 ]
 
 const router = new VueRouter({
