@@ -58,6 +58,91 @@ npm run serve
 
 
 
+该项目的node_modules目录是不会上传远程仓库的，所以从仓库下载的项目包是很小的，如果需要运行，则应该在package.json所在目录执行命令，安装所需要的依赖模块：
+
+```shell
+npm install
+```
+
+
+
+脚手架运行时涉及到的文件：
+
+> public/index.html
+>
+> src/main.js
+>
+> src/App.vue
+>
+> src/views/HomeView.vue (先放下)
+>
+> src/views/AboutView.vue (先放下)
+
+**脚手架的运行过程：** 当执行`npm run serve`时，将会编译整个项目。启动8080服务来提供网站的访问。当访问地址：`http://localhost:8080`时，将会看到`public/index.html`，并且在该页面中将自动加载`main.js`中的代码，创建vue对象，由该vue对象来管理页面中的`#app`。
+
+```javascript
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount('#app')
+```
+
+初始化的状态下， 默认将会把App.vue组件（`Component`）中的内容渲染到#app中，从而看到页面效果。
+
+
+
+**需求：设计一个页面，使用脚手架实现。**
+
+访问：http://localhost:8080/login，可以看到一个登录页面：包含账号、密码、登录按钮。
+
+
+
+### 脚手架路由系统（VueRouter）的设计与使用
+
+脚手架的路由系统的功能是通过浏览器地址栏的地址来动态显示页面内容。
+
+> 当访问：/login时，可以看到Login页面。
+>
+> 当访问：/时，可以看到HomeView页面。
+>
+> 当访问：/about时，可以看到AboutView页面。
+>
+> ......
+
+![1685332361227](../../day01/note/assets/1685332361227.png)
+
+在路由系统中有个非常重要的组件：`<router-view/>`，它可以根据请求路径的不同，动态的在该位置显示相应组件内容。具体如何显示得参照 `src/router/index.js`的配置：
+
+```javascript
+const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import('../views/AboutView.vue')
+  }
+]
+```
+
+思考题：尝试实现刚才的登录页面的需求。
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
