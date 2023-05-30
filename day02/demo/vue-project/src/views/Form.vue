@@ -10,6 +10,13 @@
     <hr>
     用户手机：<input v-model="form.phone" type="text">
     <hr>
+    证件类型：
+    <input type="radio" value="sfz" v-model="form.card"> 身份证
+    <input type="radio" value="jgz" v-model="form.card"> 军官证
+    <input type="radio" value="sbk" v-model="form.card"> 社保卡
+    <input type="radio" value="jz" v-model="form.card"> 驾照
+    
+    <hr>
     <button @click="submit">提交注册信息</button>
 
   </div>
@@ -23,7 +30,8 @@
           name: '',
           pwd: '',
           pwd2: '',
-          phone: ''
+          phone: '',
+          card: 'sfz'
         }
       }
     },

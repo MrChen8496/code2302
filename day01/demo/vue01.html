@@ -149,6 +149,12 @@
         }
       },
       
+      watch: {
+        i(newValue, oldValue){
+          console.log(`i从${oldValue}变成${newValue}`)
+        }
+      },
+
       el: '#app',  // 该属性用于告诉Vue，管理页面中的哪个DOM
     })
 
