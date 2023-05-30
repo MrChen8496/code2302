@@ -24,6 +24,15 @@
     <input type="checkbox" value="zmt" v-model="form.hy"> 自媒体
     
     <hr>
+    选择籍贯：
+    <select v-model="form.jg">
+      <option value="hb">河北省</option>
+      <option value="hn">河南省</option>
+      <option value="sd">山东省</option>
+      <option value="sx">山西省</option>
+    </select>
+
+    <hr>
     <button @click="submit">提交注册信息</button>
 
   </div>
@@ -38,8 +47,9 @@
           pwd: '',
           pwd2: '',
           phone: '',
-          card: 'sfz',
-          hy: []
+          card: 'sfz',   // 单选按钮的默认值
+          hy: ['jy', 'zmt'],  // 多选框的默认值
+          jg: 'hb'  // 下拉列表的默认选中
         }
       }
     },

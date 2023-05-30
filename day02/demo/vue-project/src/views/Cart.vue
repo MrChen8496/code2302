@@ -75,6 +75,11 @@
       /** 删除选中项 */
       delSelected(){
         console.log('删除选中的列表项：', this.inds)
+        // 为了保证删除顺序，需要先对 this.inds 倒序排列
+        this.inds.sort().reverse()
+        this.inds.forEach(item=>{
+          this.cartInfo.splice(item, 1)
+        })
       },
 
 
