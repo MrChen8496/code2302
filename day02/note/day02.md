@@ -185,7 +185,7 @@ const routes = [
 
 在style标签上可以添加scoped属性，一旦style标签上有scoped属性，则在此style段中定义的样式只针对当前组件生效（原理就是当前组件的每一个元素都会生成一个随机属性，使用属性选择器来代替普通选择器）。如果没有scoped属性，则样式一旦被加载后将全局生效。
 
-
+SPA（Single Page Application）项目
 
 ### Vue的常用指令
 

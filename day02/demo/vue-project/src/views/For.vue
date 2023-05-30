@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if='1'>
     <h1 v-for="item in 2" :key="item">测试v-for指令</h1>
 
     <hr>
@@ -10,7 +10,6 @@
     <div class="tabs">
       <div v-for="item in tabs" :key="item">{{item}}</div>
     </div>
-
     <hr>
     <h3>遍历电影对象数组</h3>
     <p v-for="item in movies" :key="item.id">
