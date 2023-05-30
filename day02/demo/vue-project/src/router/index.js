@@ -44,6 +44,11 @@ const routes = [
     path: '/direct',
     name: 'direct',
     component: () => import('../views/Direct.vue'),
+  },
+  {
+    path: '/movie-list',
+    name: 'movie-list',
+    component: () => import('../views/MovieList.vue'),
   }
 ]
 
