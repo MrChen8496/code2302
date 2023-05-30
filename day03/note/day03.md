@@ -253,10 +253,69 @@ watch: {
 
 
 
+### Vue的自定义指令
+
+Vue官方提供了很多的指令来对页面中国的元素进行特殊处理。例如:v-html   v-if等。这些指令本质都是一段程序，用于处理当前dom元素。当vue在加载页面template时，一旦发现有元素身上包含v-开头的属性，就会当做是指令来看待，将会寻找指令处理函数来操作当前DOM元素。
+
+vue提供了自定义指令的语法，可以让开发者自己设计指令（自定义指令的名称、指令的功能），以更加方便的完成特殊的DOM操作需求。
+
 ```html
-<p v-red></p>
-<span></span>
+<span v-red>删除</span>
 ```
+
+案例：访问：/direct 看到 views/Direct.vue。在该组件中测试自定义指令的声明与使用。
+
+```javascript
+directives: {
+    // 自定义一个v-red指令  
+    red: {
+        // 当vue检测到元素上包含有v-red指令时，
+        // 并且当绑定了v-red指令的dom元素被插入dom树后
+        // 将会自动执行inserted方法，传入dom对象
+        inserted: (el)=>{
+            el.style.color = "red"
+        }
+    }
+}
+```
+
+
+
+### Axios 
+
+axios是一个网络通信库，封装了原生了ajax。提供了一些简单的API辅助程序员方便的发送http、https请求。底层基于Promise进行封装。
+
+#### 在脚手架中安装axios
+
+找到项目根目录，打开cmd，执行命令：
+
+```shell
+npm  install  axios
+```
+
+安装成功后，将会在package.json中生成axios的依赖项。
+
+##### 基于axios发送请求
+
+```javascript
+import axios from 'axios'
+let instance = axios.create()  
+instance({
+    url: '请求资源路径',
+    method: 'GET',
+    params: {name:'zs', pwd:'1234'}
+}).then(res=>{
+    res就是发送请求后，axios封装的响应数据
+})
+```
+
+测试接口：
+
+```
+https://web.codeboy.com/bmdapi/movie-infos?page=1&pagesize=20
+```
+
+
 
 
 
