@@ -21,7 +21,60 @@
 
 
 
+如果希望在末尾计算购物车所有商品总价格时，发现计算算法较为复杂，无法在页面中直接用`{{}}`来表示，所以可以如下实现：
 
+```javascript
+methods: {
+    /** 获取购物车总价格，将每一件商品单价*数量，再累加即可 */
+    getTotal() {
+        let total = 0
+        this.cartInfo.forEach(item=>{
+            total += item.count * item.price
+        })
+        return total
+    }
+},
+```
+
+```html
+<div style="width:300px; font-size:1.5em;">
+    总计: ¥ {{ getTotal() }}
+</div>
+```
+
+如上解决方案即可显示复杂运算的结果，并且当运算所需要的变量有变化时，页面也会及时更新。
+
+Vue针对这一类需求（显示复杂运算的结果），也提供了一个更好的解决方案：**计算属性**。 
+
+
+
+### Vue中的计算属性
+
+Vue提供了一种特殊的属性：计算属性。它本质上就是一个函数，返回复杂运算之后的结果。在template中可以使用访问属性的语法来访问它。
+
+定义计算属性：
+
+```javascript
+// computed选项用于定义计算属性，计算属性的本质实际上是函数
+computed: {
+    // 定义一个计算属性(函数)，函数名就是计算属性名
+    totalPrice() {
+        let total = 0
+        this.cartInfo.forEach(item=>{
+            total += item.count * item.price
+        })
+        return total
+    }
+},
+```
+
+```html
+<div style="width:300px; font-size:1.5em;">
+    总计: ¥ {{totalPrice}}
+</div>
+```
+
+计算属性与方法本质上都是使用函数来定义，都需要进行运算之后才可以得到结果。不一样的是方法每次调用每次都要算，而计算属性第一次计算完毕后将会把结果进行缓存，后续需要使用时，直接拿来用。如果计算属性计算时涉及到的变量有变化，再重新运算。
 
 
 
