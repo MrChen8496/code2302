@@ -78,6 +78,48 @@ computed: {
 
 
 
+### 表单元素的双向数据绑定指令 `v-model`
+
+假如有如下输入框：
+
+```html
+<input type="text" placeholder="" v-model="username">
+<button>提交</button>
+```
+
+```javascript
+data(){
+    return {
+        username: ''
+    }
+}
+```
+
+如上写法即可完成输入框的value值与data中声明的username变量的**双向数据绑定**。
+
+1. 如果用户在输入框中输入内容，则data中username的值会立即更新。
+2. 如果通过程序修改了data中的username值，则将会立即更新界面。
+
+案例：新建Form.vue，访问：/form时，看到该组件。该组件包含一个表单，收集用户数据。
+
+
+
+**安装基于Chrome浏览器的vue扩展插件：**
+
+```
+Vue.jsDevtools-v5.3.3.crx
+```
+
+1. 打开浏览器的**扩展程序**界面：
+
+   ![1685418162098](../../day02/note/assets/1685418162098.png)
+
+2. 打开开发者模式，将插件拖拽进入chrome浏览器即可：
+
+   ![1685418272696](../../day02/note/assets/1685418272696.png)
+
+
+
 
 
 
