@@ -17,6 +17,13 @@
     <input type="radio" value="jz" v-model="form.card"> 驾照
     
     <hr>
+    选择行业：
+    <input type="checkbox" value="jy" v-model="form.hy"> 教育
+    <input type="checkbox" value="yl" v-model="form.hy"> 医疗
+    <input type="checkbox" value="jr" v-model="form.hy"> 金融
+    <input type="checkbox" value="zmt" v-model="form.hy"> 自媒体
+    
+    <hr>
     <button @click="submit">提交注册信息</button>
 
   </div>
@@ -31,7 +38,8 @@
           pwd: '',
           pwd2: '',
           phone: '',
-          card: 'sfz'
+          card: 'sfz',
+          hy: []
         }
       }
     },

@@ -6,6 +6,9 @@
         class="item" 
         :key="item.id"
         v-for="item,i in cartInfo" >
+        
+        <input type="checkbox" :value="i" v-model="inds">  &nbsp;&nbsp;&nbsp;&nbsp;
+        
         <div class="pic">
           <img :src="item.url" alt="">
         </div>
@@ -35,7 +38,7 @@
         </div>
       </div>
       <div class="item" style="align-items: center;">
-        <div style="width:200px;">
+        <div @click="delSelected" style="width:200px;">
           删除选中的购物项
         </div>
         <div @click="cartInfo=[]" style="width:200px;">
@@ -58,6 +61,7 @@
   export default {
     data() {
       return {
+        inds: [],
         cartInfo: [
           {id:1001, name:'臭豆腐', cat:'零食', price:'15.5', count:3, url:"https://img1.baidu.com/it/u=3177312548,1875042102&fm=253&fmt=auto&app=120&f=JPEG?w=550&h=350"},
           {id:1002, name:'榴莲', cat:'水果', price:'115.5', count:51, url:"https://img0.baidu.com/it/u=880115772,2516992756&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"},
@@ -67,6 +71,13 @@
       }
     },
     methods: {
+
+      /** 删除选中项 */
+      delSelected(){
+        console.log('删除选中的列表项：', this.inds)
+      },
+
+
       /** 获取购物车总价格，将每一件商品单价*数量，再累加即可 
        *  1 1 2 3 5 8 13 21 34 55 89 。。。
        */
