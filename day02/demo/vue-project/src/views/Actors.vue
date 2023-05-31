@@ -3,8 +3,7 @@
 
     <!-- 测试子组件Counter，计数器 -->
     <counter></counter>
-    <counter :value="25"></counter>
-
+    <counter :min="20" :max="30" :value="25"></counter>
 
     <!-- Actors.vue -->
     <h3>演员列表</h3>

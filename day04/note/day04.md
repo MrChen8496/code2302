@@ -246,6 +246,7 @@ export default {
 <counter></counter>
 <counter :value="25"></counter>
 <counter :min="1" :max="10"></counter>
+<counter :min="1" :max="10" :step="2"></counter>
 ```
 
 1. 通过counter标签即可看到该组件。

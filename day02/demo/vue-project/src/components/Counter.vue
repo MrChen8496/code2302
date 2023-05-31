@@ -1,9 +1,9 @@
 <template>
   <div class="counter">
     <!-- src/components/Counter.vue -->
-    <button @click="n--">-</button>
+    <button :disabled="n==min" @click="n--">-</button>
     <span>{{n}}</span>
-    <button @click="n++">+</button>
+    <button :disabled="n==max" @click="n++">+</button>
   </div>
 </template>
 
@@ -14,7 +14,15 @@
       value: {
         type: Number,
         default: 5
-      }
+      },
+      min: {
+        type: Number,
+        default: 1
+      },
+      max: {
+        type: Number,
+        default: 10
+      },
     },
 
     data() {
