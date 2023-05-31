@@ -3,6 +3,11 @@
     <!-- views/MovieList.vue -->
     <h2>电影列表</h2>
     <button @click="listMovies">访问电影列表</button>
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    <input type="text" v-model="name" placeholder="输入电影名关键字">
+    &nbsp;&nbsp; 
+    <button @click="listMoviesByName">模糊查询电影列表</button>
+
     <hr>
     <h1>查询结果</h1>
     <div class="header" style="font-weight:bold;">
@@ -38,10 +43,24 @@
   export default {
     data() {
       return {
+        name: '',   // 绑定电影名称关键字
         movies: [],  // 初始化数组，保存需要显示的电影数组
       }
     },
     methods: {
+
+      /** 通过电影名关键字，模糊查询电影列表 */
+      listMoviesByName(){
+        let instance = axios.create()
+        instance({
+          url: 'https://web.codeboy.com/bmdapi/movie-infos/name',
+          method: 'POST',
+          data: `page=1&pagesize=20&name=${this.name}`
+        }).then(res=>{
+          console.log('模糊查询结果：', res)
+        })
+      },
+
       /** 加载电影列表 */
       listMovies() {
         let instance = axios.create()

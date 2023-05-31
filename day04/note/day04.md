@@ -1,0 +1,85 @@
+# Vue DAY04
+
+### Axios 
+
+axios是一个网络通信库，封装了原生了ajax。提供了一些简单的API辅助程序员方便的发送http、https请求。底层基于Promise进行封装。
+
+#### 在脚手架中安装axios
+
+找到项目根目录，打开cmd，执行命令：
+
+```shell
+npm  install  axios
+```
+
+安装成功后，将会在package.json中生成axios的依赖项。
+
+##### 基于axios发送GET请求
+
+```javascript
+import axios from 'axios'
+let instance = axios.create()  
+instance({
+    url: '请求资源路径',
+    method: 'GET',
+    params: {name:'zs', pwd:'1234'}
+}).then(res=>{
+    res就是发送请求后，axios封装的响应数据
+})
+```
+
+测试接口：
+
+```
+https://web.codeboy.com/bmdapi/movie-infos?page=1&pagesize=20
+```
+
+
+
+##### 基于axios发送POST请求
+
+```javascript
+import axios from 'axios'
+let instance = axios.create()  
+instance({
+    url: '请求资源路径',
+    method: 'POST',
+    // post请求通过data来传递参数
+    // data: 'page=1&pagesize=20&name=xxx',   传递普通kv参数
+    // data: {page:1, pagesize:20},           传递json参数
+}).then(res=>{
+    res就是发送请求后，axios封装的响应数据
+})
+```
+
+post请求参数的类型有很多种：
+
+1. application/json     传递json字符串
+2. x-www-form-urlenocded     普通的k=v&k=v
+3. multipart/form-data    用于上传文件
+
+**提供一个post请求的接口，用于通过关键字模糊查询电影列表**
+
+```
+接口地址：
+https://web.codeboy.com/bmdapi/movie-infos/name
+请求方式：
+POST
+请求参数：
+page=1&pagesize=20&name=熊猫
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
