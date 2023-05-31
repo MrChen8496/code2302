@@ -4,7 +4,6 @@
     <h3>演员列表</h3>
     <button @click="listActors">加载演员列表</button>
     <hr>
-
     <!-- 加载演员列表项 -->
     <div 
       class="person" 
@@ -12,6 +11,17 @@
       :key="item.id">
       <img :src="item.actor_avatar" alt="">
       <span>{{item.actor_name}}</span>
+    </div>
+
+    <h3>导演列表</h3>
+    <button @click="listDirectors">加载导演列表</button>
+    <hr>
+    <div 
+      class="person" 
+      v-for="item in directors" 
+      :key="item.id">
+      <img :src="item.director_avatar" alt="">
+      <span>{{item.director_name}}</span>
     </div>
 
   </div>
@@ -25,13 +35,26 @@
       return {
         // 保存所有的演员 [{id:1, actor_name:'', actor_avatar:''}]
         actors: [], 
+        // 保存所有导演
+        directors: [],  
       }
     },
     methods: {
+      /** 加载导演列表 */
+      listDirectors(){
+        let url = "https://web.codeboy.com/bmdapi/movie-directors"
+        let params = {page:1, pagesize:10}
+        myaxios.get(url, params).then(res=>{
+          console.log('导演列表', res)
+          // res.data.data 中保存了导演数组
+          this.directors = res.data.data
+        })
+      },
+
       /** 加载演员列表 */
       listActors() {
         let url = "https://web.codeboy.com/bmdapi/movie-actors"
-        let params = {page:1, pagesize:100}
+        let params = {page:1, pagesize:10}
         myaxios.get(url, params).then(res=>{
           console.log('演员列表', res)
           // res.data.data 中保存了演员数组
@@ -55,6 +78,10 @@
   }
   span {
     font-size: 0.9em;
+    display: block;
+    overflow: hidden; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 </style>

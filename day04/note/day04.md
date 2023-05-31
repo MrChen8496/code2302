@@ -96,7 +96,7 @@ myaxios.post(url, params).then(res=>{})
 ```
 接口地址：https://web.codeboy.com/bmdapi/movie-actors
 请求方式：GET
-请求参数：page=1&pagesize=100
+请求参数：page=1&pagesize=10
 返回结果：[演员对象组成的数组]
 ```
 
@@ -107,6 +107,15 @@ myaxios.post(url, params).then(res=>{})
 3. 给按钮绑定事件，点击后使用myaxios发送get请求，打印查询结果。
 
 
+
+加载导演列表：
+
+```
+接口地址：https://web.codeboy.com/bmdapi/movie-directors
+请求方式：GET
+请求参数：page=1&pagesize=10
+返回结果：[导演对象组成的数组]
+```
 
 
 
