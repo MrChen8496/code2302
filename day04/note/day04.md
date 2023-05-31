@@ -244,12 +244,14 @@ export default {
 
 ```html
 <counter></counter>
+<counter :value="25"></counter>
 <counter :min="1" :max="10"></counter>
 ```
 
 1. 通过counter标签即可看到该组件。
-2. 通过min定义最小值，通过max属性定义最大值。
-3. 如果已经是最小值，则不能再减；同理，如果已经是最大值，则不能再加了。
+2. 通过value属性，设置计数器的初始值。
+3. 通过min定义最小值，通过max属性定义最大值。
+4. 如果已经是最小值，则不能再减；同理，如果已经是最大值，则不能再加了。
 
 
 

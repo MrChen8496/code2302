@@ -9,9 +9,17 @@
 
 <script>
   export default {
+    // 声明自定义属性
+    props: {
+      value: {
+        type: Number,
+        default: 5
+      }
+    },
+
     data() {
       return {
-        n: 5
+        n: this.value
       }
     },
   }
