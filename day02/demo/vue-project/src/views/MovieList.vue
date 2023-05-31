@@ -7,7 +7,9 @@
     <input type="text" v-model="name" placeholder="输入电影名关键字">
     &nbsp;&nbsp; 
     <button @click="listMoviesByName">模糊查询电影列表</button>
-
+    <hr>
+    <button @click="listMoviesMyAxios">使用MyAxios访问电影列表</button>
+    
     <hr>
     <h1>查询结果</h1>
     <div class="header" style="font-weight:bold;">
@@ -39,7 +41,8 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  import axios from 'axios'
+  import myaxios from '../http/MyAxios'
   export default {
     data() {
       return {
@@ -48,6 +51,15 @@
       }
     },
     methods: {
+
+      /** 通过myaxios发送get请求，查询电影首页 */
+      listMoviesMyAxios(){
+        let url = "https://web.codeboy.com/bmdapi/movie-infos"
+        let params = {page:1, pagesize:20}
+        myaxios.get(url, params).then(res=>{
+          console.log('使用myaxios发送get请求', res)
+        })
+      },
 
       /** 通过电影名关键字，模糊查询电影列表 */
       listMoviesByName(){
