@@ -1,5 +1,10 @@
 <template>
   <div>
+
+    <!-- 测试子组件Counter，计数器 -->
+    <counter></counter>
+
+
     <!-- Actors.vue -->
     <h3>演员列表</h3>
     <button @click="listActors">加载演员列表</button>
@@ -40,6 +45,7 @@
 <script>
   import Person from '@/components/Person.vue'
   import myaxios from '../http/MyAxios'
+  import Counter from '@/components/Counter.vue'
 
   export default {
     components: { 
@@ -47,6 +53,7 @@
       Person : Person,
       abc : Person,
       PersonInfo: Person,
+      Counter,
     },
     data() {
       return {
