@@ -4,10 +4,16 @@
     <h3>演员列表</h3>
     <button @click="listActors">加载演员列表</button>
     <hr>
-    <person></person>
+    
+    <person 
+      v-for="item in actors" :key="item.id"
+      :name="item.actor_name" :avatar="item.actor_avatar">
+    </person>
+
+    <!-- <person></person>
     <abc></abc>
     <PersonInfo></PersonInfo>
-    <person-info></person-info>
+    <person-info></person-info> -->
 
     <!-- 加载演员列表项 -->
     <!-- <div 
@@ -21,13 +27,12 @@
     <h3>导演列表</h3>
     <button @click="listDirectors">加载导演列表</button>
     <hr>
-    <div 
-      class="person" 
-      v-for="item in directors" 
-      :key="item.id">
-      <img :src="item.director_avatar" alt="">
-      <span>{{item.director_name}}</span>
-    </div>
+    <person
+      v-for="item in directors" :key="item.id"
+      :name="item.director_name" :avatar="item.director_avatar">
+    </person>
+
+    <!-- <person :avatar="123"></person> -->
 
   </div>
 </template>

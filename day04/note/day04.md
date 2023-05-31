@@ -188,13 +188,68 @@ myaxios.post(url, params).then(res=>{})
    ```
 
 
+#### 父组件向子组件传递自定义参数
+
+```html
+<person avatar="头像路径" name="人名"></person>
+```
+
+若子组件需要接收父组件传来的参数（为了动态显示组件内容），则需要在子组件中事先声明自定义属性，通过自定义属性来接收父组件传来的数据，从而实现相应的功能。
+
+1. 在子组件中设计一些自定义属性：
+
+   ```javascript
+   export default { 
+       // props选项用于定义当前组件的自定义属性 avatar name
+       // 一旦定义了这些属性，则在使用当前组件时，就可以传参
+       // <person avatar="a.jpg" name='张三' ></person>
+       // <person avatar="b.jpg" name='李四' ></person>
+       // <person avatar="c.jpg" name='王五' ></person>
+       // <person avatar="d.jpg" name='赵六' ></person>
+       props: ['avatar', 'name']
+   }
+   ```
+
+2. 在使用子组件时，就可以给这些属性赋值（通过标签属性赋值的语法）：
+
+   ```html
+   <person avatar="头像路径" name="人名"></person>
+   <person :avatar="变量a" :name="变量b"></person>
+   ```
 
 
 
+在组件声明自定义属性时，可以用一种相对详细的语法定义属性的细节：
+
+```javascript
+export default { 
+    props: {
+        name: {
+            type: string,    // 指定属性的数据类型  
+            default: '姓名'   // 没有指定name时的默认值
+        },
+        avatar: {
+            type: string,
+            required: true   // 要求该属性必填
+        }
+    }
+}
+```
 
 
 
+案例：设计一个计数器组件，可以实现如下功能：
 
+<img src="../../day03/note/assets/1685523465271.png" width="150px">
+
+```html
+<counter></counter>
+<counter :min="1" :max="10"></counter>
+```
+
+1. 通过counter标签即可看到该组件。
+2. 通过min定义最小值，通过max属性定义最大值。
+3. 如果已经是最小值，则不能再减；同理，如果已经是最大值，则不能再加了。
 
 
 

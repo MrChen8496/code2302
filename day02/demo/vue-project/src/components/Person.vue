@@ -1,12 +1,30 @@
 <template>
-    <div class="person">
-      <img src="https://p0.pipi.cn/basicdata/25bfd6d753706dd7c3cf3e4348f18898a9954.jpg?imageView2/1/w/128/h/170" alt="">
-      <span>亮亮</span>
-    </div>
+  <div class="person">
+    <img :src="avatar" alt="">
+    <span>{{name}}</span>
+  </div>
 </template>
 
 <script>
-  export default { }
+  export default { 
+    // props选项用于定义当前组件的自定义属性 avatar name
+    // 一旦定义了这些属性，则在使用当前组件时，就可以传参
+    // <person avatar="a.jpg" name='张三' ></person>
+    // <person avatar="b.jpg" name='李四' ></person>
+    // <person avatar="c.jpg" name='王五' ></person>
+    // <person avatar="d.jpg" name='赵六' ></person>
+    // props: ['avatar', 'name']
+    props: {
+      name: {
+        type: String,
+        default: '姓名'
+      },
+      avatar: {
+        type: String,
+        required: true
+      }
+    }
+  }
 </script>
 
 <style lang="scss" scoped>
