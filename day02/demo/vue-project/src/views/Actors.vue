@@ -4,14 +4,19 @@
     <h3>演员列表</h3>
     <button @click="listActors">加载演员列表</button>
     <hr>
+    <person></person>
+    <abc></abc>
+    <PersonInfo></PersonInfo>
+    <person-info></person-info>
+
     <!-- 加载演员列表项 -->
-    <div 
+    <!-- <div 
       class="person" 
       v-for="item in actors" 
       :key="item.id">
       <img :src="item.actor_avatar" alt="">
       <span>{{item.actor_name}}</span>
-    </div>
+    </div> -->
 
     <h3>导演列表</h3>
     <button @click="listDirectors">加载导演列表</button>
@@ -28,9 +33,16 @@
 </template>
 
 <script>
+  import Person from '@/components/Person.vue'
   import myaxios from '../http/MyAxios'
 
   export default {
+    components: { 
+      // 属性名就是自定义标签名 :   属性值引用了Person对象
+      Person : Person,
+      abc : Person,
+      PersonInfo: Person,
+    },
     data() {
       return {
         // 保存所有的演员 [{id:1, actor_name:'', actor_avatar:''}]

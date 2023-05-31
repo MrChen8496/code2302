@@ -119,6 +119,81 @@ myaxios.post(url, params).then(res=>{})
 
 
 
+### Vue组件化开发
+
+在Vue项目的开发过程中，官方推荐使用组件化开发的思想来设计并实现页面结构。不建议在一个网页中编写过于复杂的页面结构。推荐将页面内容按照功能模块拆分，形成不同的组件，多个组件组成一个完整的页面：
+
+```html
+<div>
+    <header></header>   
+    <footer></footer>
+</div>
+```
+
+案例可以改造为：
+
+```html
+<template>
+  <div>
+    <!-- Actors.vue -->
+    <h3>演员列表</h3>
+    <button @click="listActors">加载演员列表</button>
+    <person v-for=""></person>
+
+    <h3>导演列表</h3>
+    <button @click="listDirectors">加载导演列表</button>
+    <person v-for=""></person>
+  </div>
+</template>
+```
+
+
+
+#### Vue中的自定义组件
+
+被Vue所管理的标签可以认为是vue的**组件**。在项目开发过程中经常会遇到一些需要**复用**的标签结构以及相应的样式、功能。vue提供了自定义组件的语法，可以让开发者将一些重复使用的页面结构、样式、功能组织一起，作为一个整体（新的组件）存在在项目中。这样如果需要使用这个组件时，直接引用即可使用自定义标签来显示。
+
+```html
+<person avatar="http:头像路径" name="人名"></person>
+```
+
+
+
+**如何设计并实现一个自定义组件？**
+
+1. 新建自定义组件文件：`src/components/Person.vue`。
+
+2. 在该文件中编写`template`、`script`、`style`代码。 
+
+3. 当需要使用这个组件时，需要引入该组件，使用自定义标签来引用它，显示它。
+
+   ```html
+   <person></person>
+   <abc></abc>
+   <PersonInfo></PersonInfo>
+   <person-info></person-info>
+   ```
+
+   ```javascript
+   import Person from '@/components/Person.vue'
+   export default {
+       // components用于声明当前组件需要引用的子组件
+       components: {
+           // 属性名就是自定义标签名 :   属性值引用了Person对象
+           Person: Person,
+           abc: Person,
+           PersonInfo: Person
+       }
+   }
+   ```
+
+
+
+
+
+
+
+
 
 
 
