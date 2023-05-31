@@ -55,9 +55,11 @@
         instance({
           url: 'https://web.codeboy.com/bmdapi/movie-infos/name',
           method: 'POST',
-          data: `page=1&pagesize=20&name=${this.name}`
+          data: `page=1&pagesize=20&name=${this.name}`,
+          // data: {page:1, pagesize:20, name:this.name} 
         }).then(res=>{
           console.log('模糊查询结果：', res)
+          this.movies = res.data.data.result
         })
       },
 

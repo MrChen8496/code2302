@@ -73,6 +73,20 @@ page=1&pagesize=20&name=熊猫
 
 
 
+### 封装Axios
+
+由于axios官方提供的api使用频繁，细节太多，需要针对自己项目常用的场景进行一次封装，使得发请求更加方便。
+
+**期望：**无论发送get还是post，不要写太多的代码，简单的调用一个get、post方法就行了。传递参数的时候也不要区分params、data等，直接传递对象即可。
+
+```javascript
+import myaxios from 'myaxios.js'
+
+let params = {page:1, pagesize:20}
+myaxios.get(url, params).then(res=>{})
+myaxios.post(url, params).then(res=>{})
+```
+
 
 
 
