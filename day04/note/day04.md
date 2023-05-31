@@ -89,6 +89,29 @@ myaxios.post(url, params).then(res=>{})
 
 
 
+**课堂练习：**
+
+模仿上述查询电影列表业务，根据下面的接口，加载演员列表。
+
+```
+接口地址：https://web.codeboy.com/bmdapi/movie-actors
+请求方式：GET
+请求参数：page=1&pagesize=100
+返回结果：[演员对象组成的数组]
+```
+
+实现思路：新建一个组件：`views/Actors.vue`。当访问：/actors时，可以看到该页面。在页面中提供一个按钮，点击后加载所有的演员，以列表的方式显示。
+
+1. 新建组件 `views/Actors.vue`，提供一个按钮。
+2. 配置路由，访问`/actors`看到组件。
+3. 给按钮绑定事件，点击后使用myaxios发送get请求，打印查询结果。
+
+
+
+
+
+
+
 
 
 
