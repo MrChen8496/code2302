@@ -7,8 +7,13 @@
     <input type="text" v-model="name" placeholder="输入电影名关键字">
     &nbsp;&nbsp; 
     <button @click="listMoviesByName">模糊查询电影列表</button>
+    
     <hr>
     <button @click="listMoviesMyAxios">使用MyAxios访问电影列表</button>
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    <input type="text" v-model="name" placeholder="输入电影名关键字">
+    &nbsp;&nbsp; 
+    <button @click="listMoviesByNameMyAxios">使用MyAxios模糊查询电影列表</button>
     
     <hr>
     <h1>查询结果</h1>
@@ -51,6 +56,14 @@
       }
     },
     methods: {
+      /** 通过myaxios发送post请求，模糊查询电影列表 */
+      listMoviesByNameMyAxios(){
+        let url = "https://web.codeboy.com/bmdapi/movie-infos/name" 
+        let params = {page:1, pagesize:20, name:this.name}
+        myaxios.post(url, params).then(res=>{ 
+          this.movies = res.data.data.result
+        })
+      },
 
       /** 通过myaxios发送get请求，查询电影首页 */
       listMoviesMyAxios(){
@@ -58,6 +71,7 @@
         let params = {page:1, pagesize:20}
         myaxios.get(url, params).then(res=>{
           console.log('使用myaxios发送get请求', res)
+          this.movies = res.data.data.result
         })
       },
 
