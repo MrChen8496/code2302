@@ -261,6 +261,7 @@ vue提供了自定义指令的语法，可以让开发者自己设计指令（�
 
 ```html
 <span v-red>删除</span>
+<span v-color="`#455aab`">删除</span>
 ```
 
 案例：访问：/direct 看到 views/Direct.vue。在该组件中测试自定义指令的声明与使用。

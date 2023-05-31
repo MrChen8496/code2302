@@ -14,15 +14,17 @@
       <div class="duration">电影时长</div>
     </div>
     <!-- 表格行 -->
-    <div class="header">
+    <div 
+      class="header" 
+      v-for="item in movies" :key="item.id">
       <div class="cover">
-        <img src="" alt="">
+        <img height="80px" :src="item.cover" alt="">
       </div>
-      <div class="title">标题xxx</div>
-      <div class="actor">主演xxxx</div>
-      <div class="showingon">上映时间xxxxx</div>
-      <div class="type">电影类型xxxx</div>
-      <div class="duration">电影时长xxxx</div>
+      <div class="title">{{item.title}}</div>
+      <div class="actor">{{item.star_actor}}</div>
+      <div class="showingon">{{item.showingon}}</div>
+      <div class="type">{{item.type}}</div>
+      <div class="duration">{{item.duration}}分钟</div>
     </div>
 
     <!-- <p v-for="item in movies" :key="item.id">
