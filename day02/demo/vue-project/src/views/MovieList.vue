@@ -57,6 +57,18 @@
   import axios from 'axios'
   import myaxios from '../http/MyAxios'
   export default {
+    beforeCreate(){ console.log('List beforeCreate...') },
+    created(){ console.log('List created...') },
+    beforeMount(){ console.log('List beforeMount...') },
+    mounted(){ 
+      console.log('List mounted...') 
+      this.listMovies() // 列出电影列表
+    },
+    beforeUpdate(){ console.log('List beforeUpdate...') },
+    updated(){ console.log('List updated...') },
+    beforeDestroy(){ console.log('List beforeDestroy...') },
+    destroyed(){ console.log('List destroyed...') },
+
     data() {
       return {
         name: '',   // 绑定电影名称关键字
