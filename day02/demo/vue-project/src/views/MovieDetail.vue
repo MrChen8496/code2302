@@ -1,6 +1,11 @@
 <template>
   <div>
     <h1 class="red">电影详情</h1>
+
+    <h3>通过query的方式获取参数ID：{{$route.query.id}}</h3>
+    <h3>通过params的方式获取参数ID：{{$route.params.id}}</h3>
+    
+
     <h3>电影名称：{{movie.name}}</h3>
     <h3>电影主演：{{movie.actors}}</h3>
     <h3>上映时间：{{movie.showingon}}</h3>
@@ -41,6 +46,15 @@
           showingon: '2023-04-10'
         }
       }
+    },
+
+    /** mounted方法将会在组件挂载完毕后自动执行 */
+    mounted () {
+      // 获取上一个页面传过来的参数，通过参数id发送请求加载电影详情
+      let id = this.$route.query.id || this.$route.params.id
+      console.log('mounted执行，电影ID：' + id)
+      // 发送请求：
+      // https://web.codeboy.com/bmdapi/movie-info/query?id=654
     },
   }
 </script>

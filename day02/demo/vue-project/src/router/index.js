@@ -26,6 +26,11 @@ const routes = [
     component: () => import('../views/MovieDetail.vue'),
   },
   {
+    path: '/movie-detail/:id',
+    name: 'movie-detail-id',
+    component: () => import('../views/MovieDetail.vue'),
+  },
+  {
     path: '/for',
     name: 'for',
     component: () => import('../views/For.vue'),

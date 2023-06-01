@@ -289,6 +289,59 @@ this.$router.go(-1)
 
 
 
+案例：从电影列表页，跳转到电影详情页。在跳转的过程中，需要将选中的电影的ID一起带给详情页，这样才可以在详情页中通过该id发送请求，拿到详细信息后显示。
+
+
+
+#### 路由跳转过程中的参数传递问题
+
+路由传参的方案大致分为两种：
+
+1. **第一种参数传递的方案：在路径后使用?拼接参数**
+
+   假设需要从`/movie-list`跳转到`/movie-detail`，并且传递参数，则可以如下跳转：
+
+   ```html
+   <router-link to="/movie-detail?id=600">详情</router-link>
+   <router-link :to="{path:'/movie-detail', query:{id:600}}">
+       详情
+   </router-link>
+   ```
+
+   如上述方式即可将参数直接带到目标页面，在目标页面中使用如下代码即可获取参数id:
+
+   ```javascript
+   let id = this.$route.query.id
+   ```
+
+2. **第二种参数传递的方案：将参数藏在路径里，通过params方式传参** 
+
+   ```html
+   <router-link to="/movie-detail/600">详情</router-link>
+   <router-link to="/movie-detail/554">详情</router-link>
+   ```
+
+   需要修改一下电影详情页的路由配置：
+
+   ```javascript
+   {
+       path: '/movie-detail/:movieId',
+       name: 'movie-detail',
+       component: () => import('../views/MovieDetail.vue'),
+   },
+   ```
+
+   如上述方式即可将参数带到目标页面，在目标页面中使用如下代码即可获取参数id:
+
+   ```javascript
+   let id = this.$route.params.movieId
+   ```
+
+
+
+
+
+
 
 
 

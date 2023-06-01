@@ -30,10 +30,14 @@
       class="header" 
       v-for="item in movies" :key="item.id">
       <div class="cover">
-        <img @click="$router.push('/movie-detail')" height="80px" :src="item.cover" alt="">
+        <img @click="$router.push(`/movie-detail/${item.id}`)" height="80px" :src="item.cover" alt="">
       </div>
       <div class="title">
-        <router-link to="/movie-detail">
+        <!-- <router-link :to="`/movie-detail?id=${item.id}`"> -->
+        <router-link :to="{
+          path:'/movie-detail', 
+          query:{ id:item.id }
+        }">
           {{item.title}}
         </router-link>
       </div>
