@@ -30,9 +30,13 @@
       class="header" 
       v-for="item in movies" :key="item.id">
       <div class="cover">
-        <img height="80px" :src="item.cover" alt="">
+        <img @click="$router.push('/movie-detail')" height="80px" :src="item.cover" alt="">
       </div>
-      <div class="title">{{item.title}}</div>
+      <div class="title">
+        <router-link to="/movie-detail">
+          {{item.title}}
+        </router-link>
+      </div>
       <div class="actor">{{item.star_actor}}</div>
       <div class="showingon">{{item.showingon}}</div>
       <div class="type">{{item.type}}</div>

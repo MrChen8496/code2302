@@ -241,6 +241,54 @@ VueRouter的项目属于单页面应用（Single Page Application）（SPA）。
 
 
 
+#### 基于路由系统完成页面的跳转功能
+
+##### 组件式跳转
+
+通过`<router-link>`组件实现路由的跳转：
+
+```html
+<router-link to="目标路径">链接文本</router-link>
+<router-link to="/">链接文本</router-link>
+
+<router-link :to="{path:'/cart'}">去购物车</router-link>
+<router-link :to="{name:'for'}">去v-for</router-link>
+```
+
+##### 编程式跳转
+
+```javascript
+methods: {
+    doClick(){
+        this.$router.push('/movie-list')
+        this.$router.replace('/movie-list')
+    }
+}
+```
+
+##### this.$router
+
+在vue组件中使用`this.$router`可以获取全局唯一的路由管理器对象。该路由管理器对象在`router/index.js`中暴露出来的对象。该路由管理器对象中包含了所有已经配置好的路由对象，还有历史记录等信息。
+
+`this.$router`提供了一些方法用于管理路由：
+
+```javascript
+this.$router.push('/actors')
+this.$router.push({'path': '/actors'})
+this.$router.push({'name': 'actors'})
+
+this.$router.replace('/actors')
+this.$router.go(-1)
+```
+
+在编程式路由跳转时，有可能出现下列错误：
+
+![1685601685184](../../day04/note/assets/1685601685184.png)
+
+如果当前已经在/login了，还要跳转到/login，重复跳转，就会报上述错误。尽量通过程序避免重复跳转。
+
+
+
 
 
 
