@@ -1,9 +1,16 @@
 <template>
   <div class="counter">
     <!-- src/components/Counter.vue -->
-    <button :disabled="n==min" @click="n--">-</button>
-    <span>{{n}}</span>
-    <button :disabled="n==max" @click="n++">+</button>
+
+    <!-- 设计一个默认插槽位置 -->
+    <slot />
+    <button :disabled="n==min" @click="n-=step">-</button>
+    <span>
+      <slot name="label"/>
+      {{n}}
+      <slot name="unit"/>
+    </span>
+    <button :disabled="n==max" @click="n+=step">+</button>
   </div>
 </template>
 
@@ -23,6 +30,10 @@
         type: Number,
         default: 10
       },
+      step: {
+        type: Number,
+        default: 1
+      },
     },
 
     data() {
@@ -37,15 +48,13 @@
 .counter {
   display: flex;
   align-items: center;
-  width: 90px;
-  border: 1px solid #ddd;
   button {
     width: 25px;
     height: 25px;
     border: none;
   }
   span {
-    width: 40px;
+    min-width: 40px;
   }
 }
 </style>

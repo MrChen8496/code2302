@@ -89,6 +89,37 @@ myaxios.post(url, params).then(res=>{})
 
 
 
+```javascript
+function sum(a, b, cb){
+    // 发请求，拿到计算结果
+    $.get(url, (data)=>{
+        cb(data)
+    })
+}
+sum(10, 5, function(data){
+    console.log(data)
+})
+```
+
+```javascript
+function sum(a, b){
+    return new Promise((resolve, reject)=>{
+        // 发请求，拿到计算结果
+        $.get(url, (data)=>{
+			resolve(data)
+        })    
+    })
+}
+
+sum(10, 5).then(res=>{
+    console.log(res)
+}).catch(err=>{
+    
+})
+```
+
+
+
 **课堂练习：**
 
 模仿上述查询电影列表业务，根据下面的接口，加载演员列表。
@@ -192,6 +223,8 @@ myaxios.post(url, params).then(res=>{})
 
 ```html
 <person avatar="头像路径" name="人名"></person>
+<person :avatar="头像路径" :name="人名"></person>
+<person :data="{avatar:'1.jpg', name='张三'}"></person>
 ```
 
 若子组件需要接收父组件传来的参数（为了动态显示组件内容），则需要在子组件中事先声明自定义属性，通过自定义属性来接收父组件传来的数据，从而实现相应的功能。

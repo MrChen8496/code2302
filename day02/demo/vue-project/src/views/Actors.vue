@@ -2,8 +2,30 @@
   <div>
 
     <!-- 测试子组件Counter，计数器 -->
-    <counter></counter>
-    <counter :min="20" :max="30" :value="25"></counter>
+    <counter>
+      <span>购物数量</span>
+    </counter>
+
+    <counter :min="20" :max="30" :value="25">
+      <img src="@/assets/logo.png" height="25px">
+      <img src="@/assets/logo.png" height="25px">
+    </counter>
+    <hr>
+    <counter :step="2"></counter>
+    <hr>
+
+    <counter>
+      <b slot="label">草稿纸:</b>
+      <b slot="unit">张</b>
+    </counter>
+    <counter>
+      <b slot="label">墨水:</b>
+      <b slot="unit">瓶</b>
+    </counter>
+    <counter>
+      <b slot="label">练习题:</b>
+      <b slot="unit">套</b>
+    </counter>
 
     <!-- Actors.vue -->
     <h3>演员列表</h3>
