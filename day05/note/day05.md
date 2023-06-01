@@ -179,5 +179,75 @@ export default {
    ```
 
 
+### VueCLI脚手架中的路由系统   VueRouter
+
+多页面项目的开发。一个大型项目需要多个页面组成，页面之间也可以进行跳转。
+
+开发方式有两种：
+
+1. 传统方案： 每一个页面都是一个独立的html文件，通过超链接a标签进行跳转。
+
+   当页面跳转时，需要浏览器重新加载新的html文档。
+
+2. 单页面应用方案：一个项目中只有一个html文件，通过js，根据不同的路径动态加载页面内容，更新html的局部。
+
+   当页面跳转时，仅仅只是当前html中的一个div的内容的替换，不会刷新页面。
+
+
+
+VueRouter插件将页面跳转的过程全权代理。路由地址变化时完全被Vuerouter所拦截，由VueRouter来决定如何显示页面。
+
+VueRouter的项目属于单页面应用（Single Page Application）（SPA）。意味着VueCLI项目无论设计多少个页面，本质上都是只有一个html。
+
+![1685590625177](../../day04/note/assets/1685590625177.png)
+
+配置路由时有两种配置方式：
+
+1. 标准模式
+
+   ```javascript
+   import HomeView from '../views/HomeView.vue'
+   import Cart from '../views/Cart.vue'
+   import AboutView from '../views/AboutView.vue'
+   import For from '../views/For.vue'
+   const routes = [
+       {
+           path: '/',
+           name: 'home',
+           component: HomeView
+       }
+   ]
+   ```
+
+   对于标准模式加载的组件，在import的时候就已经将组件加载到了内存中，这样的话，当vue项目初始化时，随着路由系统的加载将直接引入该组件（虽然可能没有立即看到该组件，但是已经下载完毕，在内存中已经存在）。
+
+2. 懒加载模式
+
+   ```javascript
+   const routes = [
+     {
+       path: '/about',
+       name: 'about',
+       component: () => import('../views/AboutView.vue')
+     },
+   ]
+   ```
+
+   懒加载模式不会在项目启动是就去加载相关组件，这种引入方式将会在需要使用该组件时再加载相应资源。真正做到随用随下载。这种模式将会极大的释放项目首页资源数据量的压力，防止出现首页白屏等待。
+
+   **结论：**
+
+   除了Home之外，一般都使用懒加载即可。
+
+
+
+
+
+
+
+
+
+
+
 
 
