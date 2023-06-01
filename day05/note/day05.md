@@ -338,9 +338,17 @@ this.$router.go(-1)
    ```
 
 
+`this.$route`
+
+在vue组件中，可以通过`this.$route`来访问当前组件的路由对象（相当于`router/index.js`中定义的一个路由配置：`{path:'', component:组件}`）。
+
+$router：路由管理器。管理所有路由对象
+
+$route:  路由对象。仅仅描述其中一个路由信息
 
 
 
+### Vue组件的生命周期
 
 
 

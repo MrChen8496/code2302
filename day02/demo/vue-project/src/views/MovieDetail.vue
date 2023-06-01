@@ -5,35 +5,30 @@
     <h3>通过query的方式获取参数ID：{{$route.query.id}}</h3>
     <h3>通过params的方式获取参数ID：{{$route.params.id}}</h3>
     
-
-    <h3>电影名称：{{movie.name}}</h3>
-    <h3>电影主演：{{movie.actors}}</h3>
+    <img :src="movie.cover" alt="">
+    <h3>电影名称：{{movie.title}}</h3>
+    <h3>电影主演：{{movie.star_actor}}</h3>
     <h3>上映时间：{{movie.showingon}}</h3>
-    <p>简介（<i v-pre>用{{}}方式</i>）：{{movie.desc}}</p>
-    <p>
-      简介（用v-text指令）：
-      <span v-text="movie.desc"></span>
-    </p>
-    <p>
-      简介（用v-html指令）：
-      <span v-html="movie.desc"></span>
-    </p>
+    <h3>简介：
+      <p v-html="movie.description"></p>
+    </h3>
+    
+    <template>两个字</template>
+    <span>两个字</span>
+
     <hr>
     <button @click="next">换一部电影</button>
   </div>
 </template>
 
 <script>
+  import myaxios from '@/http/MyAxios'
+
   export default {
     data() {
       return {
         // 此处声明template中需要使用的变量 
-        movie: {
-          name: '功夫',
-          actors: ['周星驰', '黄圣依', '火云邪神'],
-          showingon: '2014-10-05',
-          desc: '这是一部<b>史诗级电影</b>，讲述了一个可歌可泣的爱情故事。'
-        }
+        movie: { }
       }
     },
     // methods定义方法
@@ -55,6 +50,12 @@
       console.log('mounted执行，电影ID：' + id)
       // 发送请求：
       // https://web.codeboy.com/bmdapi/movie-info/query?id=654
+      let url = "https://web.codeboy.com/bmdapi/movie-info/query"
+      let params = { id } 
+      myaxios.get(url, params).then(res=>{
+        console.log('查询到的电影详情', res)
+        this.movie = res.data.data
+      })
     },
   }
 </script>
