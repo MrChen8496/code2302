@@ -18,6 +18,14 @@ const routes = [
   {
     path: '/nav',
     component: () => import('../views/Nav.vue')
+  },
+  {
+    path: '/container',
+    component: () => import('../views/Container.vue')
+  },
+  {
+    path: '/component',
+    component: () => import('../views/Component.vue')
   }
 ]
 
