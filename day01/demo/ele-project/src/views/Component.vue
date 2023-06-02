@@ -14,12 +14,25 @@
         </el-menu>
       </el-header>
       <el-container>
-        <el-aside>
+        <el-aside class="aside" width="260px">
           <!-- 垂直导航 -->
-          <el-menu default-active="1">
-            <el-menu-item index="1">Container布局组件</el-menu-item>
-            <el-menu-item index="2">Table表格组件</el-menu-item>
-            <el-menu-item index="3">Form表单组件</el-menu-item>
+          <el-menu 
+            class="sidemenu" 
+            default-active="1"
+            active-text-color="#0062ff">
+            
+            <el-menu-item index="1">
+              <i class="el-icon-menu"></i>
+              <span slot="title">Container组件</span>
+            </el-menu-item>
+            <el-menu-item index="2">
+              <i class="el-icon-s-data"></i>
+              <span slot="title">Table组件</span>
+            </el-menu-item>
+            <el-menu-item index="3">
+              <i class="el-icon-edit-outline"></i>
+              <span slot="title">Form组件</span>
+            </el-menu-item>
           </el-menu>
         </el-aside>
         <el-main>主体内容</el-main>
@@ -37,8 +50,35 @@ export default {};
 .header{
   display: flex;
   align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 44, 102, 0.05);
+  img {
+    margin: 0px 20px;
+  }
 }
 .el-menu.el-menu--horizontal {
   border-bottom: none;
+}
+
+.aside {
+  box-shadow: 0 4px 8px 0 rgba(0, 44, 102, 0.1);
+  height: calc(100vh - 60px);
+}
+.sidemenu {
+  margin-top: 10px;
+
+  .el-menu-item {
+    height: 50px;
+    line-height: 50px;
+  }
+
+  .el-menu-item.is-active {
+    border-right: 1px solid #0062ff;
+    background-color: #ebf3ff;
+  }
+
+}
+
+.el-menu {
+  border-right: none;
 }
 </style>
