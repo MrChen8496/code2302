@@ -2,9 +2,25 @@
   <el-table :data="emps" style="width: 100%">
     <el-table-column prop="id" label="ID"> </el-table-column>
     <el-table-column prop="name" label="姓名"> </el-table-column>
-    <el-table-column prop="age" label="年龄"> </el-table-column>
-    <el-table-column prop="gender" label="性别"> </el-table-column>
-    <el-table-column prop="married" label="婚姻状况"> </el-table-column>
+    <el-table-column label="年龄"> 
+      <template slot-scope="scope">
+        <b>{{scope.row.age}}</b> 周岁
+      </template>
+    </el-table-column>
+    <el-table-column label="性别">
+      <template slot-scope="scope">
+        {{scope.row.gender=='F'?'女':'男'}}
+      </template>
+    </el-table-column>
+    <el-table-column label="婚姻状况"> 
+      <template slot-scope="scope">
+        <el-tag v-if="scope.row.married" type="success">已婚</el-tag>
+        <el-tag v-else type="danger">未婚</el-tag>
+      </template>
+    </el-table-column>
+    <el-table-column label="操作">
+      <el-button type="danger" size="small">删除</el-button>
+    </el-table-column>
   </el-table>
 </template>
 

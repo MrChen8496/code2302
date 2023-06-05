@@ -132,6 +132,30 @@ el-table-column用于描述表格列，label属性为列名，prop属性为列�
 
 
 
+#### 表格数据显示中的自定义列模板
+
+```html
+<el-table :data="tableData" style="width: 100%">
+    <el-table-column label="日期" width="180">
+        <template slot-scope="scope">
+            <span style="margin-left: 10px">{{ scope.row.date }}</span>
+        </template>
+    </el-table-column>
+</el-table>
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
