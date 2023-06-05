@@ -24,6 +24,7 @@
       active-text-color="#f00">
 
       <el-menu-item index="1">产品</el-menu-item>
+      
       <el-submenu index="2">
         <!-- template为虚拟标签  不会输出DOM元素 -->
         <template slot="title">解决方案</template>

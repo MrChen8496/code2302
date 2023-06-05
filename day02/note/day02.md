@@ -61,7 +61,41 @@ http://localhost:8080/component/table
 ]
 ```
 
+通过v-for即可动态加载。值得一提的是：**不同的用户返回的json有可能不同**。
 
+如果后端返回的数据包含子菜单项，如下json：
+
+```json
+[
+    {
+        path: '/component/index',
+        icon: 'el-icon-s-home',
+        text: '首页'
+    },
+    {
+    	path: '/components',
+        icon: 'el-icon-menu',
+        text: '常用组件',
+        children: [
+            {
+                path: '/component/container',
+                icon: 'el-icon-menu',
+                text: 'Container组件'
+            },
+            {
+                path: '/component/table',
+                icon: 'el-icon-s-data',
+                text: 'table组件'
+            },
+            {
+                path: '/component/form',
+                icon: 'el-icon-edit-outline',
+                text: 'form组件'
+            },
+        ]
+    },
+]
+```
 
 
 
