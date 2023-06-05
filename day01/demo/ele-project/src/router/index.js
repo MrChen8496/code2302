@@ -25,7 +25,22 @@ const routes = [
   },
   {
     path: '/component',
-    component: () => import('../views/Component.vue')
+    component: () => import('../views/Component.vue'),
+    
+    // redirect重定向:
+    // 如果直接访问/component则自动跳转到/component/container
+    redirect: '/component/container', 
+
+    children: [{
+      path: 'container',
+      component: () => import('../views/Container.vue')
+    },{
+      path: 'table',
+      component: () => import('../views/Table.vue')
+    },{
+      path: 'form',
+      component: () => import('../views/Form.vue')
+    },]
   }
 ]
 

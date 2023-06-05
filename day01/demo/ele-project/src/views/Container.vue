@@ -1,5 +1,8 @@
 <template>
   <div>
+    
+    <h2>Container 布局容器</h2>
+
     <!-- views/Container.vue -->
     <el-container>
       <el-header style="background:#409EFF;"></el-header>      

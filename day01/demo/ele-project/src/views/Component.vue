@@ -17,25 +17,29 @@
         <el-aside class="aside" width="260px">
           <!-- 垂直导航 -->
           <el-menu 
+            router
             class="sidemenu" 
-            default-active="1"
+            :default-active="$route.path"
             active-text-color="#0062ff">
             
-            <el-menu-item index="1">
+            <el-menu-item index="/component/container">                        
               <i class="el-icon-menu"></i>
               <span slot="title">Container组件</span>
             </el-menu-item>
-            <el-menu-item index="2">
+            <el-menu-item index="/component/table">
               <i class="el-icon-s-data"></i>
               <span slot="title">Table组件</span>
             </el-menu-item>
-            <el-menu-item index="3">
+            <el-menu-item index="/component/form">                             
               <i class="el-icon-edit-outline"></i>
               <span slot="title">Form组件</span>
             </el-menu-item>
           </el-menu>
         </el-aside>
-        <el-main>主体内容</el-main>
+        <el-main>
+          <!-- 二级路由占位符 -->
+          <router-view/>
+        </el-main>
       </el-container>
     </el-container>
 
