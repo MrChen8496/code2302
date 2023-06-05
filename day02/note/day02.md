@@ -245,7 +245,27 @@ this.$refs.form.validate((valid)=>{
 
 
 
+1. 下载navicat：
 
+   navicat下载链接：
+
+   https://pan.baidu.com/s/1ObI8Ra9a3-gFot5snG6Q7A&pwd=1234
+
+   解压缩，运行navicat.exe即可打开软件。
+
+   创建一个mysql连接，可以正常连接mysql。
+
+2. 运行sql脚本： 解压缩两个压缩包，得到两个mysql脚本文件：
+
+   init_1.sql   init2.sql
+
+   右键navicat已经建立好的连接，选择运行sql脚本文件，依次选择init_1.sql    init2.sql。
+
+3. 在运行init2.sql时，有可能运行报错。
+
+   原因是数据集太大了，一条sql语句的大小超出了xampp自带的mysql的限制，所以需要调整mysql的配置文件：my.ini，修改一些参数，才可以正常执行脚本：
+
+   ![1685958798769](assets/1685958798769.png)
 
 
 
