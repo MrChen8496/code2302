@@ -22,18 +22,14 @@
             :default-active="$route.path"
             active-text-color="#0062ff">
             
-            <el-menu-item index="/component/container">                        
-              <i class="el-icon-menu"></i>
-              <span slot="title">Container组件</span>
+            <el-menu-item 
+              v-for="item in menuData" 
+              :key="item.path"
+              :index="item.path">                        
+              <i :class="item.icon"></i>
+              <span slot="title">{{item.text}}</span>
             </el-menu-item>
-            <el-menu-item index="/component/table">
-              <i class="el-icon-s-data"></i>
-              <span slot="title">Table组件</span>
-            </el-menu-item>
-            <el-menu-item index="/component/form">                             
-              <i class="el-icon-edit-outline"></i>
-              <span slot="title">Form组件</span>
-            </el-menu-item>
+
           </el-menu>
         </el-aside>
         <el-main>
@@ -47,7 +43,35 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      menuData:[
+          {
+              path: '/component/index',
+              icon: 'el-icon-s-home',
+              text: '首页'
+          },
+          {
+              path: '/component/container',
+              icon: 'el-icon-menu',
+              text: 'Container组件'
+          },
+          {
+              path: '/component/table',
+              icon: 'el-icon-s-data',
+              text: 'table组件'
+          },
+          {
+              path: '/component/form',
+              icon: 'el-icon-edit-outline',
+              text: 'form组件'
+          },
+          
+      ]
+    }
+  },
+};
 </script>
 
 <style lang="scss" scoped>
