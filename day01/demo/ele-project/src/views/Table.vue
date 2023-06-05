@@ -19,7 +19,13 @@
       </template>
     </el-table-column>
     <el-table-column label="操作">
-      <el-button type="danger" size="small">删除</el-button>
+      <template slot-scope="scope">
+        <el-button 
+          @click="handleDelete(scope.$index)"
+          type="danger" size="small">
+          删除
+        </el-button>
+      </template>
     </el-table-column>
   </el-table>
 </template>
@@ -58,6 +64,26 @@ export default {
         {id:1004, name:"朴总", age:41, married:true, gender:'M'},
       ]
     };
+  },
+
+  methods: {
+    /** 处理删除业务 先弹窗，点击确定后执行删除业务 */
+    handleDelete(index) {
+      this.$confirm('该操作将永久移除该员工，是否继续？','提示',{
+        confirmButtonText: '赶快移除',
+        cancelButtonText: '我再想想',
+        type: 'warning'
+      }).then(res=>{
+        this.emps.splice(index, 1)
+        this.$message({
+          message:'该员工已移除', type:'success'
+        })
+      }).catch(err=>{
+        this.$message({
+          message:'取消操作', type:'info'
+        })
+      })
+    }
   },
 };
 </script>
