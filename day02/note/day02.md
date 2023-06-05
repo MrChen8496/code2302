@@ -97,7 +97,38 @@ http://localhost:8080/component/table
 ]
 ```
 
+```
+[
+    {text:'在吗', user:'you', id:1},
+    {text:'在', user:'me', id:2},
+    {text:'怎么了', user:'me', id:3},
+    {text:'中午吃饭？', user:'you', id:4},
+    {text:'你请客？', user:'me', id:5},
+    {text:'没问题', user:'you', id:6},
+]
+```
 
+
+
+### Table组件
+
+Table组件用于显示表格数据。基本结构：
+
+```html
+<el-table :data="tableData">
+    <el-table-column prop="date" label="日期"> </el-table-column>
+    <el-table-column prop="name" label="姓名"> </el-table-column>
+    <el-table-column prop="address" label="地址"> </el-table-column>
+</el-table>
+```
+
+为el-table提供:data属性，用于指定数据集。数据集的结构需要满足：
+
+```
+[{}, {}, {}, {}, {}, {}..]
+```
+
+el-table-column用于描述表格列，label属性为列名，prop属性为列中应该显示的对象的属性名，width对应列的宽度，align对齐方式。
 
 
 
