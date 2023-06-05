@@ -173,6 +173,39 @@ data(){
 
 
 
+#### 表单验证
+
+无论使用任何技术进行验证，都需要完成以下两部分：
+
+1. 当某一个表单项填写完毕后，进行验证。
+2. 当点击提交按钮时，先做完整的表单验证，验证通过后再提交。
+
+
+
+##### 当某一个表单项填写完毕后，进行验证
+
+```html
+<el-form :model="form" 
+         :rules="rules"
+         label-width="80px" style="width:600px">  
+    <el-form-item label="账号" prop="name">
+        <el-input v-model="form.name"></el-input>
+    </el-form-item>
+</el-form>
+```
+
+```javascript
+rules: {    // 定义验证规则
+    name: [
+        {required:true, message:'该字段必填', trigger:"blur"},
+    ]
+}
+```
+
+
+
+
+
 
 
 
