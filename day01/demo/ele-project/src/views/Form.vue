@@ -3,7 +3,8 @@
     <!-- Table.vue -->
     <h2>Form.vue表单 注册页面</h2>
     <br>    
-    <el-form 
+    <el-form
+      ref="form" 
       :model="form" 
       :rules="rules"
       label-width="80px" style="width:600px">  
@@ -44,12 +45,28 @@ export default {
         ],
         pwd: [
           {required:true, message:'该字段必填', trigger:"blur"},
+          {pattern:/^\d{6}$/, message:'必须6位数字', trigger:"blur"}
         ],
         pwd2: [
           {required:true, message:'该字段必填', trigger:"blur"},
+          {pattern:/^\d{6}$/, message:'必须6位数字', trigger:"blur"},
+          {
+            validator: (rule, value, callback)=>{
+              if(value == this.form.pwd){
+                callback()
+              }else {
+                callback(new Error('两次密码输入不一致'))
+              }
+            }, trigger: "blur"
+          }
         ],
         phone: [
           {required:true, message:'该字段必填', trigger:"blur"},
+          {
+            pattern:/^1[3-9]\d{9}$/, 
+            message:'手机号码格式有误', 
+            trigger:"blur"
+          }
         ],
       }
     }
@@ -59,6 +76,13 @@ export default {
     //提交表单
     submit() {
       console.log(this.form)
+      this.$refs.form.validate(valid=>{  // 表单自检方法validate
+        if(valid){
+          console.log('表单验证通过，直接发送请求')
+        }else{
+          console.log('验证失败')
+        }
+      })
     }
   },
 };

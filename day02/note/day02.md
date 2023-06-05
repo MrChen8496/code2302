@@ -198,8 +198,49 @@ data(){
 rules: {    // 定义验证规则
     name: [
         {required:true, message:'该字段必填', trigger:"blur"},
+        {pattern:/^\d{6}$/, message:'必须6位数字', trigger:"blur"},
+        {
+            validator: (rule, value, callback)=>{
+                if(value == this.form.pwd){
+                    callback()
+                }else {
+                    callback(new Error('两次密码输入不一致'))
+                }
+            }, trigger: "blur"
+        }
     ]
 }
+```
+
+
+
+##### 当点击提交按钮时，先做完整的表单验证，验证通过后再提交
+
+知识点：通过this.$refs获取组件对象:
+
+```html
+<el-form ref="form">
+	<el-form-item>
+    	<el-input ref="input"></el-input>
+    </el-form-item>
+</el-form>
+```
+
+```javascript
+this.$refs.form      获取elForm表单组件对象
+this.$refs['form']   获取elForm表单组件对象
+
+this.$refs.input  获取elInput输入框组件对象
+```
+
+```javascript
+this.$refs.form.validate((valid)=>{
+    if(valid){
+        验证通过
+    }else {
+        验证失败
+    }
+})
 ```
 
 
