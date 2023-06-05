@@ -44,7 +44,7 @@ const routes = [
       path: 'form',
       component: () => import('../views/Form.vue')
     },]
-  }
+  },
 ]
 
 const router = new VueRouter({

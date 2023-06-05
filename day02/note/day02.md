@@ -146,6 +146,35 @@ el-table-column用于描述表格列，label属性为列名，prop属性为列�
 
 
 
+### Form表单组件
+
+```html
+<el-form :model="form" label-width="80px">
+	<el-form-item label="标签名">
+    	<el-input v-model="form.name"></el-input>
+    </el-form-item>
+	....
+</el-form>
+```
+
+```javascript
+data(){
+    return {
+        form: {
+            name: ''
+        }
+    }
+}
+```
+
+案例：
+
+访问地址： /component/form， 提供注册页面。账号、密码、确认密码、手机号，提供提交按钮。
+
+
+
+
+
 
 
 
