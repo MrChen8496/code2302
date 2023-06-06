@@ -114,8 +114,75 @@ https://docs.apipost.cn/preview/b8d0be111e068a7c/09ff5096269510aa
    ```
 
 
+### 功能实现
+
+#### 搭建项目的主体页面结构
+
+1. 提供Header、Aside、Main部分结构。
+
+   下载HomeView.vue、logo.svg。
+
+   **将HomeView.vue替换掉views/HomveView.vue。**
+
+   **将logo.svg放入assets目录下即可。**
+
+2. 修改App.vue。
+
+   ```html
+   <template>
+     <div id="app">
+       <router-view/>
+     </div>
+   </template>
+   
+   <style lang="scss">
+   * {
+     margin: 0;
+     padding: 0;
+   }
+   </style>
+   
+   ```
 
 
+#### 为后台管理项目设计嵌套路由并实现
+
+1. 明确页面需求，了解到底都有哪些页面，根据页面的结构，设计嵌套路由。
+
+   ```
+   http://localhost:8080/user/login  没有顶栏与侧栏
+   
+   http://localhost:8080/home/index       看到main部分显示Index
+   http://localhost:8080/home/actor-list  看到main部分显示演员列表
+   http://localhost:8080/home/actor-add   看到main部分显示新增演员表单
+   ```
+
+2. 准备所需要的组件：
+
+   ```
+   src/views/Index.vue
+   src/views/actor/ActorList.vue
+   src/views/actor/ActorAdd.vue
+   ```
+
+3. 配置嵌套路由：children：
+
+   ```
+   配置： /                    重定向到 /home/index
+   配置： /home/index
+   配置： /home/actor-list
+   配置： /home/actor-add
+   ```
+
+4. 在el-main中，添加二级路由占位符：`<router-view/>`
+
+5. 测试即可。
+
+   ```
+   http://localhost:8080/home/index       看到main部分显示Index
+   http://localhost:8080/home/actor-list  看到main部分显示演员列表
+   http://localhost:8080/home/actor-add   看到main部分显示新增演员表单
+   ```
 
 
 
