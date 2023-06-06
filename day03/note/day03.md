@@ -1,0 +1,134 @@
+# Vue2Project DAY03
+
+## 百慕大影城后台管理项目实践
+
+1. 项目立项。
+
+   项目背景：有一个小老板开了一家私人影院，最后越做越强，开成了连锁店。想要写一套系统管理电影院的运营。主要功能包括：普通用户通过**前台项目**来查看影院及上映的电影信息、电影院检索、选择影院、选座、买票等功能。管理员可以通过**后台管理项目**进行：影院管理、演职人员管理、放映厅管理、排片管理等。
+
+2. 需求分析。
+
+3. 原型设计。axureshop.com
+
+4. 数据库设计。
+
+5. 编码、测试。
+
+6. 部署上线。
+
+
+
+### 在本机搭建后端服务运行环境
+
+1. 配置数据库。
+
+2. 下载bmd_server.zip，找一个干净地方解压缩：/day03/demo下。
+
+   进入解压缩后的目录中，通过pm2命令即可启动两个后端服务：
+
+   index.js：数据接口服务。端口：3010
+
+   uploadserver.js：上传文件服务。端口：9000
+
+   1. 安装pm2进程管理工具：
+
+      ```shell
+      npm install -g  pm2
+      ```
+
+   2. 利用pm2的命令，启动这两个服务：
+
+      ```shell
+      # 执行这两个命令的时候需要当前目录在项目内部
+      pm2  start  index.js
+      pm2  start  uploadserver.js
+      ```
+
+      查看pm2的错误消息：
+
+      ```
+      pm2  logs
+      ```
+
+   3. 测试本地接口：
+
+      ```
+      http://localhost:3010/movie-actors?page=1&pagesize=100
+      ```
+
+   4. 普及一些pm2的常用命令：
+
+      ```shell
+      pm2 restart index  # 重新启动index服务
+      pm2 logs   # 查看日志信息
+      pm2 stop  index  # 停止index服务
+      pm2 status  # 查看服务状态
+      pm2 list    # 列出当前服务列表
+      ```
+
+
+
+#### 接口相关
+
+当前服务端提供了40多个接口，设计项目的各个模块：
+
+```
+https://docs.apipost.cn/preview/b8d0be111e068a7c/09ff5096269510aa
+```
+
+可以将接口导入到apipost中，方便测试接口。   
+
+
+
+### 在本机搭建前端脚手架环境
+
+1. 新建项目：`bmdstudios-ms-client`，找一个干净目录：day03/demo
+
+   ```shell
+   vue  create bmdstudios-ms-client
+   ```
+
+   选择合适的配置，使用vue2.x生成脚手架项目包。
+
+2. <span style="color:red; font-weight:bolder; font-size:2em;">进入项目目录中</span>，安装所需模块：
+
+   ```shell
+   # 通过cd命令，进入项目目录后安装 
+   # cd bmdstudios-ms-client
+   npm i axios -S
+   npm i element-ui -S
+   ```
+
+3. 在main.js中，配置ElementUI，引入所有组件：
+
+   ```javascript
+   import ElementUI from 'element-ui';
+   import 'element-ui/lib/theme-chalk/index.css';
+   Vue.use(ElementUI);
+   ```
+
+4. 启动脚手架：
+
+   ```shell
+   npm run serve
+   ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
