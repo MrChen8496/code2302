@@ -3,7 +3,8 @@
     <el-container style="height: 100vh">
       <el-aside class="aside" :style="{width:`${isCollapse?65:240}px`, transition: '0.4s'}">
         <el-menu 
-          default-active="index"
+          router 
+          :default-active="$route.path"
           background-color="#345"
           text-color="#bbb"
           :style="{height: '100vh'}"
@@ -15,7 +16,7 @@
               <span style="font-size: 1.2em; color:#efefef; font-weight: bold;">&nbsp;&nbsp;百慕大影城后台管理</span>
             </template>
           </el-menu-item>
-          <el-menu-item index="index">
+          <el-menu-item index="/home/index">
             <i class="el-icon-message"></i>
             <template slot="title">
               首页
@@ -26,11 +27,11 @@
               <i class="el-icon-location"></i>
               <span slot="title">演员管理</span>
             </template>
-            <el-menu-item index="1-1">
+            <el-menu-item index="/home/actor-list">
               <i class="el-icon-notebook-2"></i>
               <span slot="title">演员列表</span>
             </el-menu-item>
-            <el-menu-item index="1-2">
+            <el-menu-item index="/home/actor-add">
               <i class="el-icon-plus"></i>
               <span slot="title">新增演员</span>
             </el-menu-item>

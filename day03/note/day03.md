@@ -184,6 +184,7 @@ https://docs.apipost.cn/preview/b8d0be111e068a7c/09ff5096269510aa
    http://localhost:8080/home/actor-add   看到main部分显示新增演员表单
    ```
 
+6. 实现点击左侧边栏菜单，实现跳转到相应页面。（刷新后默认选中是正确的）
 
 
 
