@@ -252,6 +252,21 @@ https://docs.apipost.cn/preview/b8d0be111e068a7c/09ff5096269510aa
 
 
 
+#### 晚上想要把白天的代码再写一遍如何做？
+
+1. 找一个干净目录，从git把我的代码下载下来。 `git  clone`。
+
+2. 按照所需要的模块：   `npm   install`。
+
+3. 将git版本回滚到早上的版本：`git  reset  版本hash值`  。
+
+   ```shell
+   # 在git项目的根目录下执行（.git文件夹所在的目录）
+   git  reset  b43fd287581b6f5ef1195afa8b2afcfcc8cacb28  --hard
+   ```
+
+4. 在该基础之上往后写就行了。
+
 
 
 
