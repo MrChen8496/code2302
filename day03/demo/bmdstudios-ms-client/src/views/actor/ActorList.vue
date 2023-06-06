@@ -18,16 +18,45 @@
     <el-divider content-position="left">列表数据</el-divider>
 
     <!-- 展示演员列表数据 -->
-    <person name="亮亮" avatar="https://p0.pipi.cn/basicdata/25bfd6d753706dd7c3cf3e4348f18898a9954.jpg?imageView2/1/w/128/h/170"></person>
+    <person 
+      v-for="item in actors" 
+      :key="item.id"
+      :name="item.actor_name" 
+      :avatar="item.actor_avatar">
+    </person>
 
   </div>
 </template>
 
 <script>
 import Person from "@/components/Person.vue"
+import myaxios from '@/http/MyAxios'
 
 export default {
   components: { Person },
+
+  data() {
+    return {
+      actors: [], // 绑定所有演员
+    }
+  },
+
+  /** 页面挂载完毕后执行 */
+  mounted(){
+    this.listActors()
+  },
+
+  methods: {
+    /** 列出演员列表 */
+    listActors() {
+      let url = "http://localhost:3010/movie-actors"
+      let params = {page:1, pagesize:100}
+      myaxios.get(url, params).then(res=>{
+        console.log('演员列表', res)
+        this.actors = res.data.data
+      })
+    }
+  },
 
 };
 </script>
