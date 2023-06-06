@@ -12,9 +12,11 @@
 
     <!-- 表单 -->
     姓名：
-    <el-input placeholder="姓名关键字" style="width:200px;"></el-input> 
+    <el-input 
+      v-model="name"
+      placeholder="姓名关键字" style="width:200px;"></el-input> 
     &nbsp;
-    <el-button type="primary">查询</el-button>
+    <el-button type="primary" @click="search">查询</el-button>
     <el-divider content-position="left">列表数据</el-divider>
 
     <!-- 展示演员列表数据 -->
@@ -37,6 +39,7 @@ export default {
 
   data() {
     return {
+      name: '',  // 绑定关键字
       actors: [], // 绑定所有演员
     }
   },
@@ -47,6 +50,12 @@ export default {
   },
 
   methods: {
+
+    /** 搜索 */
+    search(){
+      console.log(this.name)
+    },
+
     /** 列出演员列表 */
     listActors() {
       let url = "http://localhost:3010/movie-actors"
