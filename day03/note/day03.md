@@ -188,6 +188,54 @@ https://docs.apipost.cn/preview/b8d0be111e068a7c/09ff5096269510aa
 
 
 
+#### 在首页显示echarts图表
+
+1. 在脚手架项目的根目录下，执行命令，安装echarts：
+
+   ```shell
+   npm install echarts --save
+   ```
+
+2. 当某一个组件，需要显示图表时，需要提供一个容器div（设置好id、style）：
+
+   ```html
+   <div id="main"></div>
+   ```
+
+   ```javascript
+   import * as echarts from 'echarts';
+   
+   // 基于准备好的dom，初始化echarts实例
+   var myChart = echarts.init(document.getElementById('main'));
+   // 绘制图表
+   myChart.setOption({
+     title: {
+       text: 'ECharts 入门示例'
+     },
+     tooltip: {},
+     xAxis: {
+       data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+     },
+     yAxis: {},
+     series: [
+       {
+         name: '销量',
+         type: 'bar',
+         data: [5, 20, 36, 10, 10, 20]
+       }
+     ]
+   });
+   ```
+
+
+
+
+
+
+
+
+
+
 
 
 
