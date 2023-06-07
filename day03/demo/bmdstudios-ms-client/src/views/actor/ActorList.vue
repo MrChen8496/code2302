@@ -56,11 +56,18 @@ export default {
 
     /**删除演员 */
     deleteActor(id){
-      let url = "http://localhost:3010/movie-actor/del"
-      myaxios.post(url, {id}).then(res=>{
-        console.log('删除演员结果', res)
-        this.search()
-      })
+      this.$confirm('确认删除吗？', '提示', {
+        confirmButtonText:'确认',
+        cancelButtonText:'取消',
+        type:'warning'
+      }).then(res=>{
+        let url = "http://localhost:3010/movie-actor/del"
+        myaxios.post(url, {id}).then(res=>{
+          console.log('删除演员结果', res)
+          this.search()
+        })
+      }).catch(err=>{})
+
     },
 
     /** 搜索 */
