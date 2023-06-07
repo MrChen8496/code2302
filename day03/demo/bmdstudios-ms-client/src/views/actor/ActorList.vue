@@ -82,19 +82,16 @@ export default {
 
     /** 通过关键字查询演员列表 */
     listActorsByName(){
-      // 发送post请求，模糊查询，得到结果
-      let url = "http://localhost:3010/movie-actors/name"
+      //调用接口，返回promise
       let params = {name: this.name}
-      myaxios.post(url, params).then(res=>{
-        console.log('模糊查询结果', res)
-        // 更新列表即可
+      httpApi.actorApi.queryActorsByName(params).then(res=>{
         this.actors = res.data.data
       })
     },
 
     /** 列出演员列表 */
     listActors() {
-      httpApi.queryActors().then(res=>{
+      httpApi.actorApi.queryActors().then(res=>{
         this.actors = res.data.data
       })
     }

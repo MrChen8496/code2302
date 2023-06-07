@@ -177,6 +177,16 @@ Vue认为，事件处理函数内部更多的代码应该聚焦在业务功能�
    }
    ```
 
+2. 当解决了上述问题后，又发现httpApi对象中需要定义所有的请求接口方法，导致httpApi对象臃肿不堪，方法繁杂，所有接口的访问方法都得在这一个对象里。需要进一步封装：按照业务模块将Api接口方法拆开，放在不同的js文件里。
+
+   ```
+   src/http/index.js
+   src/http/apis/ActorApi.js
+   src/http/apis/DirectorApi.js
+   src/http/apis/MovieApi.js
+   ...
+   ```
+
 
 
 
