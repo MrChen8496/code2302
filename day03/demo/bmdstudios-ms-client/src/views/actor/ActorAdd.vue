@@ -10,13 +10,19 @@
     <el-divider></el-divider>
 
     <!-- 表单 -->
-    <el-form ref="form" :model="form" label-width="100px">
-      <el-form-item label="演员姓名">
+    <el-form 
+      ref="form" 
+      :model="form" 
+      :rules="rules"
+      label-width="100px"
+      style="width:600px">
+
+      <el-form-item label="演员姓名" prop="actorName">
         <el-input v-model="form.actorName" placeholder="输入姓名">
         </el-input>
       </el-form-item>
-      <el-form-item label="选择头像">
-        
+
+      <el-form-item label="选择头像" prop="actorAvatar">
         <el-upload
           class="avatar-uploader"
           action="http://localhost:9000/upload"
@@ -47,22 +53,33 @@ export default {
       form: {
         actorName: '',   // 封装演员名字
         actorAvatar: ''  // 封装演员头像路径
+      },
+      rules: {
+        actorName: [
+          {required:true, message:'必填', trigger:'blur'}
+        ],
+        actorAvatar: [
+          {required:true, message:'必填', trigger:'blur'}
+        ]
       }
     }
   },
   methods: {
 
     submit(){
-      console.log(this.form)
-      // 发送新增演员的请求
-      let url = "http://localhost:3010/movie-actor/add"
-      myaxios.post(url, this.form).then(res=>{
-        if(res.data.code==200){ // 新增成功
-          this.$message({type: 'success', message: '新增成功'})
-          // this.$refs.form.resetFields()
+      this.$refs.form.validate(valid=>{
+        if(valid){ // 验证通过
+          // 发送新增演员的请求
+          let url = "http://localhost:3010/movie-actor/add"
+          myaxios.post(url, this.form).then(res=>{
+            if(res.data.code==200){ // 新增成功
+              this.$message({type: 'success', message: '新增成功'})
+              // this.$refs.form.resetFields()
 
-        }else {  // 失败
-          this.$message({type: 'error', message: '失败，请稍后重试'})
+            }else {  // 失败
+              this.$message({type: 'error', message: '失败，请稍后重试'})
+            }
+          })
         }
       })
     },
@@ -72,6 +89,8 @@ export default {
       console.log(res)
       // 将上传成功的图片访问路径赋值给form对象的属性
       this.form.actorAvatar = res.data
+      // 想办法将错误消息移除
+      this.$refs.form.clearValidate()
     },
 
     /** 图片上传之前执行 */
