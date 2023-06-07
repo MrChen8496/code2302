@@ -36,6 +36,7 @@
 <script>
 import Person from "@/components/Person.vue"
 import myaxios from '@/http/MyAxios'
+import httpApi from '@/http/index'
 
 export default {
   components: { Person },
@@ -93,10 +94,7 @@ export default {
 
     /** 列出演员列表 */
     listActors() {
-      let url = "http://localhost:3010/movie-actors"
-      let params = {page:1, pagesize:100}
-      myaxios.get(url, params).then(res=>{
-        console.log('演员列表', res)
+      httpApi.queryActors().then(res=>{
         this.actors = res.data.data
       })
     }

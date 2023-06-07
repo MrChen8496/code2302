@@ -87,7 +87,16 @@ Vue认为，事件处理函数内部更多的代码应该聚焦在业务功能�
 **父组件：**
 
 ```html
-<person name="" avatar=""></person>
+<person name="" avatar="" @delPerson="doDel"></person>
+<script>
+	...
+    methods: {
+        doDel(){
+            执行具体的删除业务即可
+        }
+    }
+    ...
+</script>
 ```
 
 **子组件：**
@@ -107,6 +116,81 @@ Vue认为，事件处理函数内部更多的代码应该聚焦在业务功能�
     ...
 </script>
 ```
+
+
+
+#### 封装Axios
+
+当前业务中使用Axios发送请求时的API的设计弊端：
+
+1. 每次发请求，都需要写url路径，url路径前缀保持一致。当前项目中其实有两种前缀：
+
+   ```
+   测试环境
+   http://localhost:3010/      业务模块请求前缀
+   http://localhost:9000/      上传文件模块请求前缀
+   
+   生产环境
+   https://web.codeboy.com/bmdapi/      	   业务模块请求前缀
+   https://web.codeboy.com/bmduploadapi/      上传文件模块请求前缀
+   ```
+
+   现阶段写法如果要切换生产环境与测试环境接口时，非常麻烦。
+
+2. 如果在项目中有多个地方都需要发送相同类型的请求（例如：通过关键字模糊查询演员列表），那么每次发请求时，都需要使用相应的url接口地址，代码中就需要每次都去接口文档看一眼（地址、参数列表）。更恶心的是如果领导修改了接口地址，所以使用该地址的地方都得该一遍，非常麻烦。
+
+
+
+#### Axios的封装设计的实现流程
+
+1. 解决如果在项目中有多个地方都需要发送相同类型的请求时，需要重复写相应的url接口地址与参数的问题。
+
+   在src/http文件夹中新建：index.js，导出httpApi对象，在该对象中提供发送请求的接口方法。这样，谁想发请求，只需要引入该httpApi对象，调用方法即可。
+
+   ```javascript
+   import myaxios from "./MyAxios"
+   
+   const httpApi = {
+   
+     /** 查询首页演员列表 */
+     queryActors(){
+       let url = "http://localhost:3010/movie-actors"
+       let params = {page:1, pagesize:100}
+       return myaxios.get(url, params)
+     }
+   
+   }
+   
+   export default httpApi
+   ```
+
+   当需要访问演员列表时，可以引入该js文件，调用httpApi的接口方法获取结果即可：
+
+   ```javascript
+   import httpApi from '@/http/index'
+   
+   /** 列出演员列表 */
+   listActors() {
+       httpApi.queryActors().then(res=>{
+           this.actors = res.data.data
+       })
+   }
+   ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
