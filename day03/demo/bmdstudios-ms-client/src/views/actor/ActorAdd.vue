@@ -10,7 +10,7 @@
     <el-divider></el-divider>
 
     <!-- 表单 -->
-    <el-form :model="form" label-width="100px">
+    <el-form ref="form" :model="form" label-width="100px">
       <el-form-item label="演员姓名">
         <el-input v-model="form.actorName" placeholder="输入姓名">
         </el-input>
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import myaxios from '@/http/MyAxios';
 export default {
   data() {
     return {
@@ -53,6 +54,17 @@ export default {
 
     submit(){
       console.log(this.form)
+      // 发送新增演员的请求
+      let url = "http://localhost:3010/movie-actor/add"
+      myaxios.post(url, this.form).then(res=>{
+        if(res.data.code==200){ // 新增成功
+          this.$message({type: 'success', message: '新增成功'})
+          // this.$refs.form.resetFields()
+
+        }else {  // 失败
+          this.$message({type: 'error', message: '失败，请稍后重试'})
+        }
+      })
     },
 
     /** 上传成功后执行 */
