@@ -36,6 +36,22 @@
               <span slot="title">新增演员</span>
             </el-menu-item>
           </el-submenu>
+
+          <el-submenu index="2">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span slot="title">导演管理</span>
+            </template>
+            <el-menu-item index="/home/director-list">
+              <i class="el-icon-notebook-2"></i>
+              <span slot="title">导演列表</span>
+            </el-menu-item>
+            <el-menu-item index="/home/director-add">
+              <i class="el-icon-plus"></i>
+              <span slot="title">新增导演</span>
+            </el-menu-item>
+          </el-submenu>
+
         </el-menu>
       </el-aside>
 
