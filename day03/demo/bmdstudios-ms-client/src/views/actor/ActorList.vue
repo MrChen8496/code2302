@@ -14,7 +14,9 @@
     姓名：
     <el-input 
       v-model="name"
+      @keyup.native.enter="search"
       placeholder="姓名关键字" style="width:200px;"></el-input> 
+
     &nbsp;
     <el-button type="primary" @click="search">查询</el-button>
     <el-divider content-position="left">列表数据</el-divider>
