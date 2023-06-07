@@ -2,6 +2,7 @@
   <div class="person">
     <img :src="avatar" alt="">
     <span>{{name}}</span>
+    <i class="el-icon-error" @click="clickx"></i>
   </div>
 </template>
 
@@ -23,18 +24,36 @@
         type: String,
         required: true
       }
-    }
+    },
+    methods: {
+      /** 叉子被点击了，触发事件执行该方法 */
+      clickx() {
+        // 此处是无法直接发送删除请求的，可以直接抛出自定义事件
+        this.$emit('delete')
+      }
+    },
   }
 </script>
 
 <style lang="scss" scoped>
+.person:hover i {
+  display: block;
+}
 .person {
   width: 80px;
   height: 130px;
   display: inline-block;
   margin: 0px 10px 10px 0px;
   text-align: center;
+  position: relative;
 
+  i {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 1.2em;
+    display: none;
+  }
   img {
     width: 80px;
   }

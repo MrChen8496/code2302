@@ -26,7 +26,8 @@
       v-for="item in actors" 
       :key="item.id"
       :name="item.actor_name" 
-      :avatar="item.actor_avatar">
+      :avatar="item.actor_avatar"
+      @delete="deleteActor(item.id)">
     </person>
 
   </div>
@@ -52,6 +53,15 @@ export default {
   },
 
   methods: {
+
+    /**删除演员 */
+    deleteActor(id){
+      let url = "http://localhost:3010/movie-actor/del"
+      myaxios.post(url, {id}).then(res=>{
+        console.log('删除演员结果', res)
+        this.search()
+      })
+    },
 
     /** 搜索 */
     search(){
