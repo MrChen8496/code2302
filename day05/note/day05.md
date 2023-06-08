@@ -65,8 +65,49 @@
    src/http/BaseUrl.js
    ```
 
+   ```javascript
+   /** src/http/BaseUrl.js  
+     * 暴露出请求资源路径的前缀即可 */
+   const URLENV = {  
+     DEV: {  // 开发环境
+       BMDURL : 'http://localhost:3010',
+       UPLOADURL:'http://localhost:9000'
+     },
+     PRO: {  // 生产环境
+       BMDURL : 'https://web.codeboy.com/bmdapi',
+       UPLOADURL:'https://web.codeboy.com/bmduploadapi'
+     }
+   }
+   export default URLENV.DEV
+   ```
 
 
+### 电影管理模块
+
+#### 整理左侧边栏导航及路由子页面
+
+设计嵌套路由：
+
+```
+/home/movie-list    看到电影列表页
+/home/movie-add     看到新增电影页
+```
+
+1. 准备两个页面：
+
+   ```
+   src/views/movie/MovieList.vue
+   src/views/movie/MovieAdd.vue
+   ```
+
+2. 配置嵌套路由：
+
+   ```
+   /home/movie-list    看到电影列表页
+   /home/movie-add     看到新增电影页
+   ```
+
+3. 添加左侧边栏菜单，点击后跳转到相应地址。
 
 
 

@@ -25,7 +25,7 @@
       <el-form-item label="选择头像" prop="actorAvatar">
         <el-upload
           class="avatar-uploader"
-          action="http://localhost:9000/upload"
+          :action="`${UPLOADURL}/upload`"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload">
@@ -46,11 +46,10 @@
 </template>
 
 <script>
-import myaxios from '@/http/MyAxios';
-import httpApi from '@/http';
 export default {
   data() {
     return {
+
       form: {
         actorName: '',   // 封装演员名字
         actorAvatar: ''  // 封装演员头像路径

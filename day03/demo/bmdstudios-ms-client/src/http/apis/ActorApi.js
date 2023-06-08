@@ -10,7 +10,7 @@ const actorApi = {
    * @param {object} params  {id:1}
    */
   delete(params){
-    let url = 'http://localhost:3010/movie-actor/del'
+    let url = BMDURL + "/movie-actor/del"
     return myaxios.post(url, params)
   },
 
@@ -19,7 +19,7 @@ const actorApi = {
    * @param {object} params  {actorName:'', actorAvatar:''}
    */
   save(params){
-    let url = 'http://localhost:3010/movie-actor/add'
+    let url = BMDURL + "/movie-actor/add"
     return myaxios.post(url, params)
   },
 
@@ -28,7 +28,7 @@ const actorApi = {
    * @param {object} params  {name:'关键字'}
    */
   queryActorsByName(params){
-    let url = "http://localhost:3010/movie-actors/name"
+    let url = BMDURL + "/movie-actors/name"
     return myaxios.post(url, params)
   },
 
