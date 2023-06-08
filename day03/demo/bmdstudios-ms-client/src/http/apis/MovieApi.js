@@ -3,6 +3,16 @@ import BASE from '@/http/BaseUrl'
 const BMDURL = BASE.BMDURL
 
 const movieApi = {
+
+  /**
+   * 删除电影
+   * @param {Object} params  {id:1}
+   */
+  delete(params){
+    let url = BMDURL + "/movie-info/del"
+    return myaxios.post(url, params)
+  },
+
   /**
    * 查询电影列表
    * @param {object} params {page:1, pagesize:3}

@@ -35,12 +35,14 @@
       </el-table-column>
       <el-table-column label="所属类别" prop="type" width="200px"></el-table-column>
       <el-table-column label="操作" width="220px">
-        <template>
+        <template slot-scope="scope">
           <el-button size="small" type="info" icon="el-icon-user" circle></el-button>
           <el-button size="small" type="success" icon="el-icon-picture-outline" circle></el-button>
           
           <el-button size="small" type="warning" icon="el-icon-edit" circle></el-button>
-          <el-button size="small" type="danger" icon="el-icon-delete" circle></el-button>
+          <el-button 
+            @click="deleteMovie(scope.row.id)"
+            size="small" type="danger" icon="el-icon-delete" circle></el-button>
 
         </template>
       </el-table-column>
@@ -77,7 +79,20 @@ export default {
       }
     }
   },
+
   methods: {
+
+    /** 删除电影业务 */
+    deleteMovie(id){
+      console.log(id)
+      // 发送http请求，执行删除业务
+      httpApi.movieApi.delete({id}).then(res=>{
+        console.log('删除结果', res)
+        // 重新加载当前页数据
+        this.search()
+      })
+    },
+
     /** 当前页码被改变时触发 */
     changeCurrent(page){
       console.log(page)
