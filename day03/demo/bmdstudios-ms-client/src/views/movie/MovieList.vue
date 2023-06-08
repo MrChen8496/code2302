@@ -43,13 +43,14 @@
         </template>
       </el-table-column>
     </el-table>
+    
     <!-- 分页器 -->
     <el-pagination
       style="margin:20px;"
       layout="->, total, prev, pager, next, jumper"
-      :current-page="1"
-      :total="200"
-      :page-size="10">
+      :current-page="movieData.page"
+      :total="movieData.total"
+      :page-size="movieData.pagesize">
     </el-pagination>
 
   </div>
