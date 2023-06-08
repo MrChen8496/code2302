@@ -47,6 +47,7 @@
 
 <script>
 import myaxios from '@/http/MyAxios';
+import httpApi from '@/http';
 export default {
   data() {
     return {
@@ -70,12 +71,10 @@ export default {
       this.$refs.form.validate(valid=>{
         if(valid){ // 验证通过
           // 发送新增演员的请求
-          let url = "http://localhost:3010/movie-actor/add"
-          myaxios.post(url, this.form).then(res=>{
+          httpApi.actorApi.save(this.form).then(res=>{
             if(res.data.code==200){ // 新增成功
               this.$message({type: 'success', message: '新增成功'})
-              // this.$refs.form.resetFields()
-
+              this.$refs.form.resetFields()
             }else {  // 失败
               this.$message({type: 'error', message: '失败，请稍后重试'})
             }

@@ -27,7 +27,7 @@
       :key="item.id"
       :name="item.actor_name" 
       :avatar="item.actor_avatar"
-      @delete="deleteActor(item.id)">
+      @delete="deleteActor(item.id, $event)">
     </person>
 
   </div>
@@ -56,16 +56,18 @@ export default {
   methods: {
 
     /**删除演员 */
-    deleteActor(id){
+    deleteActor(id, event){
+      console.log('接收到了参数:', event)
+
       this.$confirm('确认删除吗？', '提示', {
         confirmButtonText:'确认',
         cancelButtonText:'取消',
         type:'warning'
       }).then(res=>{
-        let url = "http://localhost:3010/movie-actor/del"
-        myaxios.post(url, {id}).then(res=>{
-          console.log('删除演员结果', res)
-          this.search()
+        httpApi.actorApi.delete({id}).then(res=>{
+          if(res.data.code==200){
+            this.search()
+          }
         })
       }).catch(err=>{})
 
