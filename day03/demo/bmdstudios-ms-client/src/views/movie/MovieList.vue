@@ -12,10 +12,10 @@
     电影名称：
     <el-input 
       v-model="name"  
-      @keyup.native.enter="search"
+      @keyup.native.enter="submit"
       placeholder="电影名称关键字" style="width:200px;"></el-input> 
     &nbsp;
-    <el-button type="primary" @click="search">查询</el-button>
+    <el-button type="primary" @click="submit">查询</el-button>
     <el-divider content-position="left">列表数据</el-divider>
 
     <!-- 表格 -->
@@ -82,7 +82,13 @@ export default {
     changeCurrent(page){
       console.log(page)
       this.movieData.page = page  // 修改当前页码
-      this.listMovies() // 重新加载列表即可
+      this.search()
+    },
+
+    /** 点击查询按钮 */
+    submit(){
+      this.movieData.page = 1
+      this.search()
     },
 
     /** 模糊查询电影列表 */
@@ -97,7 +103,7 @@ export default {
     /** 通过关键字查询列表 */
     listMoviesByName(){
       let params = {
-        page : 1, 
+        page : this.movieData.page, 
         pagesize : this.movieData.pagesize,
         name: this.name
       }
@@ -105,7 +111,6 @@ export default {
         // 查询成功后，更新当前列表
         this.movieData = res.data.data
       })
-      
     },
 
     /** 列出电影列表 */
