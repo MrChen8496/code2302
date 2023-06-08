@@ -111,7 +111,26 @@
 
 
 
+#### 搭建电影列表静态页面
 
+```
+面包屑导航
+搜索表单
+表格
+分页器
+```
+
+
+
+#### 组件挂载完毕时加载电影列表
+
+1. 在组件的mounted中，发送请求，加载电影列表数据。
+
+   MyAxios    httpApi    MovieApi.js    queryMovies()
+
+2. 将服务端返回的数据以el-table的方式显示在页面中。
+
+   movies:[]       `<el-table  :data="">`  ` <el-table-column>自定义列模板</el-table-column>`
 
 
 
