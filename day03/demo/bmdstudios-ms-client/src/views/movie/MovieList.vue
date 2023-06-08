@@ -88,8 +88,16 @@ export default {
       // 发送http请求，执行删除业务
       httpApi.movieApi.delete({id}).then(res=>{
         console.log('删除结果', res)
-        // 重新加载当前页数据
-        this.search()
+        if(res.data.code==200){
+          // 删除成功后，得计算一下，现在最大页码是多少？
+          let maxPage = 
+            Math.ceil((this.movieData.total-1)/this.movieData.pagesize)
+          if(maxPage<this.movieData.page){
+            this.movieData.page = maxPage
+          }
+          // 重新加载当前页数据
+          this.search()
+        }
       })
     },
 
