@@ -11,9 +11,11 @@
     <!-- 表单 -->
     电影名称：
     <el-input 
+      v-model="name"  
+      @keyup.native.enter="search"
       placeholder="电影名称关键字" style="width:200px;"></el-input> 
     &nbsp;
-    <el-button type="primary">查询</el-button>
+    <el-button type="primary" @click="search">查询</el-button>
     <el-divider content-position="left">列表数据</el-divider>
 
     <!-- 表格 -->
@@ -43,14 +45,15 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <!-- 分页器 -->
     <el-pagination
       style="margin:20px;"
       layout="->, total, prev, pager, next, jumper"
       :current-page="movieData.page"
       :total="movieData.total"
-      :page-size="movieData.pagesize">
+      :page-size="movieData.pagesize"
+      @current-change="changeCurrent($event)">
     </el-pagination>
 
   </div>
@@ -65,6 +68,7 @@ export default {
 
   data() {
     return {
+      name: '', // 双向数据绑定  绑定文本框的值 
       movieData: {
         page: 1,
         pagesize: 3,
@@ -74,9 +78,42 @@ export default {
     }
   },
   methods: {
+    /** 当前页码被改变时触发 */
+    changeCurrent(page){
+      console.log(page)
+      this.movieData.page = page  // 修改当前页码
+      this.listMovies() // 重新加载列表即可
+    },
+
+    /** 模糊查询电影列表 */
+    search(){
+      if(this.name.trim() == ''){ // 没有关键字
+        this.listMovies()  
+      }else {
+        this.listMoviesByName()
+      }
+    },
+
+    /** 通过关键字查询列表 */
+    listMoviesByName(){
+      let params = {
+        page : 1, 
+        pagesize : this.movieData.pagesize,
+        name: this.name
+      }
+      httpApi.movieApi.queryMoviesByName(params).then(res=>{
+        // 查询成功后，更新当前列表
+        this.movieData = res.data.data
+      })
+      
+    },
+
     /** 列出电影列表 */
     listMovies() {
-      let params = {page:1, pagesize:3}
+      let params = {
+        page : this.movieData.page, 
+        pagesize : this.movieData.pagesize
+      }
       httpApi.movieApi.queryMovies(params).then(res=>{
         console.log('加载电影列表', res)
         // 将数据存入data

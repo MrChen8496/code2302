@@ -10,6 +10,15 @@ const movieApi = {
   queryMovies(params){
     let url = BMDURL + "/movie-infos"
     return myaxios.get(url, params)
+  },
+
+  /**
+   * 模糊查询电影列表
+   * @param {object} params {page:1, pagesize:3, name:关键字}
+   */
+  queryMoviesByName(params){
+    let url = BMDURL + "/movie-infos/name"
+    return myaxios.post(url, params)
   }
 }
 
