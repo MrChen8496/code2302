@@ -71,7 +71,8 @@
           v-model="form.showingon"
           type="date"
           placeholder="选择日期"
-          style="width:100%;">
+          style="width:100%;"
+          value-format="yyyy-MM-dd">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="电影评分">
@@ -83,10 +84,24 @@
         <el-input v-model="form.duration"></el-input>
       </el-form-item>
       <el-form-item label="电影简介">
-        
+        <div style="border: 1px solid #ccc;">
+            <Toolbar
+                style="border-bottom: 1px solid #ccc"
+                :editor="editor"
+                :defaultConfig="toolbarConfig"
+                :mode="mode"
+            />
+            <Editor
+                style="height: 200px; overflow-y: hidden;"
+                v-model="form.description"
+                :defaultConfig="editorConfig"
+                :mode="mode"
+                @onCreated="onCreated"
+            />
+        </div>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">立即创建</el-button>
+        <el-button type="primary" @click="submit">立即创建</el-button>
         <el-button>取消</el-button>
       </el-form-item>
     </el-form>
@@ -96,15 +111,32 @@
 
 <script>
 import httpApi from '@/http';
+import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
+import { DomEditor } from '@wangeditor/editor'
+
 export default {
+  components:  {Editor, Toolbar},
 
   mounted(){
     // 加载所有的电影类别列表项
     this.queryMoviesTypes()
   },
+  beforeDestroy() {
+      const editor = this.editor
+      if (editor == null) return
+      editor.destroy() // 组件销毁时，及时销毁编辑器
+  },
 
   data() {
     return {
+      editor: null,
+      html: '<p>hello</p>',
+      toolbarConfig: { 
+        toolbarKeys: ['bold', 'underline', 'italic', 'color']
+      },
+      editorConfig: { placeholder: '请输入内容...' },
+      mode: 'default', // or 'simple'
+
       loading: false, // 是否正在加载中
       form: {
         categoryId: '1',
@@ -113,7 +145,7 @@ export default {
         type: '',
         starActor: '',
         showingon: '',
-        score: '',
+        score: 0,
         description: '',
         duration: ''
       },
@@ -123,6 +155,30 @@ export default {
   },
 
   methods: {
+
+    /** 点击提交按钮 */
+    submit(){
+      // 整理两个字段  form.type   form.starActor
+      this.form.type = this.form.type.join('／')
+      this.form.starActor = this.form.starActor.join('／')
+      console.log(this.form)
+      // 提交表单
+      httpApi.movieApi.save(this.form).then(res=>{
+        console.log('新增电影结果', res)
+      })
+    },
+
+    onCreated(editor) {
+        this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
+        
+        setTimeout(()=>{
+          const toolbar = DomEditor.getToolbar(editor)
+          const curToolbarConfig = toolbar.getConfig()
+          console.log('---------------------------')
+          console.log( curToolbarConfig.toolbarKeys ) // 当前菜单排序和分组
+        }, 1000)
+    },
+
     /** 选择演员时，远程搜索方法，会传入query关键字 */ 
     remoteMethod(query){
       console.log(query)  //query就是文本框中的关键字
@@ -172,6 +228,7 @@ export default {
 <style lang="scss" scoped>
 </style>
 
+<style src="@wangeditor/editor/dist/css/style.css"></style>
 <style>
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
