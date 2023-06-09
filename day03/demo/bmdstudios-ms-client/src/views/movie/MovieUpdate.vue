@@ -201,6 +201,10 @@ export default {
         console.log('电影详情', res)
         // 直接将电影详情数据覆盖掉this.form对象
         this.form = res.data.data
+        this.form.category_id = this.form.category_id+""
+        this.form.type = this.form.type.split('／')
+        this.form.star_actor = this.form.star_actor.split('／')
+        this.form.score = parseFloat(this.form.score)
       })
     },
 
@@ -208,7 +212,20 @@ export default {
     submit(){
       this.$refs.form.validate(valid=>{
         if(valid){
-
+          // 处理请求参数中的特殊字段 
+          // this.form.type  this.form.star_actor  
+          this.form.type = this.form.type.join('／')
+          this.form.star_actor = this.form.star_actor.join('／')
+          // 发送更新电影信息的请求
+          httpApi.movieApi.update(this.form).then(res=>{
+            console.log('修改电影结果', res)
+            if(res.data.code==200){  // 新增成功
+              this.$message({type:'success', message:'成功'})
+              this.$router.push('/home/movie-list')
+            }else {
+              this.$message({type:'error', message:'系统异常'})
+            }
+          })
         }
       })
     },

@@ -4,6 +4,12 @@ const BMDURL = BASE.BMDURL
 
 const movieApi = {
 
+  /** 修改电影业务 */ 
+  update(params){
+    let url = BMDURL + "/movie-info/update"
+    return myaxios.post(url, params)
+  },
+
   /**
    * 通过ID查询电影详情
    * @param {Object} params 

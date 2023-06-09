@@ -25,7 +25,11 @@
           <img :src="scope.row.cover" width="60px">
         </template>
       </el-table-column>
-      <el-table-column label="标题" prop="title"></el-table-column>
+      <el-table-column label="标题">
+        <template slot-scope="scope">
+          <span v-html="scope.row.title"></span>
+        </template>
+      </el-table-column>
       <el-table-column label="主演" prop="star_actor" width="220px"></el-table-column>
       <el-table-column label="上映时间" prop="showingon" width="150px"></el-table-column>
       <el-table-column label="时长" width="150px">

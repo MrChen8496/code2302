@@ -108,10 +108,12 @@
 
    ```
    /home/movie-update/1
+   let id = this.$route.params.id
    ```
 
    ```
    /home/movie-update?id=1
+   let id = this.$route.query.id
    ```
 
 3. 修改电影页面，先发送请求，加载详情，回填表单。
