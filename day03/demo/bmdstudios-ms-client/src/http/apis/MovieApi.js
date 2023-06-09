@@ -4,6 +4,12 @@ const BMDURL = BASE.BMDURL
 
 const movieApi = {
 
+  /** 查询所有电影类型 */
+  queryTypes(){
+    let url = BMDURL + "/movie-types"
+    return myaxios.get(url)
+  },
+
   /**
    * 删除电影
    * @param {Object} params  {id:1}

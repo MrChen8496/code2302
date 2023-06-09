@@ -35,9 +35,12 @@
       </el-form-item>
       <el-form-item label="电影类型">
         <el-select v-model="form.type">
-          <el-option label="111" value="1"></el-option>
-          <el-option label="222" value="2"></el-option>
-          <el-option label="333" value="3"></el-option>
+          <el-option
+            v-for="item in types"
+            :key="item.id"
+            :label="item.typename" 
+            :value="item.typename">
+          </el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="电影主演"></el-form-item>
@@ -63,7 +66,14 @@
 </template>
 
 <script>
+import httpApi from '@/http';
 export default {
+
+  mounted(){
+    // 加载所有的电影类别列表项
+    this.queryMoviesTypes()
+  },
+
   data() {
     return {
       form: {
@@ -76,11 +86,22 @@ export default {
         score: '',
         description: '',
         duration: ''
-      }
+      },
+
+      types:[], // 保存所有的电影类型 [{id:1, typename:'惊悚'}]
     }
   },
 
   methods: {
+
+    /** 查询电影类型列表 */
+    queryMoviesTypes(){
+      httpApi.movieApi.queryTypes().then(res=>{
+        console.log('查询电影类型', res)
+        this.types = res.data.data
+      })
+    },
+
     /** 上传成功后执行 */
     handleAvatarSuccess(res, file) {
       console.log(res)
