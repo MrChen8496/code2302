@@ -34,7 +34,9 @@
         <el-input v-model="form.title"></el-input>
       </el-form-item>
       <el-form-item label="电影类型">
-        <el-select v-model="form.type">
+        <el-select 
+          style="width:100%"
+          v-model="form.type" multiple>
           <el-option
             v-for="item in types"
             :key="item.id"
@@ -43,7 +45,27 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="电影主演"></el-form-item>
+      <el-form-item label="电影主演">
+        <el-select
+          v-model="form.starActor"
+          multiple
+          filterable
+          remote
+          reserve-keyword
+          placeholder="搜索演员"
+          :remote-method="remoteMethod"
+          :loading="loading"
+          style="width:100%;">
+
+          <el-option
+            v-for="item in actors" 
+            :key="item.id" 
+            :label='item.actor_name' 
+            :value="item.actor_name">
+          </el-option>
+
+        </el-select>
+      </el-form-item>
       <el-form-item label="上映时间">
         <el-input></el-input>
       </el-form-item>
@@ -76,6 +98,7 @@ export default {
 
   data() {
     return {
+      loading: false, // 是否正在加载中
       form: {
         categoryId: '1',
         cover: '',
@@ -87,12 +110,21 @@ export default {
         description: '',
         duration: ''
       },
-
       types:[], // 保存所有的电影类型 [{id:1, typename:'惊悚'}]
+      actors: [], // 保存演员列表
     }
   },
 
   methods: {
+    /** 选择演员时，远程搜索方法，会传入query关键字 */ 
+    remoteMethod(query){
+      console.log(query)  //query就是文本框中的关键字
+      // 发请求，模糊查询演员列表
+      httpApi.actorApi.queryActorsByName({name:query}).then(res=>{
+        console.log('模糊查询结果', res)
+        this.actors = res.data.data
+      })
+    },
 
     /** 查询电影类型列表 */
     queryMoviesTypes(){
