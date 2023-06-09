@@ -140,6 +140,13 @@
 
 在输入框中填写关键字，敲回车、点查询按钮都可以实现模糊查询。更新列表。
 
+```html
+<el-form @submit.native.prevent="search">
+    <el-input></el-input>
+    <el-input></el-input>
+</el-form>
+```
+
 
 
 #### 实现电影删除业务
