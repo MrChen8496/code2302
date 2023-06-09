@@ -9,8 +9,12 @@
     <el-divider></el-divider>
 
     <!-- 表单 -->
-    <el-form :model="form" label-width="100px" style="width:600px">
-      <el-form-item label="封面图片">
+    <el-form 
+      ref="form"
+      :model="form" 
+      :rules="rules"
+      label-width="100px" style="width:600px">
+      <el-form-item prop="cover" label="封面图片">
         <el-upload
           class="avatar-uploader"
           :action="`${UPLOADURL}/upload`"
@@ -23,17 +27,17 @@
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>        
       </el-form-item>
-      <el-form-item label="电影类别">
+      <el-form-item prop="categoryId" label="电影类别">
         <el-radio-group v-model="form.categoryId">
           <el-radio label="1">热映</el-radio>
           <el-radio label="2">待映</el-radio>
           <el-radio label="3">经典</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="电影名称">
+      <el-form-item prop="title" label="电影名称">
         <el-input v-model="form.title"></el-input>
       </el-form-item>
-      <el-form-item label="电影类型">
+      <el-form-item prop="type" label="电影类型">
         <el-select 
           style="width:100%"
           v-model="form.type" multiple>
@@ -45,7 +49,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="电影主演">
+      <el-form-item prop="starActor" label="电影主演">
         <el-select
           v-model="form.starActor"
           multiple
@@ -66,7 +70,7 @@
 
         </el-select>
       </el-form-item>
-      <el-form-item label="上映时间">
+      <el-form-item prop="showingon" label="上映时间">
         <el-date-picker 
           v-model="form.showingon"
           type="date"
@@ -75,15 +79,15 @@
           value-format="yyyy-MM-dd">
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="电影评分">
+      <el-form-item prop="score" label="电影评分">
         <el-rate 
           style="margin-top: 10px;"
           v-model="form.score" :max="10"></el-rate>
       </el-form-item>
-      <el-form-item label="电影时长">
+      <el-form-item prop="duration" label="电影时长">
         <el-input v-model="form.duration"></el-input>
       </el-form-item>
-      <el-form-item label="电影简介">
+      <el-form-item prop="description" label="电影简介">
         <div style="border: 1px solid #ccc;">
             <Toolbar
                 style="border-bottom: 1px solid #ccc"
@@ -149,6 +153,35 @@ export default {
         description: '',
         duration: ''
       },
+      rules: {
+        categoryId: [
+          {required:true, message:'必填', trigger:'blur'}
+        ],
+        cover: [
+          {required:true, message:'必填', trigger:'blur'}
+        ],
+        title: [
+          {required:true, message:'必填', trigger:'blur'}
+        ],
+        type: [
+          {required:true, message:'必填', trigger:'blur'}
+        ],
+        starActor: [
+          {required:true, message:'必填', trigger:'blur'}
+        ],
+        showingon: [
+          {required:true, message:'必填', trigger:'blur'}
+        ],
+        score: [
+          {required:true, message:'必填', trigger:'blur'}
+        ],
+        description: [
+          {required:true, message:'必填', trigger:'blur'}
+        ],
+        duration: [
+          {required:true, message:'必填', trigger:'blur'}
+        ],
+      },
       types:[], // 保存所有的电影类型 [{id:1, typename:'惊悚'}]
       actors: [], // 保存演员列表
     }
@@ -158,14 +191,26 @@ export default {
 
     /** 点击提交按钮 */
     submit(){
-      // 整理两个字段  form.type   form.starActor
-      this.form.type = this.form.type.join('／')
-      this.form.starActor = this.form.starActor.join('／')
-      console.log(this.form)
-      // 提交表单
-      httpApi.movieApi.save(this.form).then(res=>{
-        console.log('新增电影结果', res)
+      this.$refs.form.validate(valid=>{
+        if(valid){
+          // 整理两个字段  form.type   form.starActor
+          this.form.type = this.form.type.join('／')
+          this.form.starActor = this.form.starActor.join('／')
+          console.log(this.form)
+          // 提交表单
+          httpApi.movieApi.save(this.form).then(res=>{
+            console.log('新增电影结果', res)
+            if(res.data.code==200){  // 新增成功
+              this.$message({type:'success', message:'成功'})
+              this.$router.push('/home/movie-list')
+            }else {
+              this.$message({type:'error', message:'系统异常'})
+            }
+          })
+        }
       })
+
+
     },
 
     onCreated(editor) {
