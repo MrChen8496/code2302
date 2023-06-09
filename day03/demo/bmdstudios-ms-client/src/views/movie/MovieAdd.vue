@@ -67,16 +67,23 @@
         </el-select>
       </el-form-item>
       <el-form-item label="上映时间">
-        <el-input></el-input>
+        <el-date-picker 
+          v-model="form.showingon"
+          type="date"
+          placeholder="选择日期"
+          style="width:100%;">
+        </el-date-picker>
       </el-form-item>
       <el-form-item label="电影评分">
-        <el-input></el-input>
+        <el-rate 
+          style="margin-top: 10px;"
+          v-model="form.score" :max="10"></el-rate>
       </el-form-item>
       <el-form-item label="电影时长">
-        <el-input></el-input>
+        <el-input v-model="form.duration"></el-input>
       </el-form-item>
       <el-form-item label="电影简介">
-        <el-input></el-input>
+        
       </el-form-item>
       <el-form-item>
         <el-button type="primary">立即创建</el-button>
@@ -119,11 +126,15 @@ export default {
     /** 选择演员时，远程搜索方法，会传入query关键字 */ 
     remoteMethod(query){
       console.log(query)  //query就是文本框中的关键字
-      // 发请求，模糊查询演员列表
-      httpApi.actorApi.queryActorsByName({name:query}).then(res=>{
-        console.log('模糊查询结果', res)
-        this.actors = res.data.data
-      })
+      if(query != ''){
+        this.loading = true
+        // 发请求，模糊查询演员列表
+        httpApi.actorApi.queryActorsByName({name:query}).then(res=>{
+          this.loading = false
+          console.log('模糊查询结果', res)
+          this.actors = res.data.data
+        })
+      }
     },
 
     /** 查询电影类型列表 */
