@@ -3,7 +3,8 @@
     <!-- 面包屑导航 -->
     <el-breadcrumb separator="/">
       <el-breadcrumb-item>电影管理</el-breadcrumb-item>
-      <el-breadcrumb-item>新增电影</el-breadcrumb-item>
+      <el-breadcrumb-item>电影列表</el-breadcrumb-item>
+      <el-breadcrumb-item>修改电影信息</el-breadcrumb-item>
     </el-breadcrumb>
     <!-- 分隔线 -->
     <el-divider></el-divider>
