@@ -40,7 +40,7 @@
           <el-button size="small" type="success" icon="el-icon-picture-outline" circle></el-button>
           
           <el-button 
-            @click="$router.push('/home/movie-update')"
+            @click="$router.push('/home/movie-update?id='+scope.row.id)"    
             size="small" type="warning" icon="el-icon-edit" circle></el-button>
           <el-button 
             @click="deleteMovie(scope.row.id)"

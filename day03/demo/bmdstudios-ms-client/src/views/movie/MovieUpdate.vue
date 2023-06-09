@@ -28,8 +28,8 @@
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>        
       </el-form-item>
-      <el-form-item prop="categoryId" label="电影类别">
-        <el-radio-group v-model="form.categoryId">
+      <el-form-item prop="category_id" label="电影类别">
+        <el-radio-group v-model="form.category_id">
           <el-radio label="1">热映</el-radio>
           <el-radio label="2">待映</el-radio>
           <el-radio label="3">经典</el-radio>
@@ -50,9 +50,9 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item prop="starActor" label="电影主演">
+      <el-form-item prop="star_actor" label="电影主演">
         <el-select
-          v-model="form.starActor"
+          v-model="form.star_actor"
           multiple
           filterable
           remote
@@ -106,7 +106,7 @@
         </div>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submit">立即创建</el-button>
+        <el-button type="primary" @click="submit">更新电影信息</el-button>
         <el-button>取消</el-button>
       </el-form-item>
     </el-form>
@@ -125,7 +125,10 @@ export default {
   mounted(){
     // 加载所有的电影类别列表项
     this.queryMoviesTypes()
+    // 加载当前电影的详细信息
+    this.queryMovieInfo()
   },
+
   beforeDestroy() {
       const editor = this.editor
       if (editor == null) return
@@ -144,18 +147,19 @@ export default {
 
       loading: false, // 是否正在加载中
       form: {
-        categoryId: '1',
+        id: this.$route.query.id, // 获取query参数赋值即可
+        category_id: '1',
         cover: '',
         title: '',
         type: '',
-        starActor: '',
+        star_actor: '',
         showingon: '',
         score: 0,
         description: '',
         duration: ''
       },
       rules: {
-        categoryId: [
+        category_id: [
           {required:true, message:'必填', trigger:'blur'}
         ],
         cover: [
@@ -167,7 +171,7 @@ export default {
         type: [
           {required:true, message:'必填', trigger:'blur'}
         ],
-        starActor: [
+        star_actor: [
           {required:true, message:'必填', trigger:'blur'}
         ],
         showingon: [
@@ -190,24 +194,21 @@ export default {
 
   methods: {
 
+    /** 查询电影信息 */ 
+    queryMovieInfo(){
+      let id = this.form.id // 电影ID
+      httpApi.movieApi.queryById({id}).then(res=>{
+        console.log('电影详情', res)
+        // 直接将电影详情数据覆盖掉this.form对象
+        this.form = res.data.data
+      })
+    },
+
     /** 点击提交按钮 */
     submit(){
       this.$refs.form.validate(valid=>{
         if(valid){
-          // 整理两个字段  form.type   form.starActor
-          this.form.type = this.form.type.join('／')
-          this.form.starActor = this.form.starActor.join('／')
-          console.log(this.form)
-          // 提交表单
-          httpApi.movieApi.save(this.form).then(res=>{
-            console.log('新增电影结果', res)
-            if(res.data.code==200){  // 新增成功
-              this.$message({type:'success', message:'成功'})
-              this.$router.push('/home/movie-list')
-            }else {
-              this.$message({type:'error', message:'系统异常'})
-            }
-          })
+
         }
       })
     },
