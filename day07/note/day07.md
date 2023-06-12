@@ -23,6 +23,27 @@ this.$route.meta.thumbs  ->  ['演员管理', '演员列表']
 
 
 
+#### 实现新增电影院功能模块
+
+**需求分析：**提供一个表单页面，以地图的方式选择坐标位置，回填表单，简化填写表单的步骤，点击提交按钮，添加电影院。
+
+**实现步骤：**
+
+1. 准备好侧边菜单：电影院管理：电影院列表，新增电影院。新建组件、配置路由。
+
+   ```
+   /home/cinema-add      views/cinema/CinemaAdd.vue
+   /home/cinema-list      views/cinema/CinemaList.vue
+   ```
+
+2. 提供CinemaAdd.vue的静态页面。
+
+
+
+
+
+
+
 
 
 

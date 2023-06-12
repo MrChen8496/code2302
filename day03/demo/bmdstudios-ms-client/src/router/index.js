@@ -64,6 +64,18 @@ const routes = [
           {name:'电影列表', to:'/home/movie-list'}, 
           '修改电影信息']
       }
+    },{
+      path: 'cinema-list',
+      component: () => import('../views/cinema/CinemaList.vue'),
+      meta: {
+        thumbs: ['电影院管理', '电影院列表']
+      }
+    },{
+      path: 'cinema-add',
+      component: () => import('../views/cinema/CinemaAdd.vue'),
+      meta: {
+        thumbs: ['电影院管理', '新增电影院']
+      }
     }]
   },
   {

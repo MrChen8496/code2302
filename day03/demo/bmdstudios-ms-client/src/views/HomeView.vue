@@ -67,6 +67,21 @@
             </el-menu-item>
           </el-submenu>
 
+          <el-submenu index="4">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span slot="title">电影院管理</span>
+            </template>
+            <el-menu-item index="/home/cinema-list">
+              <i class="el-icon-notebook-2"></i>
+              <span slot="title">电影院列表</span>
+            </el-menu-item>
+            <el-menu-item index="/home/cinema-add">
+              <i class="el-icon-plus"></i>
+              <span slot="title">新增电影院</span>
+            </el-menu-item>
+          </el-submenu>
+
         </el-menu>
       </el-aside>
 
@@ -80,8 +95,9 @@
           <el-breadcrumb separator="/" style="flex:1;">
             <el-breadcrumb-item
               v-for="item in $route.meta.thumbs" 
-              :key="item">
-              {{item}}
+              :key="item.name ? item.name : item"
+              :to="item.to ? item.to : ''">
+              {{item.name ? item.name : item}}
             </el-breadcrumb-item>
           </el-breadcrumb>
           
