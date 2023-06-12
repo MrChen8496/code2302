@@ -44,6 +44,16 @@ this.$route.meta.thumbs  ->  ['演员管理', '演员列表']
 
 5. 回填表单。
 
+6. 选择标签（多选）。
+
+   提供一个接口，查询所有影院类型。以下拉列表的方式显示。
+
+   mounted  CinemaApi.js   res.data       ` <el-option v-for="" >`  
+
+   用户选择标签。
+
+7. 点击确认新增，提交新增请求。
+
 
 
 

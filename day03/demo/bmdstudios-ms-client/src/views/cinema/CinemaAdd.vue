@@ -29,9 +29,16 @@
         <el-input v-model="form.latitude"></el-input>
       </el-form-item>
       <el-form-item label="选择标签">
-        <el-select style="width:100%;" v-model="form.tags">
-          <el-option label="3D" value="3D"></el-option>
-          <el-option label="小吃" value="小吃"></el-option>
+        <el-select 
+          multiple
+          style="width:100%;" 
+          v-model="form.tags">
+          <el-option 
+            v-for="item in types" 
+            :key="item.id" 
+            :label="item.tagname" 
+            :value="item.tagname">
+          </el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -45,14 +52,19 @@
 
 <script>
 import AMapLoader from '@amap/amap-jsapi-loader';
+import httpApi from '@/http';
 
 export default {
   mounted(){
+    // 初始化地图
     this.initMap();
+    // 初始化电影类型列表
+    this.listMovieTypes();
   },
 
   data() {
     return {
+      types: [], // 保存所有影院类型
       form: {
         cinema_name:'',
         address:'',
@@ -67,6 +79,16 @@ export default {
   },
 
   methods:{
+
+    /** 列出电影类型列表 */
+    listMovieTypes(){
+      httpApi.cinemaApi.queryTypes().then(res=>{
+        console.log(res)
+        this.types = res.data.data
+      })
+    },
+
+    /** 初始化地图 */
     initMap(){
       AMapLoader.load({
         key:"7bfbe3ab215345f405c23b5eed760ca8",             // 申请好的Web端开发者Key，首次调用 load 时必填
