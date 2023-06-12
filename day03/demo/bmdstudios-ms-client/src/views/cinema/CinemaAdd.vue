@@ -42,7 +42,7 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">确认新增</el-button>
+        <el-button type="primary" @click="submit">确认新增</el-button>
         <el-button>重置</el-button>
       </el-form-item>
     </el-form>
@@ -79,6 +79,21 @@ export default {
   },
 
   methods:{
+    /** 提交表单，执行新增业务 */
+    submit(){
+      this.form.tags = this.form.tags.join(',')
+      console.log(this.form)
+      // 发送请求，执行新增业务
+      httpApi.cinemaApi.add(this.form).then(res=>{
+        console.log('新增电影院的结果', res)
+        if(res.data.code==200){
+          this.$message({message:'新增成功', type:'success'})
+          this.$router.push('/home/cinema-list')
+        }else {
+          this.$message({message:'新增失败，稍后重试', type:'error'})
+        }
+      })
+    },
 
     /** 列出电影类型列表 */
     listMovieTypes(){
