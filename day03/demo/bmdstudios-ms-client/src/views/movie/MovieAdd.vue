@@ -1,13 +1,5 @@
 <template>
   <div>
-    <!-- 面包屑导航 -->
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item>电影管理</el-breadcrumb-item>
-      <el-breadcrumb-item>新增电影</el-breadcrumb-item>
-    </el-breadcrumb>
-    <!-- 分隔线 -->
-    <el-divider></el-divider>
-
     <!-- 表单 -->
     <el-form 
       ref="form"
@@ -214,12 +206,12 @@ export default {
     onCreated(editor) {
         this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
         
-        setTimeout(()=>{
-          const toolbar = DomEditor.getToolbar(editor)
-          const curToolbarConfig = toolbar.getConfig()
-          console.log('---------------------------')
-          console.log( curToolbarConfig.toolbarKeys ) // 当前菜单排序和分组
-        }, 1000)
+        // setTimeout(()=>{
+        //   const toolbar = DomEditor.getToolbar(editor)
+        //   const curToolbarConfig = toolbar.getConfig()
+        //   console.log('---------------------------')
+        //   console.log( curToolbarConfig.toolbarKeys ) // 当前菜单排序和分组
+        // }, 1000)
     },
 
     /** 选择演员时，远程搜索方法，会传入query关键字 */ 

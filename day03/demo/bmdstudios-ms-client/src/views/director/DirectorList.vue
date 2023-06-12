@@ -1,15 +1,6 @@
 <template>
   <div>
     <!-- views/director/DirectorList.vue -->
-
-    <!-- 面包屑导航 -->
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item>导演管理</el-breadcrumb-item>
-      <el-breadcrumb-item>导演列表</el-breadcrumb-item>
-    </el-breadcrumb>
-    <!-- 分隔线 -->
-    <el-divider></el-divider>
-
     <!-- 表单 -->
     姓名：
     <el-input 

@@ -1,13 +1,5 @@
 <template>
   <div>
-    <!-- views/director/DirectorAdd.vue -->
-    <!-- 面包屑导航 -->
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item>导演管理</el-breadcrumb-item>
-      <el-breadcrumb-item>新增导演</el-breadcrumb-item>
-    </el-breadcrumb>
-    <!-- 分隔线 -->
-    <el-divider></el-divider>
 
     <!-- 表单 -->
     <el-form 

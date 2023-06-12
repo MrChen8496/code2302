@@ -1,13 +1,5 @@
 <template>
   <div>
-    <!-- 面包屑导航 -->
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item>电影管理</el-breadcrumb-item>
-      <el-breadcrumb-item>电影列表</el-breadcrumb-item>
-    </el-breadcrumb>
-    <!-- 分隔线 -->
-    <el-divider></el-divider>
-
     <!-- 表单 -->
     电影名称：
     <el-input 
