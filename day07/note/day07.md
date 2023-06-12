@@ -40,6 +40,30 @@ this.$route.meta.thumbs  ->  ['演员管理', '演员列表']
 
 
 
+### 在`VueCLI`项目中使用高德地图
+
+`lbs.amap.com` 
+
+`https://lbs.amap.com/api/javascript-api-v2/guide/abc/amap-vue`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

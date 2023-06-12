@@ -3,7 +3,7 @@
     <!-- 准备表单 -->
     <el-form :model="form" label-width="100px" style="width:700px">
       <el-form-item label="电影院名称">
-        <el-input v-model="form.cinema_room"></el-input>
+        <el-input v-model="form.cinema_name"></el-input>
       </el-form-item>
       <el-form-item label="选择位置">
         <div id="container" 
@@ -44,13 +44,19 @@
 </template>
 
 <script>
+import AMapLoader from '@amap/amap-jsapi-loader';
+
 export default {
+  mounted(){
+    this.initMap();
+  },
+
   data() {
     return {
       form: {
-        cinema_room:'',
+        cinema_name:'',
         address:'',
-        privince:'',
+        province:'',
         city:'',
         district:'',
         longitude:'',
@@ -58,6 +64,24 @@ export default {
         tags:'',
       }
     }
+  },
+
+  methods:{
+    initMap(){
+      AMapLoader.load({
+        key:"7bfbe3ab215345f405c23b5eed760ca8",             // 申请好的Web端开发者Key，首次调用 load 时必填
+        version:"2.0",      // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
+        plugins:[''],       // 需要使用的的插件列表，如比例尺'AMap.Scale'等
+      }).then((AMap)=>{
+        this.map = new AMap.Map("container",{  //设置地图容器id
+          viewMode:"3D",    //是否为3D地图模式
+          zoom:11,           //初始化地图级别
+          center:[116.397509,39.907644], //初始化地图中心点位置
+        });
+      }).catch(e=>{
+        console.log(e);
+      })
+    },
   },
 };
 </script>
