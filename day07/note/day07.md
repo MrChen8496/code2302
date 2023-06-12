@@ -36,7 +36,7 @@ this.$route.meta.thumbs  ->  ['演员管理', '演员列表']
    /home/cinema-list      views/cinema/CinemaList.vue
    ```
 
-2. 提供CinemaAdd.vue的静态页面。
+2. 提供CinemaAdd.vue的静态页面（表单）。
 
 
 
