@@ -71,13 +71,32 @@ export default {
       AMapLoader.load({
         key:"7bfbe3ab215345f405c23b5eed760ca8",             // 申请好的Web端开发者Key，首次调用 load 时必填
         version:"2.0",      // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
-        plugins:[''],       // 需要使用的的插件列表，如比例尺'AMap.Scale'等
+        plugins:['AMap.Geocoder'],       // 需要使用的的插件列表，如比例尺'AMap.Scale'等
       }).then((AMap)=>{
         this.map = new AMap.Map("container",{  //设置地图容器id
           viewMode:"3D",    //是否为3D地图模式
           zoom:11,           //初始化地图级别
           center:[116.397509,39.907644], //初始化地图中心点位置
         });
+        // 为地图绑定点击事件
+        this.map.on('click',(e)=>{
+          let lng = e.lnglat.KL
+          let lat = e.lnglat.kT
+          console.log({e, lng, lat})
+          // 通过AMap.Geocder，逆地理编码查询位置信息
+          let geocoder = new AMap.Geocoder();
+          geocoder.getAddress([lng, lat], (status, result)=>{
+            console.log(status, result)
+            // 表单的回填
+            this.form.address = result.regeocode.formattedAddress
+            let comp = result.regeocode.addressComponent
+            this.form.province = comp.province
+            this.form.city = comp.city ? comp.city : comp.province
+            this.form.district = comp.district
+            this.form.longitude = lng
+            this.form.latitude = lat
+          })
+        })
       }).catch(e=>{
         console.log(e);
       })

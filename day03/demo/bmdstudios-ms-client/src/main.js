@@ -12,6 +12,10 @@ Vue.use(ElementUI);
 import BASE from '@/http/BaseUrl'
 Vue.prototype.UPLOADURL = BASE.UPLOADURL
 
+// JS安全密钥
+window._AMapSecurityConfig = {
+  securityJsCode:'0b7fff62bb4d6f79bae15c1a1483e327',
+}
 
 Vue.config.productionTip = false
 
