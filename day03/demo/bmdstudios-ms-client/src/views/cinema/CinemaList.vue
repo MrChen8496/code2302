@@ -57,9 +57,7 @@ export default {
   },
 
   mounted(){
-    this.listCinemas()    
-    // 初始化地图
-    this.initMap();
+    this.listCinemas();
   },
 
   methods: {
@@ -75,6 +73,19 @@ export default {
           zoom:11,           //初始化地图级别
           center:[116.397509,39.907644], //初始化地图中心点位置
         });
+        // 给每一个电影院都添加点标记
+        console.log('显示所有影院的点标记', this.cinemas)
+        this.cinemas.forEach(item=>{
+          let lng = item.longitude
+          let lat = item.latitude
+          // 创建点标记 Marker显示在地图上
+          let marker = new AMap.Marker({
+            position: [lng, lat],
+            title: item.cinema_name
+          });
+          this.map.add(marker)
+        })
+
       }).catch(e=>{
         console.log(e);
       })
@@ -85,6 +96,8 @@ export default {
       httpApi.cinemaApi.queryAll().then(res=>{
         console.log('加载所有影院', res)
         this.cinemas = res.data.data
+        // 初始化地图
+        this.initMap();
       })
     }
   },
