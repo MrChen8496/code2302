@@ -88,6 +88,12 @@ const routes = [
       meta: {
         thumbs: ['电影院管理', '电影院列表', '放映厅列表', '新增排片计划']
       }
+    },{
+      path: 'showingon-plan-list',
+      component: () => import('../views/cinema/ShowingonPlanList.vue'),
+      meta: {
+        thumbs: ['电影院管理', '电影院列表', '放映厅列表', '排片计划列表']
+      }
     }]
   },
   {

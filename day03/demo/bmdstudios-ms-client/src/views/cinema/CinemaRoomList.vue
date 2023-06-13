@@ -18,6 +18,7 @@
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button 
+            @click="$router.push(`/home/showingon-plan-list?id=${scope.row.id}`)"
             size="small" type="info" icon="el-icon-view" circle></el-button>
           <el-button 
             @click="$router.push(`/home/showingon-plan-add?id=${scope.row.id}`)"
