@@ -30,9 +30,13 @@
         </template>
       </el-table-column>
       <el-table-column label="操作" width="230px">
-        <template>
-          <el-button size="small" type="info" icon="el-icon-position" circle></el-button>
-          <el-button size="small" type="success" icon="el-icon-thumb" circle></el-button>
+        <template slot-scope="scope">
+          <el-button 
+            @click="moveTo(scope.$index)"
+            size="small" type="info" icon="el-icon-position" circle></el-button>
+          <el-button 
+            @click="$router.push(`/home/cinema-room-list/${scope.row.id}`)"  
+            size="small" type="success" icon="el-icon-thumb" circle></el-button>
           
           <el-button 
             size="small" type="warning" icon="el-icon-edit" circle></el-button>
@@ -61,6 +65,17 @@ export default {
   },
 
   methods: {
+
+    /** 将地图中心点移动到某一个电影院的位置 */
+    moveTo(index){
+      let c = this.cinemas[index]
+      let position = [c.longitude, c.latitude] // 坐标
+      console.log(position)
+      if(this.map){
+        this.map.setZoomAndCenter(14, position)
+      }
+    },
+
     /** 初始化地图 */
     initMap(){
       AMapLoader.load({

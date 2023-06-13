@@ -76,6 +76,12 @@ const routes = [
       meta: {
         thumbs: ['电影院管理', '新增电影院']
       }
+    },{
+      path: 'cinema-room-list/:id',
+      component: () => import('../views/cinema/CinemaRoomList.vue'),
+      meta: {
+        thumbs: ['电影院管理', '电影院列表', '放映厅列表']
+      }
     }]
   },
   {
