@@ -36,7 +36,9 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        <el-button type="primary" @click="submit">
+          确 定
+        </el-button>
       </div>
     </el-dialog>
 
@@ -59,6 +61,18 @@ export default {
   },
 
   methods: {
+    /** 提交表单 */
+    submit(){
+      httpApi.cinemaRoomApi.add(this.form).then(res=>{
+        if(res.data.code==200){ // 新增成功
+          this.$message({message:'成功', type:'success'})
+          this.dialogFormVisible = false
+        }else { 
+          this.$message({message:'失败，稍后重试', type:'error'})
+        }
+      })
+    },
+
     showFormDialog() {
       this.dialogFormVisible=true // 显示对话框
       // 加载放映厅类型列表，更新下拉列表框
