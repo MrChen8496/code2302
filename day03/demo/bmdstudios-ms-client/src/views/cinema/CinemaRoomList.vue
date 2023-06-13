@@ -16,10 +16,11 @@
         </template>
       </el-table-column>
       <el-table-column label="操作">
-        <template>
+        <template slot-scope="scope">
           <el-button 
             size="small" type="info" icon="el-icon-view" circle></el-button>
           <el-button 
+            @click="$router.push(`/home/showingon-plan-add?id=${scope.row.id}`)"
             size="small" type="success" icon="el-icon-plus" circle></el-button>
           <el-button 
             size="small" type="warning" icon="el-icon-s-grid" circle></el-button>
