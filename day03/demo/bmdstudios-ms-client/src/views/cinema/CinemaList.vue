@@ -65,7 +65,7 @@ export default {
   },
 
   methods: {
-
+    
     /** 将地图中心点移动到某一个电影院的位置 */
     moveTo(index){
       let c = this.cinemas[index]
