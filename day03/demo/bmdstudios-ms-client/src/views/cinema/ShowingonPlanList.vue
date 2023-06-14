@@ -21,7 +21,13 @@
       <el-table-column label="场次" prop="showingon_time"></el-table-column>
       <el-table-column label="票价" prop="price"></el-table-column>
       <el-table-column label="是否已发布">
-        <el-switch></el-switch>
+        <template slot-scope="scope">
+          <el-switch 
+            v-model="scope.row.status"
+            :active-value="1"
+            :inactive-value="0">
+          </el-switch>
+        </template>
       </el-table-column>
       <el-table-column label="操作">
         <el-button 
