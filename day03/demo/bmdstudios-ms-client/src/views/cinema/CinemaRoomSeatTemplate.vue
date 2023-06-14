@@ -126,6 +126,7 @@
 
 <script>
 import SeatSelector from "@/libs/SeatSelector.js";
+import httpApi from '@/http';
 export default {
   data() {
     return {
@@ -181,9 +182,15 @@ export default {
         try {
           let seat_template = this.seatSelector.getSeatTemplateJsonString();
           let room_size = this.seatSelector.getSeatCount();
-          let id = this.id;
+          let id = this.$route.query.id;
+
+          console.log({
+            id, 
+            room_size, 
+            seat_template: JSON.parse(seat_template)})
+
           // 发送请求，更新放映厅的座位模板
-          this.$http.CinemaRoomApi.updateSeatTemplate({
+          httpApi.cinemaRoomApi.updateSeatTemplate({
             id,
             seat_template,
             room_size,

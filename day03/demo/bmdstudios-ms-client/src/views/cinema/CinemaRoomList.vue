@@ -11,8 +11,11 @@
       <el-table-column label="放映厅名称" prop="room_name"></el-table-column>
       <el-table-column label="放映厅类型" prop="room_type"></el-table-column>
       <el-table-column label="放映厅座位数量">
-        <template>
-          【暂未配置座位模板】
+        <template slot-scope="scope">
+          <span v-if="scope.row.room_size">
+            {{scope.row.room_size}} 个座位
+          </span>
+          <span v-else>【暂未配置座位模板】</span>
         </template>
       </el-table-column>
       <el-table-column label="操作">
@@ -28,7 +31,6 @@
             size="small" type="warning" icon="el-icon-s-grid" circle></el-button>
           <el-button 
             size="small" type="danger" icon="el-icon-delete" circle></el-button>
-
         </template>
       </el-table-column>
     </el-table>
