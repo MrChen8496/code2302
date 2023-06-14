@@ -105,7 +105,7 @@ AAAAAAAAAAAAAAAA
 
 https://v3.vuex.vuejs.org/zh/guide/state.html
 
-
+![1686736761678](../../day08/note/assets/1686736761678.png)
 
 #### Vuex的核心概念
 
@@ -152,6 +152,24 @@ new Vuex.Store({
 
    ```javascript
    this.$store.commit('updateUser', user)
+   ```
+
+3. actions：用于定义一些方法，执行异步任务后得到结果，让后更新state。（这次更新state，需要调用mutations中声明的方法更新state，而不是直接更新）。
+
+   ```javascript
+   actions: {
+       login(store, payload){
+           // 此处 发登录请求  payload就是传来的账号与密码
+           // 得到登录结果后，将user对象，更新state.user
+           store.commit('updateUser', user对象)
+       }
+   }
+   ```
+
+   如下代码，即可通知vuex执行actions：
+
+   ```javascript
+   this.$store.dispatch('login', {username:'admin', password:'123456'})
    ```
 
 

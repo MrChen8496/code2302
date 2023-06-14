@@ -67,20 +67,7 @@ export default {
       // 做好表单验证，发送登录请求
       this.$refs.form.validate(valid=>{
         if(valid){  // 如果验证成功  发请求
-          httpApi.adminApi.login(this.form).then(res=>{
-            console.log('登录结果', res)
-            if(res.data.code==200){  // 登录 成功
-              // 调用vuex的commit方法，更新用户信息
-              this.$store.commit('updateUser', res.data.data.user)       
-
-              this.$router.push('/home/index')
-            }else if(res.data.code==1001){  // 业务异常  提示
-              this.$message({
-                message:res.data.msg, 
-                type:'warning'
-              })
-            }
-          })
+          this.$store.dispatch('login', this.form)
         }
       })
     },
