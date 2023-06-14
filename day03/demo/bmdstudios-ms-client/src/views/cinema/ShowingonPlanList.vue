@@ -25,7 +25,8 @@
           <el-switch 
             v-model="scope.row.status"
             :active-value="1"
-            :inactive-value="0">
+            :inactive-value="0"
+            @change="changeStatus(scope.row.plan_id, $event)">
           </el-switch>
         </template>
       </el-table-column>
@@ -58,6 +59,27 @@ export default {
   },
 
   methods: {
+
+    /** 修改计划的发布状态 */
+    changeStatus(planId, status){
+      console.log(`修改${planId}状态：${status}`)
+      // 根据status的状态，调用不同的接口，执行修改状态业务
+      let params = {id : planId}
+      if(status==1){  // 发布
+        httpApi.showingonPlanApi.publish().then(res=>{
+          if(res.data.code==200){
+            this.$message({message:'成功', type:'success'})
+          }
+        })
+      }else {  // 取消发布
+        httpApi.showingonPlanApi.noPublish(params).then(res=>{
+          if(res.data.code==200){
+            this.$message({message:'成功', type:'success'})
+          }
+        })
+      }
+    },
+
     /** 列出所有排片计划 */
     listPlans(){
       let params = {room_id: this.$route.query.id}

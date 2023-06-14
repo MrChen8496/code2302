@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import httpApi from '@/http';
 export default {
   data() {
     return {
