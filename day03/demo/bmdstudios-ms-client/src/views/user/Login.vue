@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import httpApi from '@/http';
 export default {
   data() {
     return {
@@ -50,7 +51,7 @@ export default {
           },
         ],
         password: [
-          { required: true, message: "请填写用户名", trigger: "blur" },
+          { required: true, message: "请填写密码", trigger: "blur" },
           {
             pattern: /^\w{6,15}$/,
             message: "6~15位字符，可以包含：数字、字母、下划线",
@@ -63,7 +64,22 @@ export default {
 
   methods: {
     onSubmit() {
-      
+      // 做好表单验证，发送登录请求
+      this.$refs.form.validate(valid=>{
+        if(valid){  // 如果验证成功  发请求
+          httpApi.adminApi.login(this.form).then(res=>{
+            console.log('登录结果', res)
+            if(res.data.code==200){  // 登录 成功
+              this.$router.push('/home/index')
+            }else if(res.data.code==1001){  // 业务异常  提示
+              this.$message({
+                message:res.data.msg, 
+                type:'warning'
+              })
+            }
+          })
+        }
+      })
     },
   },
 };

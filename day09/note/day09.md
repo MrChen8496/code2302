@@ -80,7 +80,16 @@ AAAAAAAAAAAAAAAA
 
    **/user/login**时，看到该登录页面。 
 
+   ```
+   insert into admin 
+   	(username, password, nickname, phone, email) 
+   values 
+   	('admin', MD5('123456'),'管理员亮亮','13312341234', 'liang@qq.com');
+   ```
 
+2. 测试接口。
+
+3. 执行登录业务，登录成功后，跳转到首页。
 
 
 
