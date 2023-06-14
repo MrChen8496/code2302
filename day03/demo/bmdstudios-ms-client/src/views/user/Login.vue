@@ -70,6 +70,9 @@ export default {
           httpApi.adminApi.login(this.form).then(res=>{
             console.log('登录结果', res)
             if(res.data.code==200){  // 登录 成功
+              // 调用vuex的commit方法，更新用户信息
+              this.$store.commit('updateUser', res.data.data.user)       
+
               this.$router.push('/home/index')
             }else if(res.data.code==1001){  // 业务异常  提示
               this.$message({

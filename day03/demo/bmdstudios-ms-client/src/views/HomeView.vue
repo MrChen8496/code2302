@@ -101,7 +101,15 @@
             </el-breadcrumb-item>
           </el-breadcrumb>
           
-          <span>未登录</span>
+          <span v-if="$store.state.user">
+            {{$store.state.user.nickname}} 
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            {{$store.state.user.phone}} 
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            {{$store.state.user.email}} 
+
+          </span>
+          <span v-else>未登录</span>
         </el-header>
 
         <el-main>
