@@ -25,7 +25,48 @@ no-publish
 
 ### 请求响应的统一业务异常处理
 
+```javascript
 
+// 针对instance处理统一的业务异常   基于响应拦截器
+instance.interceptors.response.use((response)=>{
+  // 统一异常处理 400业务状态码
+  if(response.data.code==400){
+    let errmsg = response.data.msg.details[0].message
+    console.warn('请求参数有误，请检查:', errmsg)
+    Notification.error({
+      title:'注意', 
+      message:'系统开小差了，等会试试吧！'
+    })
+  }
+  return response;
+})
+```
+
+
+
+设计描述座位模板的字符串：
+
+```json
+[
+    [
+        {x:0,y:0,name:'一排一号',type:'1'}, {x:0,y:1}, {}, {}.....
+    ],
+    [],
+    [],
+    .....
+]
+```
+
+```
+AAAAAAAAANNAAAAA
+AAAAAAAAANNAAAAA
+AAAAAAAAANNAAAAA
+AAAAAAAAANNAAAAA
+NNNNNNNNNNNNNNNN
+AAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAA
+```
 
 
 

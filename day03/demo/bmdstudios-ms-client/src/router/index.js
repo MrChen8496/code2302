@@ -94,6 +94,12 @@ const routes = [
       meta: {
         thumbs: ['电影院管理', '电影院列表', '放映厅列表', '排片计划列表']
       }
+    },{
+      path: 'seat-template',
+      component: () => import('../views/cinema/CinemaRoomSeatTemplate.vue'),
+      meta: {
+        thumbs: ['电影院管理', '电影院列表', '放映厅列表', '排片计划列表']
+      }
     }]
   },
   {

@@ -66,7 +66,7 @@ export default {
       // 根据status的状态，调用不同的接口，执行修改状态业务
       let params = {id : planId}
       if(status==1){  // 发布
-        httpApi.showingonPlanApi.publish().then(res=>{
+        httpApi.showingonPlanApi.publish(params).then(res=>{
           if(res.data.code==200){
             this.$message({message:'成功', type:'success'})
           }

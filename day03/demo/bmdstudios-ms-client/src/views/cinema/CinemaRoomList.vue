@@ -24,6 +24,7 @@
             @click="$router.push(`/home/showingon-plan-add?id=${scope.row.id}`)"
             size="small" type="success" icon="el-icon-plus" circle></el-button>
           <el-button 
+            @click="$router.push(`/home/seat-template?id=${scope.row.id}`)"
             size="small" type="warning" icon="el-icon-s-grid" circle></el-button>
           <el-button 
             size="small" type="danger" icon="el-icon-delete" circle></el-button>
