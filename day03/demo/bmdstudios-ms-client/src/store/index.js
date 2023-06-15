@@ -3,13 +3,14 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '@/router'
 import { Message } from 'element-ui'
+import storage from '@/utils/Storage'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     cityname: '北京',
-    user: null
+    user: storage.get(storage.KEY_USER)
   },
   getters: {
   },
@@ -19,6 +20,9 @@ export default new Vuex.Store({
      */
     updateUser(state, payload){
       state.user = payload
+      // 顺便向storage中存一份
+      // sessionStorage.setItem('user', JSON.stringify(payload))
+      storage.set(storage.KEY_USER, payload)
     }
   },
   actions: {
