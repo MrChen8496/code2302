@@ -102,11 +102,11 @@
           </el-breadcrumb>
           
           <span v-if="$store.state.user">
-            {{$store.state.user.nickname}} 
+            {{user.nickname}} 
             &nbsp;&nbsp;|&nbsp;&nbsp;
-            {{$store.state.user.phone}} 
+            {{user.phone}} 
             &nbsp;&nbsp;|&nbsp;&nbsp;
-            {{$store.state.user.email}} 
+            {{user.email}} 
 
           </span>
           <span v-else>未登录</span>
@@ -122,12 +122,24 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data() {
     return {
       isCollapse: false
     }
   },
+  // 计算属性
+  computed: mapState(['user', 'cityname'])
+
+  // computed: {
+  //   ...mapState(['user', 'cityname']),
+  //   total(){
+  //     return xxxx
+  //   }
+  // }
+  
 };
 </script>
 

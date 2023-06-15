@@ -154,7 +154,7 @@ new Vuex.Store({
    this.$store.commit('updateUser', user)
    ```
 
-3. actions：用于定义一些方法，执行异步任务后得到结果，让后更新state。（这次更新state，需要调用mutations中声明的方法更新state，而不是直接更新）。
+3. **actions：用于定义一些方法，执行异步任务后得到结果，让后更新state。（这次更新state，需要调用mutations中声明的方法更新state，而不是直接更新）。**
 
    ```javascript
    actions: {
