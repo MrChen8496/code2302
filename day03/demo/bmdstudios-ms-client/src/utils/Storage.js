@@ -18,6 +18,10 @@ const storage = {
       return JSON.parse(str)
     }
     return null
+  },
+
+  remove(key){
+    sessionStorage.removeItem(key)
   }
 }
 
