@@ -115,4 +115,17 @@ const router = new VueRouter({
   routes
 })
 
+import store from '@/store'
+
+// 设置全局前置守卫  每当路由跳转时执行 （在显示目标组件之前执行）
+router.beforeEach((to, from, next)=>{
+  // 向后继续执行，显示登录页面
+  // 不是访问登录，就需要验证vuex用户
+  if(to.path=='/user/login' || store.state.user){ 
+    next() 
+  }else {
+    router.push('/user/login')
+  }
+})
+
 export default router
