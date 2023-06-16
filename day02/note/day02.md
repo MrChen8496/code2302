@@ -148,7 +148,7 @@ code runner
 
 ### Typescript的数据类型
 
-https://www.tslang.cn/docs/home.html
+https://www.w3cschool.cn/typescript/typescript-basic-types.html
 
 
 
