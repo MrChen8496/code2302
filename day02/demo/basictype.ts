@@ -85,6 +85,19 @@ console.log(str.split(','))
 let str2:any = 'abc,cde,def'
 // console.log(str2.toFixed(2))  不会提示编译错误  但是无法运行
 
+// 类型断言（可以理解为 在某些语言中的类型转换）
+// 通过类型断言可以清楚的告诉ts编译器 指定某个数据的数据类型
+let resp = '{"code":200, "msg":"ok"}'
+let respObj = JSON.parse(resp)
+// let msg = respObj.msg
+// 如何才能让respObj.可以有提示呢？
+// 就需要明确的指明 respObj 的数据类型，这里就需要使用类型断言
+let r = respObj as {code:number, msg:string}
+console.log(r.code)  // 有提示
+console.log(r.msg)   // 有提示
+
+
+
 
 
 
