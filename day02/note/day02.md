@@ -140,6 +140,18 @@ npm  install  @types/node
 tsc  demo.ts
 ```
 
+安装vscode的插件，方便的运行ts代码。
+
+```
+code runner
+```
+
+### Typescript的数据类型
+
+https://www.tslang.cn/docs/home.html
+
+
+
 
 
 
