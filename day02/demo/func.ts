@@ -17,6 +17,20 @@ add2 = function (a:number, b:number):number{
 }
 console.log(add2(5, 10))
 
+/**
+ * 定义一个函数queryMovies
+ * 接收参数：page 页码 
+ * 接收参数：pagesize 每页条目数  （默认10条）
+ * 接收一个可选参数：name
+ */
+function queryMovies(
+  page:number=1, pagesize:number=10, name?:string){
+  console.log('查询电影信息:', {page, pagesize, name})  
+}
+queryMovies(2, 3)
+queryMovies(2, 3, '杀手')
+queryMovies(2)
+queryMovies()
 
 
 
