@@ -159,9 +159,29 @@ vue3+typescript
 
 3. 将项目拖拽到vscode，开发。
 
+### 关于属性Data
 
+1. vue2中使用data来定义页面中需要使用的变量。
 
+   ```javascript
+   data(){
+       return {
+           
+       }
+   }
+   ```
 
+2. vue3中使用setup方法来定义页面中需要使用的变量。
+
+   ```javascript
+   setup(){
+       return {
+           
+       }
+   }
+   ```
+
+3. 在vue2中，data中声明的变量将会自动具备响应式的特点。而在vue3中，数据响应式的功能完全交给了程序员自己来处理，哪些对象需要响应式，可以通过ref、reactive等方法创建代理对象来实现。普通的属性是不具备响应式的特点的。也由于此，vue3的UI渲染性能要高于vue2。
 
 
 
