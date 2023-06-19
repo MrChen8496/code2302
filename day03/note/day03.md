@@ -29,6 +29,42 @@ new AMap.Map()
 
 
 
+案例：做一个扑克牌比大小的小游戏。
+
+需求：两个人，一副牌（54张）。洗牌，起牌，每人27张。每人拿出一张比大小，大的得1分，否则不得分。最后比较谁赢了。
+
+```
+class Card {
+    suit:number;
+    rank:number;
+}
+new Card()  一张牌
+```
+
+```
+class Player {
+    name: string;
+    score: number;
+    cards: Card[];
+}
+new Player()
+new Player()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
