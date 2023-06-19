@@ -31,11 +31,18 @@ class Product {
     this.model = model;
     this.pictures = pictures;
   }
+
+  // 在类型中，声明方法（对象拥有的功能） 例如：计算打9折后的价格
+  getPriceOff():number{
+    return this.price * 0.9
+  }
 }
+
 // 创建一件商品对象：
 let p = new Product(
   '速冻粽子', 18.9, '五芳斋', '鲜肉粽', ['1.jpg','2.jpg']);
 console.log(p)
+console.log(p.getPriceOff())
 
 
 
