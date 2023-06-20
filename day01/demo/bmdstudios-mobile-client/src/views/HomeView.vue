@@ -3,11 +3,35 @@
     <p>上半部分</p>
 
     <!-- 底部选项卡 -->
-    <van-tabbar v-model="active">
-      <van-tabbar-item icon="home-o">标签</van-tabbar-item>
-      <van-tabbar-item icon="search">标签</van-tabbar-item>
-      <van-tabbar-item icon="friends-o">标签</van-tabbar-item>
-      <van-tabbar-item icon="setting-o">标签</van-tabbar-item>
+    <van-tabbar v-model="active" active-color="#f03d37">
+      <van-tabbar-item>
+        首页
+        <template #icon="props">
+          <img v-show="props.active" src="../assets/tabs/index_1.png" alt="">
+          <img v-show="!props.active" src="../assets/tabs/index_0.png" alt="">
+        </template>
+      </van-tabbar-item>
+      <van-tabbar-item>
+        视频
+        <template #icon="props">
+          <img v-show="props.active" src="../assets/tabs/video_1.png" alt="">
+          <img v-show="!props.active" src="../assets/tabs/video_0.png" alt="">
+        </template>
+      </van-tabbar-item>
+      <van-tabbar-item>
+        演出
+        <template #icon="props">
+          <img v-show="props.active" src="../assets/tabs/show_1.png" alt="">
+          <img v-show="!props.active" src="../assets/tabs/show_0.png" alt="">
+        </template>
+      </van-tabbar-item>
+      <van-tabbar-item>
+        我的
+        <template #icon="props">
+          <img v-show="props.active" src="../assets/tabs/me_1.png" alt="">
+          <img v-show="!props.active" src="../assets/tabs/me_0.png" alt="">
+        </template>
+      </van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
