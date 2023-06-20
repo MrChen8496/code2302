@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vuedemo.html</title>
+</head>
+<body>
+  <h1>Vue2数据监听</h1>
+  <h2 id="h1">1</h2>
+  <button id="btn1">点我后，数字++</button>
+  <script>
+    var data = {
+      num: 1
+    }
+    // 为data定义属性监听，一旦data对象中属性有变化就更新UI
+    Object.defineProperties(data, {
+      _num: {value:1, writable:true},
+      // 对data的num属性进行监听
+      num: {
+        // 当外部访问data的num属性时，就会执行该get方法
+        get(){
+          return this._num
+        },
+        // 当外部修改data的num属性时，就会执行该set方法，并传入参数
+        set(value){
+          this._num = value
+          // 修改掉num值的同时，此处还可以顺便更新UI
+          h1.innerHTML = value
+        }
+      }
+    })
+
+    btn1.onclick = function(){
+      data.num++
+    }
+  </script>
+
+  <hr>
+  <hr>
+  <hr>
+
+  <h1>Vue3的代理模式</h1>
+  <h3 id="h3">1</h3>
+  <button id="btn3">点我，数字++</button>
+  <script>
+    var v3data = {
+      count: 1
+    }
+    // 为v3data对象请一个代理对象，来管理属性的访问及更新
+    var dataProxy = new Proxy(v3data, {
+      // 当希望获取v3data的某一个属性时，将会执行get
+      // obj: 目标对象    key: 要访问的属性名
+      get(obj, key){
+        return obj[key]
+      },
+      // 当希望修改v3data的某个属性时，将会执行set
+      // obj:目标对象  key:要修改的属性名   value:要修改的属性值
+      set(obj, key, value){
+        obj[key] = value
+        // 更新属性的同时，还可以顺便更新UI
+        h3.innerHTML = value
+      },
+    })
+
+    btn3.onclick = function(){
+      dataProxy.count++
+    }
+  </script>
+
+
+</body>
+</html>
