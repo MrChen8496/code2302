@@ -2,6 +2,38 @@
 
 ### 面向对象编程 
 
+```Javascript
+SeatSelector.js
+
+1. 通过canvas画大div套小div的基础结构。
+2. 框选、点选小div时，将小座位设置为选中状态。蓝色。
+3. 点击按钮，将选中的小座位变成普通座位。
+4. 点击按钮，将选中的小座位变成过道。
+5. 计算当前放映厅中所有的座位的数量。
+6. 将放映厅的座位情况转换成json字符串，输出。
+class Seat {
+    x,
+    y,
+    width,
+    type,
+    selected
+}
+
+class  SeatSelector{
+    canvas
+    row
+    col
+    seats: Seat[];
+    constructor(canvas, row, col){}
+    }
+    draw(){ 将完整的座位分布画出来 }
+    setSelectedSeatToNormalSeat(){}
+    toJson()
+}
+```
+
+
+
 面向对象编程是一种新的编程方式，它是一种将一些零散变量与函数封装在一起统一解决问题的编程方式。
 
 **类**  （面向对象编程思想中的**自定义类型**） 
@@ -34,6 +66,14 @@ new AMap.Map()
 需求：两个人，一副牌（54张）。洗牌，起牌，每人27张。每人拿出一张比大小，大的得1分，否则不得分。最后比较谁赢了。
 
 ```
+map = new AMap.Map()
+map.setCenter()
+map.setZoom()
+map.add()
+map.addControl()
+map.xxx()
+
+
 class Card {
     suit:number;
     rank:number;
