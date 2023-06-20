@@ -342,6 +342,52 @@ watch(()=>pro.count, (newValue, oldValue)=>{
    ```
 
 
+### 在项目中引入vant组件库
+
+1. 安装所需模块：
+
+   ```shell
+   npm i vant
+   npm i unplugin-vue-components -D
+   ```
+
+2. 配置插件：如果是基于 `vue-cli` 的项目，在 `vue.config.js` 文件中配置插件：
+
+   ```javascript
+   const { defineConfig } = require('@vue/cli-service')
+   const { VantResolver } = require('unplugin-vue-components/resolvers');
+   const ComponentsPlugin = require('unplugin-vue-components/webpack');
+   
+   module.exports = defineConfig({
+     transpileDependencies: true,
+     configureWebpack: {
+       plugins: [
+         ComponentsPlugin({
+           resolvers: [VantResolver()],
+         }),
+       ],
+     },
+   })
+   
+   ```
+
+3. 使用组件：
+
+   ```html
+   <template>
+     <van-button type="primary" />
+   </template>
+   ```
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -3,6 +3,9 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </nav>
+  <van-button type="primary">按钮</van-button>
+  <van-button type="primary">按钮</van-button>
+  <van-button type="primary">按钮</van-button>
   <router-view/>
 </template>
 
