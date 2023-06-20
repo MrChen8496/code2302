@@ -20,7 +20,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue';
+import { defineComponent, ref, reactive, computed, watch } from 'vue';
 
 export default defineComponent({
   setup(){
@@ -54,7 +54,20 @@ export default defineComponent({
       //   count: 10
       // })
     }
-    return { count, minus, pro, jiajia, jianjian, changePro }
+
+    // 声明一个计算属性total，计算总价格
+    let total = computed(function(){
+      // 此处进行数据运算
+      return pro.price * pro.count
+    })
+
+    // 声明一个属性监听器，监听pro.count的变化
+    watch(()=>pro.count, (newValue, oldValue)=>{
+      console.log('oldValue:', oldValue)
+      console.log('newValue:', newValue)
+    })
+
+    return { total, count, minus, pro, jiajia, jianjian, changePro }
   }
 })
 </script>
