@@ -121,9 +121,26 @@ public
 
 3. 在mounted生命周期方法中，发送http请求，加载首页热映类别下的电影数据。
 
+   mounted     httpApi    MovieApi.js    res.data.data.result      ref()    interface    
+
 4. 将列表数据显示在页面中。
 
 
+
+#### vue3的生命周期
+
+包含3个阶段，涉及到常用的6个生命周期钩子方法：
+
+```
+onBeforeMount
+onMounted
+
+onBeforeUpdate
+onUpdated
+
+onBeforeUnmount
+onUnmounted
+```
 
 
 

@@ -10,7 +10,7 @@
     <!-- 广告Header -->
     <!-- <AppHeader></AppHeader> -->
     <app-header></app-header>
-    
+
     <van-sticky>
       <!-- 导航条 -->
       <div class="nav" style="background-color:#fff;">
@@ -37,8 +37,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import httpApi from '@/http/index'
+
+/** 处理顶部导航的选中项 */
 const activeName = ref('1')
+
+/** 处理组件挂载完毕后，加载首页热映列表 */
+onMounted(()=>{
+  console.log('mounted')
+  // 通过类别ID  cid=1  查询电影列表
+  let params = {cid:1, page:1, pagesize:20}
+  httpApi.movieApi.queryByCategoryId(params).then(res=>{
+    console.log(res)
+  })
+})
+
+
 </script>
 
 <style scoped lang="scss">
