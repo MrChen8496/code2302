@@ -20,7 +20,7 @@
         <van-tabs 
           color="#f03d37" 
           class="tabs" 
-          v-model:active="activeName">
+          v-model:active="activeName" @click-tab="clickTab">
           <van-tab title="热映" name="1"></van-tab>
           <van-tab title="待映" name="2"></van-tab>
           <van-tab title="经典" name="3"></van-tab>
@@ -43,8 +43,22 @@ import { ref, onMounted } from 'vue'
 import httpApi from '@/http/index'
 import Movie from '@/types/Movie' 
 
+
 /** 处理顶部导航的选中项 */
 const activeName = ref('1')
+function clickTab(e:any){
+  console.log(e)
+  let cid = e.name
+  // 发送请求，加载当前选中的cid类别下 的电影列表
+  let params = {cid, page:1, pagesize:20}
+  httpApi.movieApi.queryByCategoryId(params).then(res=>{
+    console.log('更改类别后', res)
+    // 更新列表
+    movies.value = res.data.data.result
+  })
+}
+
+
 
 /** 处理组件挂载完毕后，加载首页热映列表 */
 const movies = ref<Movie[]>([])
