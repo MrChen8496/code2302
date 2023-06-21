@@ -41,24 +41,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import httpApi from '@/http/index'
+import Movie from '@/types/Movie' 
 
 /** 处理顶部导航的选中项 */
 const activeName = ref('1')
 
 /** 处理组件挂载完毕后，加载首页热映列表 */
-interface Movie {
-  category_id: number;
-  cover: string;
-  description: string;
-  duration: number;
-  id: number;
-  score: string;
-  showingon: string;
-  star_actor: string;
-  title: string;
-  type: string;
-}
-
 const movies = ref<Movie[]>([])
 onMounted(()=>{
   console.log('mounted')
