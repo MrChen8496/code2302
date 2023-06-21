@@ -7,14 +7,15 @@
       <van-tabbar-item>
         首页
         <template #icon="props">
-          <img v-show="props.active" src="../assets/tabs/index_1.png" alt="">
-          <img v-show="!props.active" src="../assets/tabs/index_0.png" alt="">
+          <img :src="require(`../assets/tabs/index_${
+            props.active? '1' : '0'
+          }.png`)" alt="">
         </template>
       </van-tabbar-item>
       <van-tabbar-item>
         视频
         <template #icon="props">
-          <img v-show="props.active" src="../assets/tabs/video_1.png" alt="">
+          <img v-show="props.active" src="/tabs/video_1.png" alt="">
           <img v-show="!props.active" src="../assets/tabs/video_0.png" alt="">
         </template>
       </van-tabbar-item>
