@@ -44,12 +44,28 @@ import httpApi from '@/http/index'
 const activeName = ref('1')
 
 /** 处理组件挂载完毕后，加载首页热映列表 */
+interface Movie {
+  category_id: number;
+  cover: string;
+  description: string;
+  duration: number;
+  id: number;
+  score: string;
+  showingon: string;
+  star_actor: string;
+  title: string;
+  type: string;
+}
+
+const movies = ref<Movie[]>([])
 onMounted(()=>{
   console.log('mounted')
   // 通过类别ID  cid=1  查询电影列表
   let params = {cid:1, page:1, pagesize:20}
   httpApi.movieApi.queryByCategoryId(params).then(res=>{
     console.log(res)
+    // 为movies赋值即可
+    movies.value = res.data.data.result
   })
 })
 
