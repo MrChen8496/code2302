@@ -1,6 +1,7 @@
 <template>
   <div>
-    <p>上半部分</p>
+    <!-- 二级路由占位符 -->
+    <router-view />
 
     <!-- 底部选项卡 -->
     <van-tabbar v-model="active" active-color="#f03d37">

@@ -63,11 +63,45 @@ public
 
 **思考问题**：什么样的图片适合放在public下，什么样的图片适合放在assets下？
 
+项目中所必须使用的小图标适合放在assets，除此之外的其他图片都可以放在public。更多的情况会把一些图片放在静态图片服务器中。
 
 
 
+### 搭建项目的基础结构
 
+基础结构包含两部分：1.  主要内容   2. 底部选项卡
 
+设计嵌套路由：
+
+```
+访问：/时， 看到HomeView.vue。  包含<router-view/>与底部选项卡。
+```
+
+子路由设计：
+
+```
+访问：/home/index，看到首页上半部分显示Index内容。views/index/Index.vue
+访问：/home/video，看到首页上半部分显示Video内容。views/video/Video.vue
+访问：/home/show，看到首页上半部分显示Show内容。  views/show/Show.vue
+访问：/home/me，看到首页上半部分显示个人信息内容。 views/me/Me.vue
+```
+
+**实现步骤：**
+
+1. 先创建四个新的组件，分别是：
+
+   ```
+   views/index/Index.vue
+   views/video/Video.vue
+   views/show/Show.vue
+   views/me/Me.vue
+   ```
+
+2. 在/home下配置嵌套路由children，匹配上述路由设计。
+
+3. 在HomeView.vue中设置二级路由占位符 `<router-view />`。 
+
+4. 测试。
 
 
 
