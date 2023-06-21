@@ -146,6 +146,33 @@ onUnmounted
 
 #### 当改变顶部导航的类别后，更新电影列表
 
+```html
+<van-tabs v-model:active="activeName" @click-tab="clickTab">
+    <van-tab title="热映" name="1"></van-tab>
+    <van-tab title="待映" name="2"></van-tab>
+    <van-tab title="经典" name="3"></van-tab>
+</van-tabs>
+```
+
+```javascript
+function clickTab(e:any){
+    console.log(e)
+    let cid = e.name
+    // 发送请求，加载当前选中的cid类别下 的电影列表
+    let params = {cid, page:1, pagesize:20}
+    httpApi.movieApi.queryByCategoryId(params).then(res=>{
+        console.log('更改类别后', res)
+        // 更新列表
+        movies.value = res.data.data.result
+    })
+}
+
+```
+
+
+
+#### 当滚动条滚到底后，自动加载当前类别的下一页数据（触底加载）
+
 
 
 

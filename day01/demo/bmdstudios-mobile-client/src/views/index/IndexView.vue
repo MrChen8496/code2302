@@ -30,10 +30,19 @@
     </van-sticky>
 
     <!-- 加载电影列表 -->
-    <movie-item 
-      :movie="item"
-      v-for="item in movies" :key="item.id">
-    </movie-item>
+    <van-list
+      v-if="movies && movies.length>0"
+      v-model:loading="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="onLoad">
+
+      <movie-item 
+        :movie="item"
+        v-for="item in movies" :key="item.id">
+      </movie-item>
+
+    </van-list>
 
   </div>
 </template>
@@ -43,6 +52,29 @@ import { ref, onMounted } from 'vue'
 import httpApi from '@/http/index'
 import Movie from '@/types/Movie' 
 
+/** 处理列表相关业务 */
+const loading = ref(false)
+const finished = ref(false)
+
+// 当List组件发现触底后，自动调用onLoad方法，并且将loading设置为true
+function onLoad(){
+  console.log('触底加载...onLoad...')
+  // 向服务端发请求，获取当前类别下的下一页数据
+  // 计算下一页的页码：
+  /* 当前数组的长度    每页条目数    下一页的页码
+     20               20           2
+     40               20           3
+     80               20           5
+     n                20           ?  (n/20)+1
+  */
+  let params = { 
+    cid:activeName.value, 
+    page:Math.floor((movies.value.length/20)) + 1, 
+    pagesize:20 
+  }
+  // 发请求
+
+}
 
 /** 处理顶部导航的选中项 */
 const activeName = ref('1')
