@@ -105,9 +105,23 @@ public
 
 
 
+### 加载首页热映类别电影列表
 
+**需求分析：** 当打开app首页，就可以看到热映类别下的首页电影列表数据。第一页，20条数据。点击待映、经典后，可以更新电影列表信息。
 
+**实现步骤：**
 
+1. 准备好后端服务：启动mysql、index.js、uploadserver.js。
+
+2. 修改后端代码index.js，去掉token验证。重启index.js。
+
+   ```
+   http://localhost:3010/movie-infos/category?cid=1&page=1&pagesize=20
+   ```
+
+3. 在mounted生命周期方法中，发送http请求，加载首页热映类别下的电影数据。
+
+4. 将列表数据显示在页面中。
 
 
 
