@@ -30,6 +30,9 @@
 </template>
 
 <script setup lang="ts">
+  // 定义自定义属性 movie，接收父组件传来的参数
+  const props = defineProps(['movie'])
+  console.log('接收到参数movie:', props.movie)
 
 </script>
 

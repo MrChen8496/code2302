@@ -30,7 +30,9 @@
     </van-sticky>
 
     <!-- 加载电影列表 -->
-    <movie-item v-for="i in 10" :key="i">
+    <movie-item 
+      :movie="item"
+      v-for="item in movies" :key="item.id">
     </movie-item>
 
   </div>
