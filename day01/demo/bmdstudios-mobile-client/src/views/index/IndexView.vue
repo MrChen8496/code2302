@@ -10,19 +10,29 @@
     <!-- 广告Header -->
     <!-- <AppHeader></AppHeader> -->
     <app-header></app-header>
+    
+    <van-sticky>
+      <!-- 导航条 -->
+      <div class="nav" style="background-color:#fff;">
+        <span>北京</span>
+        <b></b>
+        <!-- tabs -->
+        <van-tabs 
+          color="#f03d37" 
+          class="tabs" 
+          v-model:active="activeName">
+          <van-tab title="热映" name="1"></van-tab>
+          <van-tab title="待映" name="2"></van-tab>
+          <van-tab title="经典" name="3"></van-tab>
+        </van-tabs>
+        <van-icon name="search" />
+      </div>
+    </van-sticky>
 
-    <!-- 导航条 -->
-    <div class="nav">
-      <span>北京</span>
-      <b></b>
-      <!-- tabs -->
-      <van-tabs class="tabs" v-model:active="activeName">
-        <van-tab title="热映" name="1"></van-tab>
-        <van-tab title="待映" name="2"></van-tab>
-        <van-tab title="经典" name="3"></van-tab>
-      </van-tabs>
-      <van-icon name="search" />
-    </div>
+    <!-- 加载电影列表 -->
+    <movie-item v-for="i in 10" :key="i">
+    </movie-item>
+
   </div>
 </template>
 
@@ -39,7 +49,6 @@ const activeName = ref('1')
   border-bottom: 1px solid #eee;
 
   b {
-    display: block;
     border: 4px solid transparent;
     border-top-color: black;
     margin: 8px 0px 0px 4px;
