@@ -61,40 +61,14 @@
         <div class="photos">
         <div class="title">视频和剧照</div>
         <div class="photos-list">
-            <!-- 遍历剧照列表 -->
-            <div class="photos-item">
-                <img src="@/assets/icon/thumb.jpg">
-            </div>
-            <div class="photos-item">
-                <img src="@/assets/icon/thumb.jpg">
-            </div>
-            <div class="photos-item">
-                <img src="@/assets/icon/thumb.jpg">
-            </div>
-            <div class="photos-item">
-                <img src="@/assets/icon/thumb.jpg">
-            </div>
-            <div class="photos-item">
-                <img src="@/assets/icon/thumb.jpg">
-            </div>
-            <div class="photos-item">
-                <img src="@/assets/icon/thumb.jpg">
-            </div>
-            <div class="photos-item">
-                <img src="@/assets/icon/thumb.jpg">
-            </div>
-            <div class="photos-item">
-                <img src="@/assets/icon/thumb.jpg">
-            </div>
-            <div class="photos-item">
-                <img src="@/assets/icon/thumb.jpg">
-            </div>
-            <div class="photos-item">
-                <img src="@/assets/icon/thumb.jpg">
-            </div>
-            <div class="photos-item">
-                <img src="@/assets/icon/thumb.jpg">
-            </div>
+
+          <!-- 遍历剧照列表 -->
+          <div 
+            class="photos-item" 
+            v-for="(item,i) in thumbList" :key="i">
+              <img style="object-fit: cover;" :src="item">
+          </div>
+
         </div>
         </div>
         <!-- 剧照结束 -->
@@ -121,6 +95,7 @@ const $route = useRoute()    // 获取到当前route路由对象
 const id = $route.params.id
 const movie = ref<Movie>()
 const actorList = ref<Actor[]>()  // 代理演员对象数组 
+const thumbList = ref<string[]>() // 代理剧照图片路径数组
 
 onMounted(()=>{
   httpApi.movieApi.queryById({id}).then(res=>{
@@ -130,6 +105,11 @@ onMounted(()=>{
     let actors = JSON.parse(res.data.data.actor)
     console.log('演员列表', actors)
     actorList.value = actors
+    // 处理视频和剧照列表
+    let thumbs = JSON.parse(res.data.data.thumb)
+    // console.log('剧照列表', thumbs)
+    thumbList.value = thumbs
+    // console.log(thumbs)
   })
 })
 
