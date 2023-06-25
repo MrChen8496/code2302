@@ -51,6 +51,8 @@
 import { ref, onMounted } from 'vue'
 import httpApi from '@/http/index'
 import Movie from '@/types/Movie' 
+import Storage from '@/utils/Storage'
+
 
 /** 处理列表相关业务 */
 const loading = ref(false)
@@ -68,7 +70,7 @@ function onLoad(){
   // 向服务端发请求，获取当前类别下的下一页数据
   let params = { 
     cid: parseInt(activeName.value),
-    page:Math.floor((movies.value.length/20)) + 1, 
+    page:Math.ceil((movies.value.length/20)) + 1, 
     pagesize:20 
   }
   // 发请求
@@ -88,6 +90,7 @@ function onLoad(){
 
 /** 处理顶部导航的选中项 */
 const activeName = ref('1')
+
 function clickTab(e:any){
   console.log(e)
   finished.value = false  // 重置finished变量
@@ -97,12 +100,23 @@ function clickTab(e:any){
   }
 
   let cid = e.name
+  // 请求之前先判断，Storage缓存中是否已经存储了当前类别下的首页数据
+  // 如果有，则直接拿来使用即可。
+  let data = Storage.get(cid)
+  if(data){
+    movies.value = data
+    return;
+  }
+
   // 发送请求，加载当前选中的cid类别下 的电影列表
   let params = {cid, page:1, pagesize:20}
   httpApi.movieApi.queryByCategoryId(params).then(res=>{
     console.log('更改类别后', res)
     // 更新列表
     movies.value = res.data.data.result
+    
+    // 不仅要更新列表，还要将列表数据存入缓存  Storage
+    Storage.set(cid, movies.value);
   })
 }
 
