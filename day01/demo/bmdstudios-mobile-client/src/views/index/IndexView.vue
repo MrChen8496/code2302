@@ -34,7 +34,7 @@
       v-if="movies && movies.length>0"
       v-model:loading="loading"
       :finished="finished"
-      finished-text="没有更多了"
+      finished-text="我是有底线的"
       @load="onLoad">
 
       <movie-item 
@@ -57,22 +57,32 @@ const loading = ref(false)
 const finished = ref(false)
 
 // 当List组件发现触底后，自动调用onLoad方法，并且将loading设置为true
+// 计算下一页的页码：
+// 当前数组的长度    每页条目数    下一页的页码
+//      20               20           2
+//      40               20           3
+//      80               20           5
+//      n                20           ?  (n/20)+1
 function onLoad(){
   console.log('触底加载...onLoad...')
   // 向服务端发请求，获取当前类别下的下一页数据
-  // 计算下一页的页码：
-  /* 当前数组的长度    每页条目数    下一页的页码
-     20               20           2
-     40               20           3
-     80               20           5
-     n                20           ?  (n/20)+1
-  */
   let params = { 
-    cid:activeName.value, 
+    cid: parseInt(activeName.value),
     page:Math.floor((movies.value.length/20)) + 1, 
     pagesize:20 
   }
   // 发请求
+  httpApi.movieApi.queryByCategoryId(params).then(res=>{
+    console.log('加载下一页', res)
+    // 将服务端返回的电影列表，追加到当前电影列表的末尾
+    movies.value.push(...res.data.data.result)
+    // 将loading改为false
+    loading.value = false
+    // 判断是否已经到底，如果到底，需要修改finished变量为true
+    if(movies.value.length == res.data.data.total){
+      finished.value = true
+    }
+  })
 
 }
 
@@ -80,6 +90,12 @@ function onLoad(){
 const activeName = ref('1')
 function clickTab(e:any){
   console.log(e)
+  finished.value = false  // 重置finished变量
+  console.log({x:window.scrollX, y:window.scrollY})
+  if(window.scrollY > 106){
+    window.scrollTo(0, 106)
+  }
+
   let cid = e.name
   // 发送请求，加载当前选中的cid类别下 的电影列表
   let params = {cid, page:1, pagesize:20}

@@ -29,6 +29,7 @@ npm  run  build
 
 ```html
 <img :src="`../asset/index.png`">
+<img src="../asset/index.png">
 ```
 
 如果出现了上述情况，脚手架将不会编译该路径，大概率是无法访问这一张图片的。
