@@ -45,67 +45,15 @@
         <div class="actors">
             <div class="title">演职人员</div>
             <div class="actors-list">
-                <!-- 遍历演员表 -->
-                <div class="actors-item" >
-                    <img src="@/assets/icon/actor.jpg">
-                    <text>演员名称</text>
-                </div>    
-                <div class="actors-item" >
-                    <img src="@/assets/icon/actor.jpg">
-                    <text>演员名称</text>
-                </div>    
-                <div class="actors-item" >
-                    <img src="@/assets/icon/actor.jpg">
-                    <text>演员名称</text>
-                </div>    
-                <div class="actors-item" >
-                    <img src="@/assets/icon/actor.jpg">
-                    <text>演员名称</text>
-                </div>    
-                <div class="actors-item" >
-                    <img src="@/assets/icon/actor.jpg">
-                    <text>演员名称</text>
-                </div>    
-                <div class="actors-item" >
-                    <img src="@/assets/icon/actor.jpg">
-                    <text>演员名称</text>
-                </div>    
-                <div class="actors-item" >
-                    <img src="@/assets/icon/actor.jpg">
-                    <text>演员名称</text>
-                </div>    
-                <div class="actors-item" >
-                    <img src="@/assets/icon/actor.jpg">
-                    <text>演员名称</text>
-                </div>    
-                <div class="actors-item" >
-                    <img src="@/assets/icon/actor.jpg">
-                    <text>演员名称</text>
-                </div>    
-                <div class="actors-item" >
-                    <img src="@/assets/icon/actor.jpg">
-                    <text>演员名称</text>
-                </div>    
-                <div class="actors-item" >
-                    <img src="@/assets/icon/actor.jpg">
-                    <text>演员名称</text>
-                </div>    
-                <div class="actors-item" >
-                    <img src="@/assets/icon/actor.jpg">
-                    <text>演员名称</text>
-                </div>    
-                <div class="actors-item" >
-                    <img src="@/assets/icon/actor.jpg">
-                    <text>演员名称</text>
-                </div>    
-                <div class="actors-item" >
-                    <img src="@/assets/icon/actor.jpg">
-                    <text>演员名称</text>
-                </div>    
-                <div class="actors-item" >
-                    <img src="@/assets/icon/actor.jpg">
-                    <text>演员名称</text>
-                </div>    
+                
+              <!-- 遍历演员表 -->
+              <div 
+                class="actors-item" 
+                v-for="(item,i) in actorList" :key="i">
+                  <img :src="item.avatar">
+                  <text>{{ item.name }}</text>
+              </div>    
+              
             </div>
         </div>
         <!-- 演职人员结束 -->
@@ -165,16 +113,23 @@ import httpApi from '@/http';
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import Movie from '@/types/Movie'
+import Actor from '@/types/Actor'
 
 const $route = useRoute()    // 获取到当前route路由对象
 
 // 获取上一个页面传过来的参数id
 const id = $route.params.id
 const movie = ref<Movie>()
+const actorList = ref<Actor[]>()  // 代理演员对象数组 
+
 onMounted(()=>{
   httpApi.movieApi.queryById({id}).then(res=>{
     console.log('电影详情数据', res)
     movie.value = res.data.data
+    // 处理演员列表
+    let actors = JSON.parse(res.data.data.actor)
+    console.log('演员列表', actors)
+    actorList.value = actors
   })
 })
 
