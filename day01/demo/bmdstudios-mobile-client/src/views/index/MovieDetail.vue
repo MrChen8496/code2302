@@ -31,11 +31,14 @@
         </div>
         <!-- 顶部区域结束 -->
         <!-- 简介区域开始 -->
-        <div class="introduction" bindtap="tapIntro">
-        <div class="line-clamp" v-html="movie.description"></div>
-        <div class="more">
-            <img src="@/assets/icon/arrow_down.png">
-        </div>
+        <div 
+          class="introduction"
+          @click="isOpen = !isOpen">
+          <div :class="{ 'line-clamp': !isOpen }" v-html="movie.description"></div>
+          <div class="more">
+              <img v-show="!isOpen" src="@/assets/icon/arrow_down.png">
+              <img v-show="isOpen" src="@/assets/icon/arrow_up.png">
+          </div>
         </div>
         <!-- 简介区域结束 -->
         <!-- 演职人员开始 -->
@@ -174,6 +177,10 @@ onMounted(()=>{
     movie.value = res.data.data
   })
 })
+
+
+// 控制简介的展开与收起
+const isOpen = ref(false)
 
 </script>
 
