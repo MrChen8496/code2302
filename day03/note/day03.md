@@ -41,7 +41,30 @@
 
 #### 实现下拉刷新，更新缓存
 
+```html
+<van-pull-refresh success-text="加载完成"
+                  :success-duration="1500"
+                  v-model="refreshing" 
+                  @refresh="onRefresh">
+    <van-list v-if="movies && movies.length>0"
+              v-model:loading="loading"
+              :finished="finished"
+              finished-text="我是有底线的"
+              @load="onLoad">
 
+        <movie-item :movie="item"
+                    v-for="item in movies" :key="item.id">
+        </movie-item>
+
+    </van-list>
+</van-pull-refresh>
+```
+
+
+
+#### 制作全局等待框
+
+在移动端app中的每一个请求都应该弹出等待框，获取响应后让等待框消失。
 
 
 
