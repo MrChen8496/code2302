@@ -44,6 +44,7 @@
 
         <movie-item 
           :movie="item"
+          @click="$router.push(`/movie-detail/${item.id}`)" 
           v-for="item in movies" :key="item.id">
         </movie-item>
 

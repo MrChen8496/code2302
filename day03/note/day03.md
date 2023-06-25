@@ -66,9 +66,39 @@
 
 在移动端app中的每一个请求都应该弹出等待框，获取响应后让等待框消失。
 
+**基于拦截器实现：**
+
+```javascript
+/** 设置请求拦截器，每次请求弹出等待框 */
+instance.interceptors.request.use((config)=>{
+    console.log('loading...')
+    // 每次发请求，都会执行该请求拦截器
+    showLoadingToast({
+        duration:0,            // 持续时长设置为0，永不自动消失
+        message: '加载中...',   // 弹窗文案
+        forbidClick: true      // 是否禁用背景点击
+    })
+    return config;
+})
+/** 在响应拦截器中，关闭弹窗 */
+instance.interceptors.response.use((config)=>{
+    closeToast()
+    return config;
+})
+```
 
 
 
+### 实现电影详情页的显示
+
+**业务需求：**当用户在首页点击其中某一个列表项时，跳转到详情页。并且携带选中项的电影ID一起跳转。到详情页后显示该电影的详细信息。
+
+**实现步骤：**
+
+1. 准备好一个电影详情页的静态页面：`views/index/MovieDetail.vue`。 
+2. 配置路由：当访问：`/movie-detail/:id`时，跳转到详情页。
+3. 在详情页中，接收参数ID，带着id发请求，加载电影详情数据。
+4. 完成页面的数据展示。
 
 
 
