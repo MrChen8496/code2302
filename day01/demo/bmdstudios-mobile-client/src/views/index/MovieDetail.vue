@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" v-if="movie">
         <!-- 广告 -->
         <app-header></app-header>
 
@@ -9,22 +9,22 @@
           <!-- 背景图开始 -->
           <div 
               class="poster-background"  
-              :style="{'background-image': `url(${require('@/assets/icon/cover.jpg')})`}">
+              :style="{'background-image': `url(${movie.cover})`}">
           </div>
           <!-- 背景图结束 -->
           <div class="detail">
               <!--海报帧开始-->
               <div class="poster">
-                  <img src="@/assets/icon/cover.jpg">
+                  <img :src="movie.cover">
               </div>
               <!--海报帧结束-->
               <!-- 内容区域开始 -->
               <div class="content">
-                  <div class="title line-ellipsis">疯狂原始人</div>
-                  <div class="score line-ellipsis">4.9</div>
-                  <div class="type line-ellipsis">主演: 黄渤 / 徐峥</div>
-                  <div class="type line-ellipsis">动画 / 剧情</div>
-                  <div class="type line-ellipsis">2011-11-11 上映</div>
+                  <div class="title line-ellipsis">{{movie.title}}</div>
+                  <div class="score line-ellipsis">{{ movie.score }}</div>
+                  <div class="type line-ellipsis">{{ movie.star_actor }}</div>
+                  <div class="type line-ellipsis">{{ movie.type }}</div>
+                  <div class="type line-ellipsis">{{ movie.showingon }} 上映</div>
               </div>
               <!-- 内容区域结束 -->
           </div>
@@ -32,11 +32,7 @@
         <!-- 顶部区域结束 -->
         <!-- 简介区域开始 -->
         <div class="introduction" bindtap="tapIntro">
-        <div class="line-clamp">
-            简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述
-            简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述
-            简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述简介描述
-        </div>
+        <div class="line-clamp" v-html="movie.description"></div>
         <div class="more">
             <img src="@/assets/icon/arrow_down.png">
         </div>
@@ -162,6 +158,22 @@
 </template>
 
 <script setup lang="ts">
+import httpApi from '@/http';
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import Movie from '@/types/Movie'
+
+const $route = useRoute()    // 获取到当前route路由对象
+
+// 获取上一个页面传过来的参数id
+const id = $route.params.id
+const movie = ref<Movie>()
+onMounted(()=>{
+  httpApi.movieApi.queryById({id}).then(res=>{
+    console.log('电影详情数据', res)
+    movie.value = res.data.data
+  })
+})
 
 </script>
 
