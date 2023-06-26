@@ -7,7 +7,7 @@
       <app-header></app-header>
 
       <!-- 选座面板 -->
-      <div class="seat-selection-panel" v-html="htmlContent" @click.native="chooseSeat"></div>
+      <div class="seat-selection-panel" v-html="htmlContent" @click="chooseSeat"></div>
       
       <!-- 底部状态栏 -->
       <div class="selection-result">

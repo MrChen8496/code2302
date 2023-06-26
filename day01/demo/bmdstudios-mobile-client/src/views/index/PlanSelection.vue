@@ -16,7 +16,7 @@
       </div>
       
       <!-- 电影详细描述 -->
-      <movie-desc></movie-desc>
+      <!-- <movie-desc></movie-desc> -->
 
       <!-- 顶部时间导航条 -->
       <van-sticky>
@@ -31,7 +31,7 @@
       </van-sticky>
 
       <!-- 排期列表项 -->
-      <div class="plan-item" v-for="i in 10" @click.native="$router.push('/seat-selection')">
+      <div class="plan-item" @click="$router.push('/seat-selection')">
         <div class="time">
           <p class="t">13:00</p>
           <p class="b">15:17散场</p>

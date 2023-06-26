@@ -36,6 +36,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/cinema-selection',
     name: '/cinema-selection',
     component: () => import('../views/index/CinemaSelection.vue')
+  },
+  {
+    path: '/plan-selection',
+    name: '/plan-selection',
+    component: () => import('../views/index/PlanSelection.vue')
+  },
+  {
+    path: '/seat-selection',
+    name: '/seat-selection',
+    component: () => import('../views/index/SeatSelection.vue')
   }
 ]
 
