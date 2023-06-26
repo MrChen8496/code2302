@@ -9,15 +9,14 @@
       <!-- 电影详细描述 -->
       <movie-desc v-if="movie" :movie="movie"></movie-desc>
 
-      <!-- 顶部时间导航条 -->
+      <!-- 顶部时间导航条 momentjs -->
       <van-sticky>
         <van-tabs v-model:active="activeDate" swipe-threshold="1" line-width="80px">
-          <van-tab name="2022-10-06" title="周一 10月06日"></van-tab>
-          <van-tab name="2022-10-07" title="周二 10月07日"></van-tab>
-          <van-tab name="2022-10-08" title="周三 10月08日"></van-tab>
-          <van-tab name="2022-10-08" title="周三 10月08日"></van-tab>
-          <van-tab name="2022-10-08" title="周三 10月08日"></van-tab>
-          <van-tab name="2022-10-08" title="周三 10月08日"></van-tab>
+          <van-tab 
+            :name="d.format('YYYY-MM-DD')" 
+            :title="d.format('周d MM月DD日')"
+            v-for="(d,i) in dates" :key="i">
+          </van-tab>
         </van-tabs>
       </van-sticky>
 
@@ -49,7 +48,24 @@ import Movie from '@/types/Movie'
 
 const $route = useRoute()
 
+
+// 处理时间序列
+import moment from 'moment'
+const now = moment()
+console.log(now)
+console.log(now.add(5, 'days'))
+console.log(now.format('YYYY年 MM月 DD号'))
+// 想办法整理出来一个保存了连续7天moment对象的数组
+const dates:moment.Moment[] = []
+for(let i=0; i<7; i++){
+  let n = moment().add(i, 'days')
+  dates.push(n)
+}
+console.log(dates)
+
 const activeDate = ref('2022-10-06')
+
+
 
 // 通过电影ID，加载电影信息并显示
 const id = $route.query.id

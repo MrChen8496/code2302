@@ -72,6 +72,18 @@
 
 
 
+#### 使用momentjs整理时间序列
+
+```shell
+# 在项目目录下 安装momentjs
+npm install moment
+```
+
+```
+import moment from 'moment'
+let now = moment()
+```
+
 
 
 
