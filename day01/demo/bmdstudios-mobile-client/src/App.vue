@@ -1,5 +1,13 @@
 <template>
-  <router-view/>
+  <!-- <router-view/> -->
+  <!-- 使用KeepAlive缓存组件实例 -->
+  <!-- Component表示的就是当前正在显示的路由组件 -->
+  <router-view v-slot="{Component}">
+    <keep-alive>
+      <component v-if="$route.meta.keepAlive" :is="Component" />
+    </keep-alive>
+    <component v-if="!$route.meta.keepAlive" :is="Component" />
+  </router-view>
 </template>
 
 <style lang="scss">

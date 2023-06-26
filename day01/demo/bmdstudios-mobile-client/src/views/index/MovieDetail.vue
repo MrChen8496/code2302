@@ -66,7 +66,9 @@
           <div 
             class="photos-item" 
             v-for="(item,i) in thumbList" :key="i">
-              <img style="object-fit: cover;" :src="item">
+              <img 
+                @click="previewImage(i)"
+                style="object-fit: cover;" :src="item">
           </div>
 
         </div>
@@ -86,6 +88,9 @@
 import httpApi from '@/http';
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { showImagePreview } from 'vant'
+import 'vant/es/image-preview/style'
+
 import Movie from '@/types/Movie'
 import Actor from '@/types/Actor'
 
@@ -113,9 +118,25 @@ onMounted(()=>{
   })
 })
 
-
 // 控制简介的展开与收起
 const isOpen = ref(false)
+
+// 控制大图浏览图片列表
+function previewImage(index:number){
+  let urls = thumbList.value
+  // 现在的urls:      ['http://xxx.jpg@106w_106h', .....]
+  // 希望得到newurls: ['http://xxx.jpg', .....]
+  if(urls){
+    let newurls:string[] = []
+    urls.forEach(item=>{
+      newurls.push(item.split('@')[0])
+    })
+    showImagePreview({
+      images: newurls,
+      startPosition: index
+    })
+  }
+}
 
 </script>
 

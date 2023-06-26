@@ -1,7 +1,11 @@
 <template>
   <div>
     <!-- 二级路由占位符 -->
-    <router-view />
+    <router-view v-slot="{Component}">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
     
     <div style="height:50px;"></div>
 

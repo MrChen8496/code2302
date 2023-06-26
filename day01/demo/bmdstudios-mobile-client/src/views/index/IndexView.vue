@@ -55,13 +55,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onActivated, onDeactivated } from 'vue'
 import httpApi from '@/http/index'
 import Movie from '@/types/Movie' 
 import Storage from '@/utils/Storage'
 
+onActivated(()=>{ console.log('Index被激活') })
+onDeactivated(()=>{ console.log('Index失活') })
 
-/** 处理列表相关业务 */
+/** 处理列表相关业务 */ 
 const loading = ref(false)
 const finished = ref(false)
 

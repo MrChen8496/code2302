@@ -13,6 +13,9 @@ const routes: Array<RouteRecordRaw> = [
     children:[{
       path: 'index',
       component: () => import('../views/index/IndexView.vue'),
+      meta: {
+        keepAlive: true  // 声明了keepAlive就代表当前组件需要保活  
+      }
     },{
       path: 'video',
       component: () => import('../views/video/VideoView.vue'),
