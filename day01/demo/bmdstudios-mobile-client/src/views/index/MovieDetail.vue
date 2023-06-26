@@ -78,7 +78,13 @@
         <div style="height: 50px"></div>
         <!-- 提示若热映类别则显示购票，若待映类别则显示暂未上映，若经典类别则什么都不显示 -->
         <div class="buyblock">
-          <van-button round type="danger" block @click="$router.push('/cinema-selection')">特惠购票</van-button>
+          <van-button 
+            round 
+            type="danger" 
+            block 
+            @click="$router.push('/cinema-selection?id='+id)">
+            特惠购票
+          </van-button>
           <!-- <van-button round type="danger" disabled block>暂未上映</van-button> -->
         </div>
     </div>
