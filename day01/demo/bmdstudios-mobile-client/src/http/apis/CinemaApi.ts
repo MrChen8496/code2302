@@ -5,6 +5,16 @@ const {BMDURL} = BASEURL
 
 const cinemaApi = {
 
+  /**
+   * 通过电影ID与上映日期，查询有排期的影院
+   * @param params 
+   */
+  queryByMovieIdAndDate(params:{
+    movie_id:number,
+    showingon_date:string
+  }){
+    return myaxios.get(BMDURL+"/cinemas/date", params)
+  },
 
   /**
    * 删除电影院接口

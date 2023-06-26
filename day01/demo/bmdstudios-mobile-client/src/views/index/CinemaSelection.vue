@@ -14,26 +14,30 @@
         <van-tabs v-model:active="activeDate" swipe-threshold="1" line-width="80px">
           <van-tab 
             :name="d.format('YYYY-MM-DD')" 
-            :title="d.format('周d MM月DD日')"
+            :title="momentToStr(d)"
             v-for="(d,i) in dates" :key="i">
           </van-tab>
         </van-tabs>
       </van-sticky>
 
       <!-- 电影院列表项 -->
-      <div class="item mb-line-b" @click="$router.push('/plan-selection')">
+      <div class="item mb-line-b" 
+        v-for="item in cinemas"
+        :key="item.id"
+        @click="$router.push('/plan-selection')">
         <div class="title-block">
-        <div class="title line-ellipsis">娜美国际影城</div>
-          <div class="location-block">
-              <div class="flex line-ellipsis">通州区六和桥西甲壹号（免费停车）</div>
-              <div class="distance">8.6 km</div>
-          </div>
-          <div class="label-block">
-            <p class="vipTag">改签</p>
-            <p class="vipTag">小吃</p>
-            <p class="vipTag">折扣卡</p>
-            <p class="vipTag">退</p>
-          </div>
+          <div class="title line-ellipsis">{{ item.cinema_name }}</div>
+            <div class="location-block">
+                <div class="flex line-ellipsis">{{ item.address }}</div>
+                <div class="distance"></div>
+            </div>
+            <div class="label-block">
+              <p class="vipTag"
+                v-for="tag in item.tags.split(',')"
+                :key="tag">
+                {{ tag }}
+              </p>
+            </div>
         </div>
       </div>
 
@@ -41,16 +45,17 @@
 </template>
 
 <script setup lang="ts">
-import {ref, reactive, onMounted} from 'vue'
+import {ref, reactive, onMounted, watch} from 'vue'
 import { useRoute } from 'vue-router';
 import httpApi from '@/http';
 import Movie from '@/types/Movie'
+import Cinema from '@/types/Cinema'
+import moment from 'moment'
 
 const $route = useRoute()
 
 
 // 处理时间序列
-import moment from 'moment'
 const now = moment()
 console.log(now)
 console.log(now.add(5, 'days'))
@@ -63,12 +68,33 @@ for(let i=0; i<7; i++){
 }
 console.log(dates)
 
+// momentToStr()
+enum Week {'日', '一', '二', '三', '四', '五', '六'}
+function momentToStr(d: moment.Moment){
+  let wIndex = d.format('d')  //  => 0,1,2,3,4,5,6
+  let weekStr = Week[parseInt(wIndex)]
+  return d.format(`周${weekStr} MM月DD日`)
+}
+
+// 监听activeDate的改变就可以获取当前选中的时间字符串  发请求即可
 const activeDate = ref('2022-10-06')
+const cinemas = ref<Cinema[]>()
+watch(activeDate, (newVal, oldVal)=>{
+  console.log('activeDate改变：', newVal)
+  // 带着时间字符串、电影id，发送请求，加载有排期的电影院列表
+  let params = {
+    movie_id: parseInt(id), 
+    showingon_date: newVal
+  }
+  httpApi.cinemaApi.queryByMovieIdAndDate(params).then(res=>{
+    console.log('查到的影院列表', res)
+    // 将响应数据交给代理，在template中v-for遍历渲染
+    cinemas.value = res.data.data
+  })
+})
 
-
-
-// 通过电影ID，加载电影信息并显示
-const id = $route.query.id
+// 通过电影ID，加载电影信息并显示 
+const id = $route.query.id as string
 const movie = ref<Movie>()
 onMounted(()=>{
   httpApi.movieApi.queryById({id}).then(res=>{
